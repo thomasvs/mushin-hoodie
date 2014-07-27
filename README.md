@@ -1,12 +1,7 @@
-# Zen To Done
-[![Build Status](https://api.travis-ci.org/boennemann/zentodone.svg?branch=master)](https://travis-ci.org/boennemann/zentodone)
-[![Bower Dependency Status](https://www.versioneye.com/user/projects/53624813fe0d0724d4000080/badge.png)](https://www.versioneye.com/user/projects/53624813fe0d0724d4000080)
-[![Dependency Status](https://david-dm.org/boennemann/zentodone.svg)](https://david-dm.org/boennemann/zentodone)
-[![devDependency Status](https://david-dm.org/boennemann/zentodone/dev-status.svg)](https://david-dm.org/boennemann/zentodone#info=devDependencies)
-[![Code Climate](http://img.shields.io/codeclimate/github/boennemann/zentodone.svg)](https://codeclimate.com/github/boennemann/zentodone)
+# mushin-hoodie
 
-A to-do app based on [Leo Babauta's](http://leobabauta.com/) ultimate simple productivity system [Zen To Done](http://zenhabits.net/zen-to-done-ztd-the-ultimate-simple-productivity-system/).
-Built with [Bradypodion.js](http://bradypodion.io), [AngularJS](http://angularjs.org) and [Hoodie](http://hood.ie).
+A GTD app prototype based on [Stephan Bönnemann's](http://boennemann.me/)
+zentodone app.
 
 ## Installation
 
@@ -21,7 +16,7 @@ brew install node
 brew install couchdb
 ```
 
-#### Linux 
+#### Linux
 
 ##### General
 
@@ -52,7 +47,7 @@ sudo yum install couchdb git nodejs npm
 
 #### Windows
 
-On Windows, install [Node.js](http://nodejs.org/download/), [git](http://git-scm.com/downloads) and [CouchDB](https://couchdb.apache.org/#download) using the installers on each website. 
+On Windows, install [Node.js](http://nodejs.org/download/), [git](http://git-scm.com/downloads) and [CouchDB](https://couchdb.apache.org/#download) using the installers on each website.
 
 ### Install project specific dependencies
 
@@ -79,19 +74,7 @@ Start Hoodie and serve a development version of the App with Livereload.
 grunt serve
 ```
 
-## Deployment
-
-Releasing a new version is automated with `grunt release`.
-You may add flags to specify the new version.
-
-1. `grunt release` or `grunt release:patch`: 0.0.1 => 0.0.2
-2. `grunt release:minor`: 0.0.2 => 0.1.0
-3. `grunt release:major`: 0.1.0 => 1.0.0
-
-The app will then automatically be deployed to [nodejitsu](https://www.nodejitsu.com/) once the [TravisCI](https://travis-ci.org/) build passes.
-The current version is [![GitHub version](https://badge.fury.io/gh/boennemann%2Fzentodone.svg)](http://badge.fury.io/gh/boennemann%2Fzentodone) and the build is [![Build Status](https://api.travis-ci.org/boennemann/zentodone.svg?branch=master)](https://travis-ci.org/boennemann/zentodone). 
-
 ## Author
-| [![twitter/boennemann](http://gravatar.com/avatar/29e45e7e0bf9561770aae5818f139c80?s=70)](https://twitter.com/boennemann "Follow @boennemann on Twitter") |
+| [![twitter/thomasvs](http://gravatar.com/avatar/f5dc647e1f30b6127527da3dbfdaba73?s=70)](https://twitter.com/thomasvs "Follow @thomasvs on Twitter") |
 |---|
-| [Stephan Bönnemann](http://boennemann.me/) |
+| [Thomas Vander Stichele](http://thomas.apestaart.org/) |

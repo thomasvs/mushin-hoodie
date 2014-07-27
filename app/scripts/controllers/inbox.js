@@ -23,7 +23,14 @@ angular.module('zentodone').controller('InboxCtrl', function ($scope, $filter, t
   })
 
   $scope.newTask = function() {
+    var debug = new window.$debug('mushin:task');
+
     var title = ($scope.taskTitle || '').trim()
+    var parser = new window.Parser();
+    var parsed = parser.parse(title);
+
+    title = parsed.title;
+    debug('parsed new thing ' + JSON.stringify(parsed, null, 4));
 
     if (!title) return
 

@@ -7,7 +7,9 @@ angular.module('zentodone').factory('Task', function ($q, $filter, hoodie) {
   var ONE_DAY = 24*60*60*1000
   var ONE_WEEK = 7*24*60*60*1000
 
+  var debug = new window.$debug('zentodone:Task');
   function Task(title, description) {
+    debug('new Task with title ' + title + ' and desc ' + description)
     if (angular.isObject(title)) {
       this.data = title
       return
@@ -23,6 +25,7 @@ angular.module('zentodone').factory('Task', function ($q, $filter, hoodie) {
       title: title,
       description: description
     }
+    debug('created new task ' + JSON.stringify(this.data, null, 4));
   }
 
   Task.INBOX = INBOX

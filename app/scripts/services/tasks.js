@@ -29,8 +29,8 @@ angular.module('zentodone').factory('tasks', function ($rootScope, hoodie, $q, T
       })
       return deferred.promise
     },
-    add: function(title, description) {
-      var newTask = new Task(title, description)
+    add: function(title, description, data) {
+      var newTask = new Task(title, description, data)
       return $q.when(hoodie.store.add('task', newTask.data))
     },
     extend: function(scope) {

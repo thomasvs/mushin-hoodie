@@ -37,7 +37,8 @@ angular.module('zentodone').controller('InboxCtrl', function ($scope, $filter, t
 
     if (!title) return
 
-    tasks.add(title)
+    // see app/scripts/services/tasks.js
+    tasks.add(title, '', parsed)
 
     $scope.taskTitle = ''
     $scope.taskInput.$setPristine()

@@ -8,14 +8,17 @@ angular.module('zentodone').factory('Task', function ($q, $filter, hoodie) {
   var ONE_WEEK = 7*24*60*60*1000
 
   var debug = new window.$debug('zentodone:Task');
-  function Task(title, description) {
+
+  function Task(title, description, data) {
     debug('new Task with title ' + title + ' and desc ' + description)
     if (angular.isObject(title)) {
       this.data = title
       return
     }
 
-    this.data = {
+    this.data = data && angular.copy(data) || {};
+
+    angular.extend(this.data, {
       id: Math.random().toString(36).substr(2, 9),
       date: Date.now(),
       dueDate: null,
@@ -24,7 +27,7 @@ angular.module('zentodone').factory('Task', function ($q, $filter, hoodie) {
       deleted: false,
       title: title,
       description: description
-    }
+    });
     debug('created new task ' + JSON.stringify(this.data, null, 4));
   }
 

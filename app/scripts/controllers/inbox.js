@@ -1,4 +1,7 @@
 angular.module('zentodone').controller('InboxCtrl', function ($scope, $filter, tasks, Task) {
+
+  var debug = new window.$debug('mushin:task');
+
   $scope.inbox = []
   tasks.extend($scope)
 
@@ -19,11 +22,11 @@ angular.module('zentodone').controller('InboxCtrl', function ($scope, $filter, t
   fetchTasks()
 
   $scope.$on('taskChange', function() {
+    debug('taskChange');
     fetchTasks()
   })
 
   $scope.newTask = function() {
-    var debug = new window.$debug('mushin:task');
 
     var title = ($scope.taskTitle || '').trim()
     var parser = new window.Parser();

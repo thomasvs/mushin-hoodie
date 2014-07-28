@@ -31,11 +31,11 @@
     </div>
 
     <div class="btn-group projects-dropdown" dropdown ng-class="{open: projectOpen}">
-      <button type="button" class="btn btn-primary dropdown-toggle pull-left" ng-disabled="disabled" ng-click="projectOpen=!projectOpen">
+      <button type="button" class="btn btn-primary dropdown-toggle" ng-disabled="disabled" ng-click="projectOpen=!projectOpen">
         <span class="badge">{{ getProjectsCount() }}</span>
         projects <span class="caret"></span>
       </button>
-      <ul class="dropdown-menu" role="menu">
+      <ul class="dropdown-menu dropdown-menu-right" role="menu">
         <li><a href="#">All projects</a></li>
         <li class="divider"></li>
         <li ng-repeat="project in getProjects()">

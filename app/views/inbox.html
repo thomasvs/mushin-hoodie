@@ -21,7 +21,7 @@
         contexts <span class="caret"></span>
       </button>
       <ul class="dropdown-menu" role="menu">
-        <li><a href="#">All contexts</a></li>
+        <li class="active"><a href="#">All contexts</a></li>
         <li class="divider"></li>
         <li ng-repeat="context in getContexts()">
           <a href="#">{{ context }}
@@ -36,7 +36,7 @@
         projects <span class="caret"></span>
       </button>
       <ul class="dropdown-menu dropdown-menu-right" role="menu">
-        <li><a href="#">All projects</a></li>
+        <li class="active"><a href="#">All projects</a></li>
         <li class="divider"></li>
         <li ng-repeat="project in getProjects()">
           <a href="#">{{ project }}

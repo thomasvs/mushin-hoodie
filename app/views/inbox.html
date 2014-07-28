@@ -13,6 +13,41 @@
   </bp-search>
 </form>
 
+  <div>
+  <span>
+    <div class="btn-group contexts-dropdown" dropdown ng-class="{open: contextOpen}">
+      <button type="button" class="btn btn-primary dropdown-toggle" ng-disabled="disabled" ng-click="contextOpen=!contextOpen">
+        <span class="badge">{{ getContextsCount() }}</span>
+        contexts <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li><a href="#">All contexts</a></li>
+        <li class="divider"></li>
+        <li ng-repeat="context in getContexts()">
+          <a href="#">{{ context }}
+          <span class="badge pull-right">{{ getContextsCount(context) }}</span></a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="btn-group projects-dropdown" dropdown ng-class="{open: projectOpen}">
+      <button type="button" class="btn btn-primary dropdown-toggle pull-left" ng-disabled="disabled" ng-click="projectOpen=!projectOpen">
+        <span class="badge">{{ getProjectsCount() }}</span>
+        projects <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li><a href="#">All projects</a></li>
+        <li class="divider"></li>
+        <li ng-repeat="project in getProjects()">
+          <a href="#">{{ project }}
+          <span class="badge pull-right">{{ getProjectsCount(project) }}</span></a>
+        </li>
+      </ul>
+    </div>
+
+  </span>
+  </div>
+
 <bp-table
   class="inbox"
   bp-scroll

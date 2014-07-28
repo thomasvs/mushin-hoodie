@@ -1,4 +1,4 @@
-.contexts-count {
+.contexts-dropdown {
     float: left;
     width: 50%;
     height: 34px;
@@ -6,13 +6,20 @@
     font-weight: bold;
 }
 
-.projects-count {
+.projects-dropdown {
     float: right;
-    width: 50%;
+//  without width it really sticks to the right
+//    width: 50%;
     display: block;
     text-align: right;
     height: 34px;
     line-height: 34px;
     font-weight: bold;
 
+}
+
+div.projects-dropdown ul.dropdown-menu {
+  // FIXME: there must be a better way to make the dropdown menu right-align
+  // with the right edge of its button
+  left: -55px;
 }

@@ -1,11 +1,30 @@
 angular.module('zentodone').factory('tasks', function ($rootScope, hoodie, $q, Task) {
 
+  var debug = new window.$debug('zentodone:services/task');
+  var contexts = {}; // context name -> list of thing id's
+  var projects = {};
+
   hoodie.store.on('change:task', function(name, task) {
     $rootScope.$broadcast('taskChange', {
       type: name,
       task: task
     })
   })
+
+  // update the contexts/projects hash based on the task
+  var trackHash = function(hash, type, task) {
+    var plural = type + 's'
+
+          if (task[plural]) {
+            for (var j = 0; j < task[plural].length; ++j) {
+              var name = task[plural][j];
+              if (!(name in hash)) {
+                hash[name] = []
+              }
+              hash[name].push(task.id)
+            }
+          }
+  }
 
   return {
     get: function(id) {
@@ -24,7 +43,12 @@ angular.module('zentodone').factory('tasks', function ($rootScope, hoodie, $q, T
           if (tasksData[i].taskType === type) {
             tasksDataOfType.push(tasksData[i])
           }
+          trackHash(projects, 'project', tasksData[i]);
+          trackHash(contexts, 'context', tasksData[i]);
         }
+        debug('loaded ' + tasksDataOfType.length + ' tasks of type ' + type)
+        debug('loaded ' + Object.keys(projects).length + ' projects')
+        debug('loaded ' + Object.keys(contexts).length + ' contexts')
         deferred.resolve(tasksDataOfType)
       })
       return deferred.promise

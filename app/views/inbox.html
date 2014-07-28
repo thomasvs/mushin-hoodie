@@ -43,6 +43,12 @@
       <div class="title">{{ task.title }}</div>
       <time datetime="{{ task.date | date : 'yyyy-MM-dd hh:mm' }}">{{ task.date | date : 'MMM d, h:mm' }}</time>
       <div class="description" ng-if="task.description">{{ task.description }}</div>
+      <div class="contexts" ng-if="task.contexts">
+        <b ng-repeat="context in task.contexts">@{{context}}{{$last ? '' : ', '}}</b>
+      </div>
+      <div class="projects" ng-if="task.projects">
+        <b ng-repeat="project in task.projects">p:{{project}}{{$last ? '' : ', '}}</b>
+      </div>
     </div>
   </bp-cell>
 

@@ -62,6 +62,11 @@ angular.module('zentodone').factory('tasks', function ($rootScope, hoodie, $q, T
       var deferred = $q.defer()
       promise.then(function(tasksData) {
         var tasksDataOfType = []
+
+        // reset when we recount
+        projects = {};
+        contexts = {};
+
         for (var i = 0; i < tasksData.length; i++) {
           if (tasksData[i].taskType === type) {
             tasksDataOfType.push(tasksData[i])

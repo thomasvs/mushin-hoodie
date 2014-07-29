@@ -1,8 +1,10 @@
 angular.module('zentodone').factory('tasks', function ($rootScope, hoodie, $q, Task) {
 
   var debug = new window.$debug('zentodone:services/task');
-  var contexts = {}; // context name -> list of thing id's
-  var projects = {};
+  $rootScope.contexts = {}; // context name -> obj with tasks, active, ...
+  $rootScope.projects = {};
+  $rootScope.contextsAll = true; // false if any context selected
+  $rootScope.projectsAll = true; // false if any project selected
 
   hoodie.store.on('change:task', function(name, task) {
     $rootScope.$broadcast('taskChange', {
@@ -11,6 +13,8 @@ angular.module('zentodone').factory('tasks', function ($rootScope, hoodie, $q, T
     })
   })
 
+  // FIXME: boennemann says to turn the dropdown list into a directive,
+  //        and give it its own scope for active tracking
   // update the contexts/projects hash based on the task
   var trackHash = function(hash, type, task) {
     var plural = type + 's'
@@ -19,34 +23,51 @@ angular.module('zentodone').factory('tasks', function ($rootScope, hoodie, $q, T
             for (var j = 0; j < task[plural].length; ++j) {
               var name = task[plural][j];
               if (!(name in hash)) {
-                hash[name] = []
+                hash[name] = {
+                  'name': name,
+                  'active': false,
+                  'things': [],
+                }
               }
-              hash[name].push(task.id)
+              hash[name].things.push(task)
             }
           }
+  }
+  var resetHash = function(hash) {
+    for (var key in hash) {
+      hash[key].things = [];
+    }
+  }
+
+  $rootScope.toggleContext = function(name) {
+    var all = true;
+
+    $rootScope.contexts[name].active = !$rootScope.contexts[name].active
+
+
+    for (var key in $rootScope.contexts) {
+      if ($rootScope.contexts[key].active) { all = false; }
+    }
+    if ($rootScope.contextsAll != all) {
+      $rootScope.contextsAll = all;
+    }
   }
 
   /* FIXME: does this pollute some outside namespace, or is this tied
    *        to inbox ? */
   $rootScope.getContextsCount = function(context) {
     if (context) {
-      return contexts[context].length;
+      return $rootScope.contexts[context].things.length;
     } else {
-      return Object.keys(contexts).length;
+      return Object.keys($rootScope.contexts).length;
     }
   }
   $rootScope.getProjectsCount = function(project) {
     if (project) {
-      return projects[project].length;
+      return $rootScope.projects[project].things.length;
     } else {
-    return Object.keys(projects).length;
+      return Object.keys($rootScope.projects).length;
     }
-  }
-  $rootScope.getContexts = function() {
-    return Object.keys(contexts);
-  }
-  $rootScope.getProjects = function() {
-    return Object.keys(projects);
   }
 
   return {
@@ -64,19 +85,19 @@ angular.module('zentodone').factory('tasks', function ($rootScope, hoodie, $q, T
         var tasksDataOfType = []
 
         // reset when we recount
-        projects = {};
-        contexts = {};
+        resetHash($rootScope.projects);
+        resetHash($rootScope.contexts);
 
         for (var i = 0; i < tasksData.length; i++) {
           if (tasksData[i].taskType === type) {
             tasksDataOfType.push(tasksData[i])
           }
-          trackHash(projects, 'project', tasksData[i]);
-          trackHash(contexts, 'context', tasksData[i]);
+          trackHash($rootScope.projects, 'project', tasksData[i]);
+          trackHash($rootScope.contexts, 'context', tasksData[i]);
         }
         debug('loaded ' + tasksDataOfType.length + ' tasks of type ' + type)
-        debug('loaded ' + Object.keys(projects).length + ' projects')
-        debug('loaded ' + Object.keys(contexts).length + ' contexts')
+        debug('loaded ' + Object.keys($rootScope.projects).length + ' projects')
+        debug('loaded ' + Object.keys($rootScope.contexts).length + ' contexts')
         deferred.resolve(tasksDataOfType)
       })
       return deferred.promise

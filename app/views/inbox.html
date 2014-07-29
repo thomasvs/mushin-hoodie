@@ -21,11 +21,11 @@
         contexts <span class="caret"></span>
       </button>
       <ul class="dropdown-menu" role="menu">
-        <li class="active"><a href="#">All contexts</a></li>
+        <li ng-class="{ 'active': contextsAll }"><a href="#">All contexts</a></li>
         <li class="divider"></li>
-        <li ng-repeat="context in getContexts()|orderBy:'toString()'">
-          <a href="#">{{ context }}
-          <span class="badge pull-right">{{ getContextsCount(context) }}</span></a>
+        <li ng-repeat="context in contexts|orderBy:name" ng-class="{ 'active': context.active}">
+          <a href="#" ng-click="toggleContext(context.name)">{{ context.name }}
+          <span class="badge pull-right">{{ getContextsCount(context.name) }}</span></a>
         </li>
       </ul>
     </div>
@@ -38,9 +38,9 @@
       <ul class="dropdown-menu dropdown-menu-right" role="menu">
         <li class="active"><a href="#">All projects</a></li>
         <li class="divider"></li>
-        <li ng-repeat="project in getProjects()|orderBy:'toString()'">
-          <a href="#">{{ project }}
-          <span class="badge pull-right">{{ getProjectsCount(project) }}</span></a>
+        <li ng-repeat="project in projects|orderBy:'toString()'">
+          <a href="#">{{ project.name }}
+          <span class="badge pull-right">{{ getProjectsCount(project.name) }}</span></a>
         </li>
       </ul>
     </div>

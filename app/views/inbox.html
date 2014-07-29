@@ -30,6 +30,10 @@
       </ul>
     </div>
 
+    <div class="search">
+      <input type="text" class="form-control" placeholder="Search" ng-model="searchString">
+    </div>
+
     <div class="btn-group projects-dropdown" dropdown ng-class="{open: projectOpen}">
       <button type="button" class="btn btn-primary dropdown-toggle" ng-disabled="disabled" ng-click="projectOpen=!projectOpen">
         <span class="badge">{{ getProjectsCount() }}</span>
@@ -69,7 +73,7 @@
   <bp-cell
     task-cell
     class="task-cell-animation"
-    ng-repeat="task in inbox track by task.id"
+    ng-repeat="task in inboxFound = (inbox | filter:{title: searchString}) track by task.id"
     ui-sref="inboxTask({id:task.id})"
     swipe-right="convertToBr(task)"
     swipe-left="convertToMit(task)"

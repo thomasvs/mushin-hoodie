@@ -15,20 +15,7 @@
 
   <div>
   <span>
-    <div class="btn-group contexts-dropdown" dropdown ng-class="{open: contextOpen}">
-      <button type="button" class="btn btn-primary dropdown-toggle" ng-disabled="disabled" ng-click="contextOpen=!contextOpen">
-        <span class="badge">{{ getContextsCount() }}</span>
-        contexts <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu" role="menu">
-        <li ng-class="{ 'active': contextsAll }"><a href="#">All contexts</a></li>
-        <li class="divider"></li>
-        <li ng-repeat="context in contexts|orderBy:name" ng-class="{ 'active': context.active}">
-          <a href="#" ng-click="toggleContext(context.name)">{{ context.name }}
-          <span class="badge pull-right">{{ getContextsCount(context.name) }}</span></a>
-        </li>
-      </ul>
-    </div>
+    <div tag-list></div>
 
     <div class="search">
       <input type="text" class="form-control" placeholder="Search" ng-model="searchString">

@@ -3,8 +3,6 @@ angular.module('zentodone').factory('tasks', function ($rootScope, hoodie, $q, T
   var debug = new window.$debug('zentodone:services/task');
   $rootScope.contexts = {}; // context name -> obj with tasks, active, ...
   $rootScope.projects = {};
-  $rootScope.contextsAll = true; // false if any context selected
-  $rootScope.projectsAll = true; // false if any project selected
 
   hoodie.store.on('change:task', function(name, task) {
     $rootScope.$broadcast('taskChange', {
@@ -36,20 +34,6 @@ angular.module('zentodone').factory('tasks', function ($rootScope, hoodie, $q, T
   var resetHash = function(hash) {
     for (var key in hash) {
       hash[key].things = [];
-    }
-  }
-
-  $rootScope.toggleContext = function(name) {
-    var all = true;
-
-    $rootScope.contexts[name].active = !$rootScope.contexts[name].active
-
-
-    for (var key in $rootScope.contexts) {
-      if ($rootScope.contexts[key].active) { all = false; }
-    }
-    if ($rootScope.contextsAll != all) {
-      $rootScope.contextsAll = all;
     }
   }
 

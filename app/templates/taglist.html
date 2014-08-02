@@ -1,0 +1,14 @@
+<div class="btn-group {{type}}s-dropdown" dropdown ng-class="{open: open}">
+  <button type="button" class="btn btn-primary dropdown-toggle" ng-disabled="disabled" ng-click="open=!open">
+    <span class="badge">{{ getCount() }}</span>
+    {{ type }}s <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" ng-class="{ true: 'dropdown-menu-right' }[type == 'project']" role="menu">
+    <li ng-class="{ 'active': selectedAll }"><a href="#" ng-click="clear(); clearTags(type)">All {{ type }}s</a></li>
+    <li class="divider"></li>
+    <li ng-repeat="tag in tags|orderBy:name" ng-class="{ 'active': tag.active}">
+      <a href="#" ng-click="toggle(tag.name); toggleTag(type, tag.name)">{{ tag.name }}
+      <span class="badge pull-right">{{ getCount(tag.name) }}</span></a>
+    </li>
+  </ul>
+</div>

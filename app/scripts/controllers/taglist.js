@@ -25,12 +25,35 @@ function TagListCtrl(type) {
         $scope.selectedAll = all;
       }
     }
+    $scope.clear = function() {
+      for (var key in $scope.tags) {
+        $scope.tags[key].active = false;
+      }
+      $scope.selectedAll = !$scope.selectedAll;
+    }
+
     $scope.getCount = function(tag) {
       if (tag) {
         return $scope.tags[tag].things.length;
       } else {
         return Object.keys($scope.tags).length;
       }
+    }
+
+    $scope.filterByTag = function(thing) {
+      debug('filterByTag ' + thing);
+
+      if ($scope.selectedAll) {
+        return true;
+      }
+
+      for (var key in $scope.tags) {
+        if ($scope.tags[key].active && thing.tags.indexOf(key) > -1) {
+          return true;
+        }
+      }
+
+      return false;
     }
 
   }

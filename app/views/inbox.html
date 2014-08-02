@@ -15,12 +15,12 @@
 
   <div>
   <span>
-    <span tag-list ng-controller="ContextListCtrl"></span>
+    <span tag-list ng-controller="ContextListCtrl as cl"><div>context list {{ cl.type }} yeah!</div></span>
 
     <div class="search">
       <input type="text" class="form-control" placeholder="Search" ng-model="searchString">
     </div>
-    <span tag-list ng-controller="ProjectListCtrl"></span>
+    <span tag-list ng-controller="ProjectListCtrl as pl"></span>
 
 
   </span>
@@ -47,7 +47,7 @@
   <bp-cell
     task-cell
     class="task-cell-animation"
-    ng-repeat="task in inboxFound = (inbox | filter:{title: searchString}) track by task.id"
+    ng-repeat="task in inboxFound = (inbox | filter:filterByTag | filter:{title: searchString}) track by task.id"
     ui-sref="inboxTask({id:task.id})"
     swipe-right="convertToBr(task)"
     swipe-left="convertToMit(task)"

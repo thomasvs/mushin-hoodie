@@ -2,6 +2,11 @@ angular.module('zentodone').controller('InboxCtrl', function ($scope, $filter, t
 
   var debug = new window.$debug('mushin:task');
 
+  var taglist = {
+    'context': [], // list of selected contexts
+    'project': []
+  }
+
   $scope.inbox = []
   tasks.extend($scope)
 
@@ -43,4 +48,57 @@ angular.module('zentodone').controller('InboxCtrl', function ($scope, $filter, t
     $scope.taskTitle = ''
     $scope.taskInput.$setPristine()
   }
+
+  // add/remove selected contexts/projects
+  $scope.addTag = function(type, name) {
+    var i = taglist[type].indexOf(name);
+    if (i == -1) {
+      taglist[type].push(name);
+    }
+  }
+  $scope.removeTag = function(type, name) {
+    var i = taglist[type].indexOf(name);
+    if (i > -1) {
+      taglist[type].splice(i, 1);
+    }
+  }
+  $scope.toggleTag = function(type, name) {
+    var i = taglist[type].indexOf(name);
+    if (i > -1) {
+      $scope.removeTag(type, name);
+    } else {
+      $scope.addTag(type, name);
+    }
+  }
+  $scope.clearTags = function(type) {
+    taglist[type].splice(0, Number.MAX_VALUE);
+  }
+
+
+  // filter tasks by context/project
+    $scope.filterByTag = function(thing) {
+//      debug('filterByTag ' + JSON.stringify(thing));
+
+      var keep;
+
+      for (var type in taglist) {
+        // either taglist may reject a thing
+        keep = false;
+
+        if (taglist[type].length > 0) {
+          for (var i = 0; i < taglist[type].length; ++i) {
+            if (thing[type + 's'] && thing[type + 's'].indexOf(taglist[type][i]) > -1) {
+              keep = true;
+            }
+          }
+          if (!keep) {
+            return false;
+          }
+        }
+
+      }
+
+      return true;
+    }
+
 })

@@ -8,6 +8,7 @@ angular.module('zentodone')
     debug('tagList: creating');
     return {
       restrict: 'A',
+      require: '^InboxCtrl',
       templateUrl: 'templates/taglist.html'
     }
   }

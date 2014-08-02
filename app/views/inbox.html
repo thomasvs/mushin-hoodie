@@ -15,26 +15,13 @@
 
   <div>
   <span>
-    <div tag-list></div>
+    <span tag-list ng-controller="ContextListCtrl"></span>
 
     <div class="search">
       <input type="text" class="form-control" placeholder="Search" ng-model="searchString">
     </div>
+    <span tag-list ng-controller="ProjectListCtrl"></span>
 
-    <div class="btn-group projects-dropdown" dropdown ng-class="{open: projectOpen}">
-      <button type="button" class="btn btn-primary dropdown-toggle" ng-disabled="disabled" ng-click="projectOpen=!projectOpen">
-        <span class="badge">{{ getProjectsCount() }}</span>
-        projects <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu dropdown-menu-right" role="menu">
-        <li class="active"><a href="#">All projects</a></li>
-        <li class="divider"></li>
-        <li ng-repeat="project in projects|orderBy:'toString()'">
-          <a href="#">{{ project.name }}
-          <span class="badge pull-right">{{ getProjectsCount(project.name) }}</span></a>
-        </li>
-      </ul>
-    </div>
 
   </span>
   </div>

@@ -37,23 +37,6 @@ angular.module('zentodone').factory('tasks', function ($rootScope, hoodie, $q, T
     }
   }
 
-  /* FIXME: does this pollute some outside namespace, or is this tied
-   *        to inbox ? */
-  $rootScope.getContextsCount = function(context) {
-    if (context) {
-      return $rootScope.contexts[context].things.length;
-    } else {
-      return Object.keys($rootScope.contexts).length;
-    }
-  }
-  $rootScope.getProjectsCount = function(project) {
-    if (project) {
-      return $rootScope.projects[project].things.length;
-    } else {
-      return Object.keys($rootScope.projects).length;
-    }
-  }
-
   return {
     get: function(id) {
       return $q.when(hoodie.store.find('task', id))

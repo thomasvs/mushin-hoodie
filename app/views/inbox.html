@@ -54,6 +54,14 @@
     swipe-long-right="setDeleted(task)"
     swipe-long-left="setDone(task)">
     <div class="content">
+      <div class="complete">
+        <span ng-if="task.recurrence">
+          <i class="glyphicon glyphicon-repeat"></i>
+        </span>
+        <span ng-if="!task.recurrence">
+          <i class="glyphicon glyphicon-check" ng-class="{ true: 'unchecked' }[task.complete != 100]" ng-click="complete(task)"></i>
+        </span>
+      </div>
       <div class="title">{{ task.title }}</div>
       <time datetime="{{ task.date | date : 'yyyy-MM-dd hh:mm' }}">{{ task.date | date : 'MMM d, h:mm' }}</time>
       <div class="description" ng-if="task.description">{{ task.description }}</div>

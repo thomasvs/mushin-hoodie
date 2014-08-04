@@ -60,9 +60,22 @@
     }
   }
 
+  .complete {
+    float: left;
+    width: 10%;
+    height: 34px;
+    line-height: 34px;
+    font-weight: bold;
+    &:extend(.ellipsis);
+  }
+
+  .complete .unchecked {
+    opacity: 0.2;
+  }
+
   .title {
     float: left;
-    width: 70%;
+    width: 60%;
     height: 34px;
     line-height: 34px;
     font-weight: bold;

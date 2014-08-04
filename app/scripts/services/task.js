@@ -66,6 +66,16 @@ angular.module('zentodone').factory('Task', function ($q, $filter, hoodie) {
     }))
   }
 
+  Task.prototype.complete = function() {
+    var data = this.data
+
+
+    // FIXME; deal with recurrence
+    return $q.when(hoodie.store.update('task', this.data.id, {
+      complete: 100,
+    }))
+  }
+
   Task.prototype.setDeleted = function() {
     return $q.when(hoodie.store.update('task', this.data.id, {
       deleted: true,

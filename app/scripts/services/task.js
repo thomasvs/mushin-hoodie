@@ -69,9 +69,21 @@ angular.module('zentodone').factory('Task', function ($q, $filter, hoodie) {
   Task.prototype.setComplete = function() {
     debug('complete task with title ' + this.data.title);
 
+    var complete;
+
+    if (this.data.recurrence) {
+      debug('handle recurrence');
+    } else {
+      if (this.data.complete == 100) {
+        complete = 0;
+      } else {
+        complete = 100;
+      }
+    }
+
     // FIXME; deal with recurrence
     return $q.when(hoodie.store.update('task', this.data.id, {
-      complete: 100,
+      complete: complete,
     }))
   }
 

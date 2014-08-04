@@ -58,7 +58,7 @@
           <i class="glyphicon glyphicon-repeat"></i>
         </span>
         <span ng-if="!task.recurrence">
-          <i class="glyphicon glyphicon-check" ng-class="{ true: 'unchecked' }[task.complete != 100]" ng-click="completeThing(task)">click</i>
+          <i class="glyphicon glyphicon-check" ng-class="{ true: 'unchecked' }[task.complete != 100]" ng-click="setComplete(task)"></i>
         </span>
       </div>
       <div class="title" ui-sref="inboxTask({id:task.id})">

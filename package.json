@@ -1,14 +1,14 @@
 {
-  "name": "zentodone",
-  "version": "0.1.5",
+  "name": "mushin",
+  "version": "0.0.0",
   "license": "MIT",
-  "author": "Stephan Bönnemann",
+  "author": "Thomas Vander Stichele",
   "repository": {
     "type": "git",
-    "url": "git://github.com/boennemann/zentodone.git"
+    "url": "git://github.com/thomasvs/mushin.git"
   },
   "bugs": {
-    "url": "https://github.com/boennemann/zentodone/issues"
+    "url": "https://github.com/thomasvs/mushin/issues"
   },
   "type": "app",
   "dependencies": {
@@ -45,10 +45,10 @@
   "engines": {
     "node": ">=0.10.0"
   },
-  "subdomain": "zentodone",
+  "subdomain": "mushin",
   "domains": [
-    "admin.zentodone.jit.su",
-    "couch.zentodone.jit.su"
+    "admin.mushin.jit.su",
+    "couch.mushin.jit.su"
   ],
   "scripts": {
     "start": "node node_modules/hoodie-server/bin/start",

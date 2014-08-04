@@ -56,11 +56,14 @@ angular.module('zentodone').factory('tasks', function ($rootScope, hoodie, $q, T
         resetHash($rootScope.contexts);
 
         for (var i = 0; i < tasksData.length; i++) {
-          if (tasksData[i].taskType === type) {
-            tasksDataOfType.push(tasksData[i])
+          // FIXME: not sure if it's better to deal with taskData here or
+          //        full task objects
+          var task = tasksData[i];
+          if (task.taskType === type) {
+            tasksDataOfType.push(task)
           }
-          trackHash($rootScope.projects, 'project', tasksData[i]);
-          trackHash($rootScope.contexts, 'context', tasksData[i]);
+          trackHash($rootScope.projects, 'project', task);
+          trackHash($rootScope.contexts, 'context', task);
         }
         debug('loaded ' + tasksDataOfType.length + ' tasks of type ' + type)
         debug('loaded ' + Object.keys($rootScope.projects).length + ' projects')
@@ -74,7 +77,10 @@ angular.module('zentodone').factory('tasks', function ($rootScope, hoodie, $q, T
       return $q.when(hoodie.store.add('task', newTask.data))
     },
     extend: function(scope) {
-      var methods = ['setDone', 'setDeleted']
+      /* this adds proxies for some functions on the Task class,
+       * instantiating them on the fly so they can be changed.
+       */
+      var methods = ['setDone', 'setDeleted', 'setComplete']
 
       angular.forEach(methods, function(method) {
         scope[method] = function(data) {

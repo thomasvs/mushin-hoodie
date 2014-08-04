@@ -47,7 +47,7 @@
   <bp-cell
     task-cell
     class="task-cell-animation"
-    ng-repeat="task in inboxFound = (inbox | filter:filterByTag | filter:{title: searchString}) track by task.id"
+    ng-repeat="task in inboxFound = (inbox | filter:filterByTag | filter:notRecentlyCompleted | filter:{title: searchString}) track by task.id"
     swipe-right="convertToBr(task)"
     swipe-left="convertToMit(task)"
     swipe-long-right="setDeleted(task)"

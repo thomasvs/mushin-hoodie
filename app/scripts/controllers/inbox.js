@@ -101,4 +101,19 @@ angular.module('zentodone').controller('InboxCtrl', function ($scope, $filter, t
       return true;
     }
 
+    /* complete a thing; used as ng-click handler */
+    $scope.completeThing = function(thing) {
+      debug('complete ' + Object.keys(thing));
+      if (thing.recurrence) {
+        debug('handle recurrence');
+      } else {
+        if (thing.complete == 100) {
+          thing.complete = 0;
+        } else {
+          thing.complete = 100;
+        }
+      }
+      thing.completeThing();
+    }
+
 })

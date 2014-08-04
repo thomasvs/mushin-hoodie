@@ -48,7 +48,6 @@
     task-cell
     class="task-cell-animation"
     ng-repeat="task in inboxFound = (inbox | filter:filterByTag | filter:{title: searchString}) track by task.id"
-    ui-sref="inboxTask({id:task.id})"
     swipe-right="convertToBr(task)"
     swipe-left="convertToMit(task)"
     swipe-long-right="setDeleted(task)"
@@ -62,7 +61,9 @@
           <i class="glyphicon glyphicon-check" ng-class="{ true: 'unchecked' }[task.complete != 100]" ng-click="complete(task)"></i>
         </span>
       </div>
-      <div class="title">{{ task.title }}</div>
+      <div class="title" ui-sref="inboxTask({id:task.id})">
+        {{ task.title }}
+      </div>
       <time datetime="{{ task.date | date : 'yyyy-MM-dd hh:mm' }}">{{ task.date | date : 'MMM d, h:mm' }}</time>
       <div class="description" ng-if="task.description">{{ task.description }}</div>
       <div class="contexts" ng-if="task.contexts">

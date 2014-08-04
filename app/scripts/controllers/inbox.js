@@ -108,8 +108,8 @@ angular.module('zentodone').controller('InboxCtrl', function ($scope, $filter, t
         return true;
       }
       if (!thing.completeDate) {
-//        debug(thing.title + ' no complete date, keeping');
-        return true;
+//        debug(thing.title + ' no complete date, dropping');
+        return false;
       }
 
       var now = new Date();

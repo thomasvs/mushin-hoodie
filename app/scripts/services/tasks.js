@@ -25,6 +25,9 @@ angular.module('zentodone').factory('tasks', function ($rootScope, hoodie, $q, T
             'things': [],
           }
         }
+        // for now, ignore completed tasks
+        if (task.complete == 100) { return; }
+
         hash[name].things.push(task)
       }
     }

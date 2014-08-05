@@ -19,7 +19,7 @@ angular.module('zentodone').controller('InboxCtrl', function ($scope, $filter, t
     tasks.getAll(Task.INBOX)
       .then(function(tasks) {
         $scope.inbox = $filter('filter')(tasks, function(task) {
-          // FIXME: I'm filtering on complete/completeDate in a filter func
+          // FIXME: I'm filtering on complete/end in a filter func
           if (!task.done && !task.deleted) return true
         })
       })
@@ -107,13 +107,13 @@ angular.module('zentodone').controller('InboxCtrl', function ($scope, $filter, t
 //        debug(thing.title + ' not complete, keeping');
         return true;
       }
-      if (!thing.completeDate) {
+      if (!thing.end) {
 //        debug(thing.title + ' no complete date, dropping');
         return false;
       }
 
       var now = new Date();
-      var then = new Date(thing.completeDate);
+      var then = new Date(thing.end);
       var diff = Math.abs(now - then);
       if (diff >= 1000 * 60) {
 //        debug(thing.title + ' done too long, dropping, ms ' + diff);

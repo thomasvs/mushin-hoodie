@@ -1,0 +1,8 @@
+- create a TagList directive for the dropdown button for contexts/projects
+- reuse it both in the main things view as well as in the thing edit view
+  for assigning projects and contexts
+- use angular-tour to:
+  - explain how the app works
+  - suggest things to type and click
+  - walk you through the main features with about five tasks
+- format due date with due in/overdue ...

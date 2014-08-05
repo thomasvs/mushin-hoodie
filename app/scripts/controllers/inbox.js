@@ -1,7 +1,12 @@
-angular.module('zentodone').controller('InboxCtrl', function ($scope, $filter, tasks, Task) {
+angular.module('zentodone').controller('InboxCtrl', function ($scope, $filter, $location, tasks, Task) {
 
   var debug = new window.$debug('mushin:task');
+  var search = $location.search();
+  debug('controllers/inbox.js: search params ' + JSON.stringify(search));
 
+  // managed as a list here so we can use it in the filter; needs to be
+  // kept up-to-date with toggletTag by the click handlers
+  // in the taglist directive
   var taglist = {
     'context': [], // list of selected contexts
     'project': []
@@ -22,6 +27,20 @@ angular.module('zentodone').controller('InboxCtrl', function ($scope, $filter, t
           // FIXME: I'm filtering on complete/end in a filter func
           if (!task.done && !task.deleted) return true
         })
+    // parse query params now
+    var parser = new window.Parser();
+    var parsed = parser.parse(search.filter);
+    debug('controllers/inbox: parsed filter ' + JSON.stringify(parsed));
+    angular.forEach(parsed.contexts, function (context) {
+        $scope.addTag('context', context);
+        $scope.contexts[context].active = true;
+    });
+    angular.forEach(parsed.projects, function (project) {
+        $scope.addTag('project', project);
+        $scope.projects[project].active = true;
+    });
+
+
       })
   }
 

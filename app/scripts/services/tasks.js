@@ -11,25 +11,23 @@ angular.module('zentodone').factory('tasks', function ($rootScope, hoodie, $q, T
     })
   })
 
-  // FIXME: boennemann says to turn the dropdown list into a directive,
-  //        and give it its own scope for active tracking
   // update the contexts/projects hash based on the task
   var trackHash = function(hash, type, task) {
     var plural = type + 's'
 
-          if (task[plural]) {
-            for (var j = 0; j < task[plural].length; ++j) {
-              var name = task[plural][j];
-              if (!(name in hash)) {
-                hash[name] = {
-                  'name': name,
-                  'active': false,
-                  'things': [],
-                }
-              }
-              hash[name].things.push(task)
-            }
+    if (task[plural]) {
+      for (var j = 0; j < task[plural].length; ++j) {
+        var name = task[plural][j];
+        if (!(name in hash)) {
+          hash[name] = {
+            'name': name,
+            'active': false,
+            'things': [],
           }
+        }
+        hash[name].things.push(task)
+      }
+    }
   }
   var resetHash = function(hash) {
     for (var key in hash) {

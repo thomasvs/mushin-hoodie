@@ -54,8 +54,8 @@
     swipe-long-left="setDone(task)">
     <div class="content">
       <div class="complete">
-        <span ng-if="task.recurrence">
-          <i class="glyphicon glyphicon-repeat" ng-click="setComplete(task)"></i>
+        <span ng-if="task.recurrence" ng-class="{ 'repeat-fade': completed }" class="repeat">
+          <i class="glyphicon glyphicon-repeat" ng-click="setComplete(task); completed = !completed;"></i>
         </span>
         <span ng-if="!task.recurrence">
           <i class="glyphicon glyphicon-check" ng-class="{ true: 'unchecked' }[task.complete != 100]" ng-click="setComplete(task)"></i>

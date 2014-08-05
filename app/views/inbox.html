@@ -55,7 +55,7 @@
     <div class="content">
       <div class="complete">
         <span ng-if="task.recurrence">
-          <i class="glyphicon glyphicon-repeat"></i>
+          <i class="glyphicon glyphicon-repeat" ng-click="setComplete(task)"></i>
         </span>
         <span ng-if="!task.recurrence">
           <i class="glyphicon glyphicon-check" ng-class="{ true: 'unchecked' }[task.complete != 100]" ng-click="setComplete(task)"></i>
@@ -64,7 +64,7 @@
       <div class="title" ui-sref="inboxTask({id:task.id})">
         {{ task.title }}
       </div>
-      <time datetime="{{ task.date | date : 'yyyy-MM-dd hh:mm' }}">{{ task.date | date : 'MMM d, h:mm' }}</time>
+      <time datetime="{{ task.due | date : 'yyyy-MM-dd hh:mm' }}">due {{ task.due | date : 'MMM d yyyy, h:mm' }}</time>
       <div class="description" ng-if="task.description">{{ task.description }}</div>
       <div class="contexts" ng-if="task.contexts">
         <b ng-repeat="context in task.contexts">@{{context}}{{$last ? '' : ', '}}</b>

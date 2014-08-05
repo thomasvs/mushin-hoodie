@@ -70,16 +70,21 @@ angular.module('zentodone').factory('Task', function ($q, $filter, hoodie) {
     debug('complete task with title ' + this.data.title);
 
     var complete, end;
+    var start = this.data.start && new Date(this.data.start) || new Date();
+    var due = this.data.due && new Date(this.data.due) || new Date();
 
     if (this.data.recurrence) {
-      debug('handle recurrence');
+      start = due;
+      // interestingly, setSeconds handles wrapping
+      due.setSeconds(due.getSeconds() + this.data.recurrence * 60 * 60);
+      debug('handle recurrence ' + this.data.recurrence + ', start ' + start + ' due ' + due);
     } else {
       if (this.data.complete == 100) {
         complete = 0;
         end = undefined;
       } else {
         complete = 100;
-        end = new Date().toISOString();
+        end = new Date();
       }
     }
 
@@ -87,7 +92,9 @@ angular.module('zentodone').factory('Task', function ($q, $filter, hoodie) {
     // FIXME; deal with recurrence
     return $q.when(hoodie.store.update('task', this.data.id, {
       complete: complete,
-      end: end,
+      start: start.toISOString(),
+      due: due.toISOString(),
+      end: end && end.toISOString() || '',
     }))
   }
 

@@ -1,3 +1,7 @@
+/*
+ * This controller expects a parent scope to have the matching tag list;
+ * i.e. $scope.projects if type == project
+ */
 function TagListCtrl(type) {
 
   var debug = new window.$debug('zentodone:controllers/taglist');

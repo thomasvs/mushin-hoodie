@@ -20,7 +20,7 @@ angular.module('zentodone', ['bp', 'angular-loading-bar', 'hoodie', 'monospaced.
 
     $stateProvider
       .state('inbox', {
-        url: '/inbox',
+        url: '/inbox?query',
         templateUrl: 'views/inbox.html',
         controller: 'InboxCtrl'
       })

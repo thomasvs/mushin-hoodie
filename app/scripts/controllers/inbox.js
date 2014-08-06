@@ -29,8 +29,8 @@ angular.module('zentodone').controller('InboxCtrl', function ($scope, $filter, $
         })
     // parse query params now
     var parser = new window.Parser();
-    var parsed = parser.parse(search.filter);
-    debug('controllers/inbox: parsed filter ' + JSON.stringify(parsed));
+    var parsed = parser.parse(search.query);
+    debug('controllers/inbox: parsed query ' + JSON.stringify(parsed));
     angular.forEach(parsed.contexts, function (context) {
         $scope.addTag('context', context);
         $scope.contexts[context].active = true;

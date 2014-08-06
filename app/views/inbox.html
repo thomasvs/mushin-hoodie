@@ -76,8 +76,18 @@
   </bp-cell>
 </bp-table>
 
+<form ng-if="saveListActive" ng-submit="saveList(taskList); saveListActive = false;" name="listInput">
+  <bp-search>
+    <input
+      ng-model="taskList"
+      placeholder=" Enter your list name here">
+  </bp-search>
+</form>
+
 <bp-toolbar>
-  <bp-action ng-click="doSomething()" class="bp-icon fa-save">First</bp-action>
+  <bp-action ng-click="saveListActive = !saveListActive" class="bp-icon fa-save">First
+  </bp-action>
 </bp-toolbar>
+
 <bp-tabbar tab-bar class="inbox">
 </bp-tabbar>

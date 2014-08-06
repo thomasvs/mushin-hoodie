@@ -1,4 +1,4 @@
-angular.module('zentodone').controller('InboxCtrl', function ($scope, $filter, $location, tasks, Task) {
+angular.module('zentodone').controller('InboxCtrl', function ($scope, $filter, $location, tasks, Task, lists) {
 
   var debug = new window.$debug('mushin:task');
   var search = $location.search();
@@ -11,6 +11,9 @@ angular.module('zentodone').controller('InboxCtrl', function ($scope, $filter, $
     'context': [], // list of selected contexts
     'project': []
   }
+
+  $scope.saveListActive = false;
+
 
   $scope.inbox = []
   tasks.extend($scope)
@@ -146,4 +149,26 @@ angular.module('zentodone').controller('InboxCtrl', function ($scope, $filter, $
       return true;
     }
 
+   // save the current state of the list of things as a saved list
+   $scope.saveList = function(name) {
+       debug('saveList ' + name);
+       $scope.saveListActive = false;
+
+       // construct query from state of filtering
+       var parts = [];
+       if (taglist.context.length > 0) {
+           angular.forEach(taglist.context, function (context) {
+               parts.push('@' + context);
+           });
+       }
+       if (taglist.project.length > 0) {
+           angular.forEach(taglist.project, function (project) {
+               parts.push('p:' + project);
+           });
+       }
+       var query = parts.join(' ');
+
+       debug('saveList: query ' + query);
+       lists.add(name, query);
+   }
 })

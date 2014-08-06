@@ -1,14 +1,15 @@
+<!--
 <bp-table
   class="mit"
   bp-scroll
-  ng-if="!mit.length"
   ng-controller="ProgressCtrl"
   src="'views/mit.zero.html'"
   ng-include>
 </bp-table>
+-->
 
 <bp-table
-  ng-if="mit.length"
+  ng-controller="ListsListCtrl"
   bp-scroll
   bp-scroll-sticky
   class="mit">

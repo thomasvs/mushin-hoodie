@@ -27,18 +27,21 @@ angular.module('zentodone').controller('InboxCtrl', function ($scope, $filter, $
           // FIXME: I'm filtering on complete/end in a filter func
           if (!task.done && !task.deleted) return true
         })
-    // parse query params now
-    var parser = new window.Parser();
-    var parsed = parser.parse(search.query);
-    debug('controllers/inbox: parsed query ' + JSON.stringify(parsed));
-    angular.forEach(parsed.contexts, function (context) {
-        $scope.addTag('context', context);
-        $scope.contexts[context].active = true;
-    });
-    angular.forEach(parsed.projects, function (project) {
-        $scope.addTag('project', project);
-        $scope.projects[project].active = true;
-    });
+
+        // parse query params now
+        if (search.query) {
+            var parser = new window.Parser();
+            var parsed = parser.parse(search.query);
+            debug('controllers/inbox: parsed query ' + JSON.stringify(parsed));
+            angular.forEach(parsed.contexts, function (context) {
+                $scope.addTag('context', context);
+                $scope.contexts[context].active = true;
+            });
+            angular.forEach(parsed.projects, function (project) {
+                $scope.addTag('project', project);
+                $scope.projects[project].active = true;
+            });
+        }
 
 
       })

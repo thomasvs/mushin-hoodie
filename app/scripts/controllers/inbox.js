@@ -96,6 +96,7 @@ angular.module('zentodone').controller('InboxCtrl', function ($scope, $filter, $
     } else {
       $scope.addTag(type, name);
     }
+    debug ('tags: now ' + JSON.stringify(taglist));
   }
   $scope.clearTags = function(type) {
     taglist[type].splice(0, Number.MAX_VALUE);

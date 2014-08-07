@@ -22,7 +22,10 @@ angular.module('zentodone', ['bp', 'angular-loading-bar', 'hoodie', 'monospaced.
       .state('inbox', {
         url: '/inbox?query',
         templateUrl: 'views/inbox.html',
-        controller: 'InboxCtrl'
+        controller: 'InboxCtrl',
+        data: {
+          title: 'Things'
+        }
       })
       .state('account', {
         url: '/inbox/account',
@@ -37,7 +40,7 @@ angular.module('zentodone', ['bp', 'angular-loading-bar', 'hoodie', 'monospaced.
         templateUrl: 'views/mit.html',
         controller: 'ListCtrl',
         data: {
-          title: 'Most Important Tasks',
+          title: 'Lists',
           taskType: 2
         }
       })

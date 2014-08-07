@@ -89,6 +89,7 @@ angular.module('zentodone').controller('InboxCtrl', function ($scope, $filter, $
     }
   }
   $scope.toggleTag = function(type, name) {
+    debug('toggleTag: toggling ' + type + ' ' + name);
     var i = taglist[type].indexOf(name);
     if (i > -1) {
       $scope.removeTag(type, name);

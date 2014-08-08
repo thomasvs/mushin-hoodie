@@ -4,10 +4,10 @@
     {{ type }}s <span class="caret"></span>
   </button>
   <ul class="dropdown-menu" ng-class="{ true: 'dropdown-menu-right' }[type == 'project']" role="menu">
-    <li ng-if="showAll == true" ng-class="{ 'active': selectedAll }"><a href="#" ng-click="clear(); clearTags(type)">All {{ type }}s</a></li>
+    <li ng-if="showAll == true" ng-class="{ 'active': selectedAll }"><a href="" ng-click="clear(); clearTags(type)">All {{ type }}s</a></li>
     <li ng-if="showAll == true" class="divider"></li>
     <li ng-repeat="tag in tags|orderBy:name" ng-class="{ 'active': tag.active}">
-      <a href="#" ng-click="toggle(tag.name); toggleTag(type, tag.name)">{{ tag.name }}
+      <a href="" ng-click="toggle(tag.name); toggleTag(type, tag.name)">{{ tag.name }}
       <span class="badge pull-right">{{ getCount(tag.name) }}</span></a>
     </li>
   </ul>

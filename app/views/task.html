@@ -29,6 +29,14 @@
   </bp-action>
 </bp-navbar-config>
 
+  <div>
+    <span>
+      <span tag-list ng-controller="TagListCtrl as cl" type="context" all="false"></span>
+      <span tag-list ng-controller="TagListCtrl as pl" type="project" all="false"></span>
+    </span>
+  </div>
+
+
 <bp-table ng-controller="TaskCtrl" bp-scroll>
   <form>
     <bp-table-header>

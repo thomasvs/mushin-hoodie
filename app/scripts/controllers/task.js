@@ -1,10 +1,14 @@
 angular.module('zentodone')
-  .controller('TaskCtrl', function (tasks, Task, $scope, $state, hoodie) {
+  .controller('TaskCtrl', function (tasks, Task, $scope, $state, hoodie, $rootScope) {
     var lastType
     var params = $state.params
     var current = $state.current
 
     $scope.task = {}
+
+    $scope.contexts = $rootScope.contexts;
+    $scope.projects = $rootScope.projects;
+
     tasks.get(params.id)
       .then(function(data) {
         goToCorrectType(data)

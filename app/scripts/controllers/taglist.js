@@ -1,16 +1,21 @@
-/*
- * This controller expects a parent scope to have the matching tag list;
- * i.e. $scope.projects if type == project
- */
-function TagListCtrl(type) {
+angular.module('zentodone').controller('TagListCtrl',
+  function($scope, $attrs) {
+    var debug = new window.$debug('zentodone:controllers/taglist');
+    /* whether to show the All ... header */
+    if (!$attrs.all) {
+        throw new Error("No all attribute for TagListCtrl");
+    } else {
+        $scope.showAll = $attrs.all;
+    }
+    if (!$attrs.type) {
+        throw new Error("No type attribute for TagListCtrl");
+    }
+    $scope.open = false;
 
-  var debug = new window.$debug('zentodone:controllers/taglist');
+    $scope.type = $attrs.type;
+    debug('new TagListCtrl of type ' + $scope.type);
 
-  return function($scope) {
-    debug('new TagListCtrl of type ' + type);
-    $scope.type = type;
-
-    $scope.tags = $scope[type + 's']
+    $scope.tags = $scope[$scope.type + 's']
 
     $scope.selectedAll = true;
 
@@ -60,9 +65,4 @@ function TagListCtrl(type) {
       return false;
     }
 
-  }
-}
-angular.module('zentodone').controller('ContextListCtrl',
-  ['$scope', new TagListCtrl('context')]);
-angular.module('zentodone').controller('ProjectListCtrl',
-  ['$scope', new TagListCtrl('project')]);
+})

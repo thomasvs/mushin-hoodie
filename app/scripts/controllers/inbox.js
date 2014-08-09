@@ -1,16 +1,8 @@
-angular.module('zentodone').controller('InboxCtrl', function ($scope, $filter, $location, tasks, Task, lists) {
+angular.module('zentodone').controller('InboxCtrl', function ($scope, $rootScope, $filter, $location, tasks, Task, lists) {
 
   var debug = new window.$debug('mushin:task');
   var search = $location.search();
   debug('controllers/inbox.js: search params ' + JSON.stringify(search));
-
-  // managed as a list here so we can use it in the filter; needs to be
-  // kept up-to-date with toggletTag by the click handlers
-  // in the taglist directive
-  var taglist = {
-    'context': [], // list of selected contexts
-    'project': []
-  }
 
   $scope.saveListActive = false;
 
@@ -28,6 +20,9 @@ angular.module('zentodone').controller('InboxCtrl', function ($scope, $filter, $
   function fetchTasks() {
     tasks.getAll(Task.INBOX)
       .then(function(tasks) {
+        // at this time, the rootScope contexts/projects are set and thus
+        // available through $scope too
+
         $scope.inbox = $filter('filter')(tasks, function(task) {
           // FIXME: I'm filtering on complete/end in a filter func
           if (!task.done && !task.deleted) return true
@@ -39,11 +34,9 @@ angular.module('zentodone').controller('InboxCtrl', function ($scope, $filter, $
             var parsed = parser.parse(search.query);
             debug('controllers/inbox: parsed query ' + JSON.stringify(parsed));
             angular.forEach(parsed.contexts, function (context) {
-                $scope.addTag('context', context);
                 $scope.contexts[context].active = true;
             });
             angular.forEach(parsed.projects, function (project) {
-                $scope.addTag('project', project);
                 $scope.projects[project].active = true;
             });
         }
@@ -77,58 +70,52 @@ angular.module('zentodone').controller('InboxCtrl', function ($scope, $filter, $
     $scope.taskInput.$setPristine()
   }
 
-  // add/remove selected contexts/projects
-  $scope.addTag = function(type, name) {
-    var i = taglist[type].indexOf(name);
-    if (i == -1) {
-      taglist[type].push(name);
-    }
-  }
-  $scope.removeTag = function(type, name) {
-    var i = taglist[type].indexOf(name);
-    if (i > -1) {
-      taglist[type].splice(i, 1);
-    }
-  }
-  $scope.toggleTag = function(type, name) {
-    debug('toggleTag: toggling ' + type + ' ' + name);
-    var i = taglist[type].indexOf(name);
-    if (i > -1) {
-      $scope.removeTag(type, name);
-    } else {
-      $scope.addTag(type, name);
-    }
-    debug ('tags: now ' + JSON.stringify(taglist));
-  }
-  $scope.clearTags = function(type) {
-    taglist[type].splice(0, Number.MAX_VALUE);
-  }
-
-
   // filter tasks by context/project
+  // FIXME: this now loops over all contexts/projects for each thing;
+  // would be faster to precalculate the selection once into an array on
+  // each click event in a taglist, then compare here
     $scope.filterByTag = function(thing) {
-//      debug('filterByTag ' + JSON.stringify(thing));
 
       var keep;
+      var selectedAll;
 
-      for (var type in taglist) {
-        // either taglist may reject a thing
+      // either taglist may reject a thing
+      // don't convert to angular.forEach as that does not allow breaks
+      var types = [ 'context', 'project' ];
+      var type;
+      var tags;
+
+      for (var i = 0; i < types.length; ++i) {
+        type = types[i];
+        tags = $scope[type + 's'];
+
+//        debug('filter: looking at type ' + type);
         keep = false;
+        selectedAll = true; // guilty until proven innocent
 
-        if (taglist[type].length > 0) {
-          for (var i = 0; i < taglist[type].length; ++i) {
-            if (thing[type + 's'] && thing[type + 's'].indexOf(taglist[type][i]) > -1) {
+        for (var name in tags) {
+          var tag = tags[name];
+
+//          debug('filter: looking at tag ' + tag.name);
+          if (tag.active) {
+//            debug('filter: tag.name active ' + tag.name);
+            selectedAll = false;
+//            debug('thing tags: ' + JSON.stringify(thing));
+            if (thing[type + 's'] && thing[type + 's'].indexOf(tag.name) > -1) {
+              debug('filter: keeping ' + thing.title);
               keep = true;
             }
           }
-          if (!keep) {
-            return false;
-          }
         }
+        /* also keep if no tag is selected, which means all are */
+        if (selectedAll) keep = true;
 
+        if (!keep) {
+          return false;
       }
 
       return true;
+    }
     }
 
     $scope.notRecentlyCompleted = function(thing) {
@@ -160,16 +147,16 @@ angular.module('zentodone').controller('InboxCtrl', function ($scope, $filter, $
 
        // construct query from state of filtering
        var parts = [];
-       if (taglist.context.length > 0) {
-           angular.forEach(taglist.context, function (context) {
-               parts.push('@' + context);
-           });
-       }
-       if (taglist.project.length > 0) {
-           angular.forEach(taglist.project, function (project) {
-               parts.push('p:' + project);
-           });
-       }
+       angular.forEach($scope.contexts, function (context) {
+         if (context.active) {
+           parts.push('@' + context.name);
+         }
+       });
+       angular.forEach($scope.projects, function (project) {
+         if (project.active) {
+           parts.push('p:' + project.name);
+         }
+       });
        var query = parts.join(' ');
 
        debug('saveList: query ' + query);

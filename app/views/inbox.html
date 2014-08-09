@@ -15,12 +15,12 @@
 
   <div>
   <span>
-    <span tag-list ng-controller="TagListCtrl as cl" type="context" all="true"></span>
+    <span tag-list ng-controller="TagListCtrl as cl" type="context" all="true" data="contexts" active="contexts"></span>
 
     <div class="search">
       <input type="text" class="form-control" placeholder="Search" ng-model="searchString">
     </div>
-    <span tag-list ng-controller="TagListCtrl as pl" type="project" all="true"></span>
+    <span tag-list ng-controller="TagListCtrl as pl" type="project" all="true" data="projects" active="projects"></span>
 
 
   </span>

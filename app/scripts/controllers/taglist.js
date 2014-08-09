@@ -14,6 +14,8 @@
  *                 <dt>all</dt>
  *                 <dd>true or false;
  *                     whether to allow selecting all tags</dd>
+ *                 <dt>data</dt><dd>the parent scope's variable that contains the hash of tags</dd>
+ *                 <dt>active</dt><dd>the parent scope's variable that contains the hash of tag selection; the controller will manipulate .active</dd>
  *               </dl>
  *            </p>
  *
@@ -46,11 +48,19 @@ angular.module('zentodone').controller(
       $scope.showAll = ($attrs.all == 'true');
     }
 
+    if (!$attrs.data) {
+      throw new Error("No data attribute for TagListCtrl");
+    }
+    $scope.tags = $scope[$attrs.data];
+
+    if (!$attrs.active) {
+      throw new Error("No active attribute for TagListCtrl");
+    }
+    $scope.active = $scope[$attrs.active];
+
     $scope.open = false;
 
     debug('new TagListCtrl of type ' + $scope.type);
-
-    $scope.tags = $scope[$scope.type + 's'];
 
     $scope.selectedAll = true;
 
@@ -71,10 +81,15 @@ angular.module('zentodone').controller(
     $scope.toggle = function(name) {
       var all = true;
 
-      $scope.tags[name].active = !$scope.tags[name].active;
+      if (!(name in $scope.active)) {
+          $scope.active[name] = {
+              'active': false
+          };
+      }
+      $scope.active[name].active = !$scope.active[name].active;
 
-      for (var key in $scope.tags) {
-        if ($scope.tags[key].active) { all = false; }
+      for (var key in $scope.active) {
+        if ($scope.active[key].active) { all = false; }
       }
       if ($scope.selectedAll != all) {
         $scope.selectedAll = all;
@@ -91,8 +106,8 @@ angular.module('zentodone').controller(
      * Clear the selection state of all tags, and set selectedAll.
      */
     $scope.clear = function() {
-      for (var key in $scope.tags) {
-        $scope.tags[key].active = false;
+      for (var key in $scope.active) {
+        $scope.active[key].active = false;
       }
       $scope.selectedAll = true;
     }
@@ -136,7 +151,7 @@ angular.module('zentodone').controller(
       }
 
       for (var key in $scope.tags) {
-        if ($scope.tags[key].active && thing.tags.indexOf(key) > -1) {
+        if ($scope.active[key].active && thing.tags.indexOf(key) > -1) {
           return true;
         }
       }

@@ -42,7 +42,8 @@ angular.module('zentodone').controller(
     if (!$attrs.all) {
       throw new Error("No all attribute for TagListCtrl");
     } else {
-    $scope.showAll = $attrs.all;
+      /* convert string to boolean */
+      $scope.showAll = ($attrs.all == 'true');
     }
 
     $scope.open = false;

@@ -1,21 +1,28 @@
-angular.module('zentodone').controller('TagListCtrl',
+// vi:si:et:sw=2:sts=2:ts=2
+angular.module('zentodone').controller(
+  'TagListCtrl',
   function($scope, $attrs) {
+
     var debug = new window.$debug('zentodone:controllers/taglist');
+
+    /* projects or contexts */
+    if (!$attrs.type) {
+      throw new Error("No type attribute for TagListCtrl");
+    }
+    $scope.type = $attrs.type;
+
     /* whether to show the All ... header */
     if (!$attrs.all) {
-        throw new Error("No all attribute for TagListCtrl");
+      throw new Error("No all attribute for TagListCtrl");
     } else {
-        $scope.showAll = $attrs.all;
+    $scope.showAll = $attrs.all;
     }
-    if (!$attrs.type) {
-        throw new Error("No type attribute for TagListCtrl");
-    }
+
     $scope.open = false;
 
-    $scope.type = $attrs.type;
     debug('new TagListCtrl of type ' + $scope.type);
 
-    $scope.tags = $scope[$scope.type + 's']
+    $scope.tags = $scope[$scope.type + 's'];
 
     $scope.selectedAll = true;
 
@@ -25,7 +32,7 @@ angular.module('zentodone').controller('TagListCtrl',
     $scope.toggle = function(name) {
       var all = true;
 
-      $scope.tags[name].active = !$scope.tags[name].active
+      $scope.tags[name].active = !$scope.tags[name].active;
 
       for (var key in $scope.tags) {
         if ($scope.tags[key].active) { all = false; }
@@ -65,4 +72,5 @@ angular.module('zentodone').controller('TagListCtrl',
       return false;
     }
 
-})
+  }
+);

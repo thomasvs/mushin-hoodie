@@ -182,6 +182,12 @@ module.exports = (grunt) ->
       commitFiles: ['package.json', 'bower.json', 'CHANGELOG.md']
       pushTo: 'origin master'
 
+    jsdoc:
+        dist:
+            src: ['<%= app.app %>/scripts/**/*.js', 'README.md']
+            options:
+                destination: 'doc'
+
   grunt.registerTask 'release', ->
     @args.unshift 'bump-only'
     grunt.task.run [
@@ -212,7 +218,9 @@ module.exports = (grunt) ->
     'rev'
     'usemin'
     'manifest'
+    'jsdoc'
   ]
 
   grunt.registerTask 'test', ['jshint', 'build']
   grunt.registerTask 'default', ['build']
+  grunt.loadNpmTasks 'grunt-jsdoc'

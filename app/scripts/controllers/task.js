@@ -47,10 +47,17 @@ angular.module('zentodone')
         $scope[Task.types[lastType]] = true
 
         debug ('controllers/task.js: contexts ' + JSON.stringify(data.contexts));
-        if (data.contexts.length > 0) {
+        if (data.contexts && data.contexts.length > 0) {
             angular.forEach(data.contexts, function(context) {
                 $scope.contextsActive[context] = { active: true};
                 debug('$scope.contextsActive now ' + JSON.stringify($scope.contextsActive));
+            });
+        }
+        debug ('controllers/task.js: projects ' + JSON.stringify(data.projects));
+        if (data.projects && data.projects.length > 0) {
+            angular.forEach(data.projects, function(project) {
+                $scope.projectsActive[project] = { active: true};
+                debug('$scope.projectsActive now ' + JSON.stringify($scope.projectsActive));
             });
         }
       })

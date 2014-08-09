@@ -13,6 +13,24 @@ angular.module('zentodone')
     $scope.contextsActive = {};
     $scope.projectsActive = {};
 
+    $scope.$on('TAG_TOGGLED', function(event, type, name) {
+      var taglist = $scope.task[type + 's'];
+      if (!taglist) {
+        $scope.task[type + 's'] = [];
+        taglist = $scope.task[type + 's'];
+      }
+      var i = taglist.indexOf(name);
+      if (i > -1) {
+        taglist.splice(i, 1);
+      } else {
+        taglist.push(name);
+      }
+      $scope.update();
+      // FIXME: hack: toggling can change the count for each tag, so
+      // force a recount
+      tasks.getAll(Task.INBOX);
+    });
+
     // FIXME: hack: if the page was reloaded, contexts and projects are
     //              not loaded.  force a load.
     //              only works with ECMA5

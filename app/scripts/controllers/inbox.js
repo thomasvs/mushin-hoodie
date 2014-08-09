@@ -15,8 +15,10 @@ angular.module('zentodone').controller('InboxCtrl', function ($scope, $filter, $
   $scope.saveListActive = false;
 
 
-  $scope.inbox = []
-  tasks.extend($scope)
+  $scope.inbox = [];
+
+  /* this adds proxy functions to Task class functions */
+  tasks.extend($scope);
 
   // http://cubiq.org/add-to-home-screen
   addToHomescreen({

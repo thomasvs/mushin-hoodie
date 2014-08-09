@@ -40,7 +40,8 @@
     "grunt-rev": "^0.1.0",
     "grunt-usemin": "^2.1.1",
     "load-grunt-tasks": "^0.6.0",
-    "time-grunt": "^0.4.0"
+    "time-grunt": "^0.4.0",
+    "grunt-ngdocs": "~0.2.2"
   },
   "engines": {
     "node": ">=0.10.0"

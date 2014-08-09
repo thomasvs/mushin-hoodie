@@ -1,17 +1,30 @@
 // vi:si:et:sw=2:sts=2:ts=2
 /**
- * @file      The tag list controller controls the tag list directive,
- *            allowing the user to choose any (or all) tags.
+ * @ngdoc     controller
+ * @name      zentodone.controller:TagListCtrl
+ * @requires  $scope
  *
- *            The controller should be initialized with the following tags:
- *             - type: 'project' or 'context'
- *             - all:  true or false; whether to allow selecting all tags
+ * @description <p>The tag list controller controls the tag list directive,
+ *            allowing the user to choose any (or all) tags.</p>
  *
- *            A parent scope should provide the following members:
- *             - 'projects' or 'contexts', depending on the type.
+ *            <p>The controller should be initialized with the following
+ *               tags:
+ *               <dl>
+ *                 <dt>type</dt><dd>'project' or 'context'</dd>
+ *                 <dt>all</dt>
+ *                 <dd>true or false;
+ *                     whether to allow selecting all tags</dd>
+ *               </dl>
+ *            </p>
+ *
+ *            <p>A parent scope should provide the following members:
+ *               <dl>
+ *                 <dt>'projects' or 'contexts'</dt>
+ *                 <dd>depending on the type</dd>
+ *               </dl>
+ *            </p>
  *
  * @author    Thomas Vander Stichele <thomas (at) apestaart (dot) org>
- * @namespace TagListCtrl
  */
 angular.module('zentodone').controller(
   'TagListCtrl',
@@ -45,11 +58,14 @@ angular.module('zentodone').controller(
     }
 
     /**
-     * Toggle the selection state of a tag.
-     *
-     * @memberof TagListCtrl
-     * @method   toggle
+     * @ngdoc    method
+     * @name     zentodone.controller:TagListCtrl#toggle
+     * @methodOf zentodone.controller:TagListCtrl
      * @param    {string} name the name of the tag to toggle.
+     *
+     * @description
+     *
+     * Toggle the selection state of a tag.
      */
     $scope.toggle = function(name) {
       var all = true;
@@ -65,10 +81,13 @@ angular.module('zentodone').controller(
     }
 
     /**
-     * Clear the selection state of all tags, and set selectedAll.
+     * @ngdoc    method
+     * @name     zentodone.controller:TagListCtrl#clear
+     * @methodOf zentodone.controller:TagListCtrl
      *
-     * @memberof TagListCtrl
-     * @method   clear
+     * @description
+     *
+     * Clear the selection state of all tags, and set selectedAll.
      */
     $scope.clear = function() {
       for (var key in $scope.tags) {
@@ -78,10 +97,14 @@ angular.module('zentodone').controller(
     }
 
     /**
+     * @ngdoc    method
+     * @name     zentodone.controller:TagListCtrl#getCount
+     * @methodOf zentodone.controller:TagListCtrl
+     *
+     * @description
+     *
      * Get the number of things for the given tag.
      *
-     * @memberof TagListCtrl
-     * @method   getCount
      * @param    {string} tag the name of the tag to get a count for;
      *                        leave undefined to get the total count of tags
      */
@@ -94,12 +117,15 @@ angular.module('zentodone').controller(
     }
 
     /**
+     * @ngdoc    method
+     * @name     zentodone.controller:TagListCtrl#filterByTag
+     * @methodOf zentodone.controller:TagListCtrl
+     *
+     * @description
+     *
      * Filter the given thing by the current selection state.
      *
-     * @memberof TagListCtrl
-     * @method   filterByTag
-     * @param {object} thing the name of the tag to get a count for;
-     *                 leave undefined to get the total count of tags
+     * @param {object} thing the thing to filter
      */
     $scope.filterByTag = function(thing) {
       debug('filterByTag ' + thing);

@@ -188,6 +188,11 @@ module.exports = (grunt) ->
             options:
                 destination: 'doc'
 
+    ngdocs:
+        all: ['<%= app.app %>/scripts/**/*.js', 'app/scripts/controllers/taglist.js']
+        options:
+            dest: 'app/docs'
+
   grunt.registerTask 'release', ->
     @args.unshift 'bump-only'
     grunt.task.run [
@@ -224,3 +229,4 @@ module.exports = (grunt) ->
   grunt.registerTask 'test', ['jshint', 'build']
   grunt.registerTask 'default', ['build']
   grunt.loadNpmTasks 'grunt-jsdoc'
+  grunt.loadNpmTasks 'grunt-ngdocs'

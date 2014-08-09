@@ -1,1 +1,9 @@
 export PATH=`pwd`/node_modules/.bin:$PATH
+
+Documentation
+-------------
+
+Currently using ng-docs.
+
+- grunt ngdocs
+- go to http://localhost:9000/docs/

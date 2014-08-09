@@ -13,6 +13,13 @@ angular.module('zentodone')
     $scope.contextsActive = {};
     $scope.projectsActive = {};
 
+    // FIXME: hack: if the page was reloaded, contexts and projects are
+    //              not loaded.  force a load.
+    //              only works with ECMA5
+    if (Object.keys($scope.contexts).length === 0) {
+        debug('controller/task.js: getting all tasks');
+        tasks.getAll(Task.INBOX);
+    }
     tasks.get(params.id)
       .then(function(data) {
         goToCorrectType(data)

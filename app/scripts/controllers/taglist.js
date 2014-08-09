@@ -57,6 +57,7 @@ angular.module('zentodone').controller(
       throw new Error("No active attribute for TagListCtrl");
     }
     $scope.active = $scope[$attrs.active];
+    debug('controller/taglist.js: $scope.active is ' + JSON.stringify($scope.active));
 
     $scope.open = false;
 

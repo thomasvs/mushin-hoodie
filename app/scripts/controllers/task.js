@@ -3,11 +3,15 @@ angular.module('zentodone')
     var lastType
     var params = $state.params
     var current = $state.current
+    var debug = new window.$debug('zentodone:controllers/TaskCtrl');
 
     $scope.task = {}
 
     $scope.contexts = $rootScope.contexts;
     $scope.projects = $rootScope.projects;
+
+    $scope.contextsActive = {};
+    $scope.projectsActive = {};
 
     tasks.get(params.id)
       .then(function(data) {
@@ -16,6 +20,14 @@ angular.module('zentodone')
         $scope.unit = data.taskType === Task.MIT ? Task.ONE_DAY : Task.ONE_WEEK
         lastType = $scope.task.taskType
         $scope[Task.types[lastType]] = true
+
+        debug ('controllers/task.js: contexts ' + JSON.stringify(data.contexts));
+        if (data.contexts.length > 0) {
+            angular.forEach(data.contexts, function(context) {
+                $scope.contextsActive[context] = { active: true};
+                debug('$scope.contextsActive now ' + JSON.stringify($scope.contextsActive));
+            });
+        }
       })
 
     tasks.extend($scope)

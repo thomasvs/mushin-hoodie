@@ -1,10 +1,10 @@
+// vi:si:et:sw=2:sts=2:ts=2
 var debug = new window.$debug('zentodone:directives/taglist');
-debug('tagList: loading');
+debug('directives/taglist.js: loading');
 
-angular.module('zentodone')
-  .directive('tagList', function () {
-
-
+angular.module('zentodone').directive(
+  'tagList',
+  function () {
     debug('tagList: creating');
     return {
       restrict: 'A',

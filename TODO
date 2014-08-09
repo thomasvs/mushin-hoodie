@@ -1,6 +1,8 @@
-- create a TagList directive for the dropdown button for contexts/projects
 - reuse it both in the main things view as well as in the thing edit view
   for assigning projects and contexts
+- add a way to add projects or contexts on the thing edit screen
+- emit events when taglists change in inbox, so that we can recalculate the
+  array of selected contexts/projects for use in the filter function
 - use angular-tour to:
   - explain how the app works
   - suggest things to type and click

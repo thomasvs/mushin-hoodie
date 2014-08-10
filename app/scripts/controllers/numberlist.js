@@ -60,6 +60,11 @@ angular.module('zentodone').controller(
     }
     $scope.active = $scope[$attrs.active];
 
+    if (!$attrs.multiple) {
+      throw new Error("No multiple attribute for NumberListCtrl");
+    }
+    $scope.multiple = ($attrs.multiple == 'true');
+
     $scope.open = false;
 
     debug('new NumberListCtrl of type ' + $scope.type);
@@ -87,6 +92,10 @@ angular.module('zentodone').controller(
           $scope.active[name] = {
               'active': false
           };
+      }
+      // activating one resets the others if not multiple
+      if (!$scope.multiple && !$scope.active[name].active) {
+        $scope.clear();
       }
       $scope.active[name].active = !$scope.active[name].active;
       $scope.$emit('NUMBER_TOGGLED', $scope.type, name);

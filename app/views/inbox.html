@@ -72,6 +72,12 @@
       <div class="contexts" ng-if="task.contexts">
         <b ng-repeat="context in task.contexts">@{{context}}{{$last ? '' : ', '}}</b>
       </div>
+      <div class="importance" ng-if="task.importance">
+        I:{{task.importance}}
+      </div>
+      <div class="urgency" ng-if="task.urgency">
+        I:{{task.urgency}}
+      </div>
       <div class="projects" ng-if="task.projects">
         <b ng-repeat="project in task.projects">p:{{project}}{{$last ? '' : ', '}}</b>
       </div>

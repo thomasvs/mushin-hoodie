@@ -89,7 +89,7 @@ angular.module('zentodone').controller(
           };
       }
       $scope.active[name].active = !$scope.active[name].active;
-      $scope.$emit('TAG_TOGGLED', $scope.type, name);
+      $scope.$emit('NUMBER_TOGGLED', $scope.type, name);
 
       for (var key in $scope.active) {
         if ($scope.active[key].active) { all = false; }
@@ -146,15 +146,15 @@ angular.module('zentodone').controller(
      *
      * @param {object} thing the thing to filter
      */
-    $scope.filterByTag = function(thing) {
-      debug('filterByTag ' + thing);
+    $scope.filterByNumber = function(thing) {
+      debug('filterByNumber ' + thing);
 
       if ($scope.selectedAll) {
         return true;
       }
 
       for (var key in $scope.tags) {
-        if ($scope.active[key].active && thing.tags.indexOf(key) > -1) {
+        if ($scope.active[key].active) {
           return true;
         }
       }

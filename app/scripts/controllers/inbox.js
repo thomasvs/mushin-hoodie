@@ -118,6 +118,51 @@ angular.module('zentodone').controller('InboxCtrl', function ($scope, $rootScope
     }
     }
 
+    // filter tasks by importance/urgency
+    $scope.filterByNumber = function(thing) {
+
+      var keep;
+      var selectedAll;
+
+      // either numberlist may reject a thing
+      // don't convert to angular.forEach as that does not allow breaks
+      var types = [ 'importance', 'urgency' ];
+      var type;
+      var tags;
+
+      for (var i = 0; i < types.length; ++i) {
+        type = types[i];
+        tags = $scope[type];
+
+//        debug('filter: looking at type ' + type);
+        keep = false;
+        selectedAll = true; // guilty until proven innocent
+
+        for (var number in tags) {
+          var tag = tags[number];
+
+//          debug('filter: looking at tag ' + tag.name);
+          if (tag.active) {
+//            debug('filter: tag.name active ' + tag.name);
+            selectedAll = false;
+//            debug('thing tags: ' + JSON.stringify(thing));
+            if (thing[type] && thing[type] == number) {
+              debug('filter: keeping ' + thing.title);
+              keep = true;
+            }
+          }
+        }
+        /* also keep if no tag is selected, which means all are */
+        if (selectedAll) keep = true;
+
+        if (!keep) {
+          return false;
+      }
+
+      return true;
+    }
+    }
+
     $scope.notRecentlyCompleted = function(thing) {
       if (thing.complete != 100) {
 //        debug(thing.title + ' not complete, keeping');

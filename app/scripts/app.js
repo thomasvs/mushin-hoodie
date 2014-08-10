@@ -7,7 +7,7 @@
  * Released under the MIT license.
  */
 
-angular.module('zentodone', ['bp', 'angular-loading-bar', 'hoodie', 'monospaced.elastic'])
+angular.module('zentodone', ['bp', 'angular-loading-bar', 'hoodie', 'monospaced.elastic', 'datePicker'])
   .config(function($urlRouterProvider, $stateProvider, bpAppProvider, cfpLoadingBarProvider) {
 
     bpAppProvider.setConfig({

@@ -61,6 +61,15 @@
           'other': '– due in {} weeks'
         }">
       </span>
+      <div class="dropdown" ng-class="{open: open}">
+        <a class="dropdown-toggle btn btn-danger" ng-click="open = !open; update();">
+          Due date: {{ due | date }}
+        </a>
+        <div class="dropdown-menu" ng-click="update()">
+          <div date-picker="due" max-view="year" min-view="date">
+          </div>
+        </div>
+      </div>
 
     </bp-table-header>
     <bp-cell>

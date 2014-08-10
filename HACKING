@@ -1,9 +1,17 @@
+Running in dev mode
+-------------------
+
 export PATH=`pwd`/node_modules/.bin:$PATH
+grunt serve
+
 
 Documentation
 -------------
 
 Currently using ng-docs.
 
-- grunt ngdocs
+- build docs:
+
+grunt ngdocs
+
 - go to http://localhost:9000/docs/

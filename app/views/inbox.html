@@ -76,7 +76,7 @@
         I:{{task.importance}}
       </div>
       <div class="urgency" ng-if="task.urgency">
-        I:{{task.urgency}}
+        U:{{task.urgency}}
       </div>
       <div class="projects" ng-if="task.projects">
         <b ng-repeat="project in task.projects">p:{{project}}{{$last ? '' : ', '}}</b>

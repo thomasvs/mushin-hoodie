@@ -126,7 +126,7 @@ module.exports = (grunt) ->
         dest: '<%= app.dist %>/manifest.appcache'
 
     ngtemplates:
-      zentodone:
+      mushin:
         cwd: '<%= app.app %>'
         src: 'views/*.html'
         dest: '.tmp/templates.js'

@@ -1,4 +1,4 @@
-.task-cell-animation {
+.thing-cell-animation {
   &.ng-enter {
     .transition(200ms ease-in all);
     height: 0;
@@ -26,33 +26,33 @@
   }
 }
 
-.task-cell-inner-back {
-  &.task-cell-inner-back-add {
+.thing-cell-inner-back {
+  &.thing-cell-inner-back-add {
     .transition(200ms cubic-bezier(0.50, 0.000, 0.50, 1.50) all);
   }
-  &.task-cell-inner-back-add-active {
+  &.thing-cell-inner-back-add-active {
     .transform(~'translateX(0) !important');
   }
 }
 
-.task-cell-inner-right {
+.thing-cell-inner-right {
   .transform(~'translateX(120%) !important');
-  &.task-cell-inner-right-add {
+  &.thing-cell-inner-right-add {
     .transition(200ms ease-out all);
   }
 
-  &.task-cell-inner-right-add-active {
+  &.thing-cell-inner-right-add-active {
     .transform(~'translateX(120%) !important');
   }
 }
 
-.task-cell-inner-left {
+.thing-cell-inner-left {
   .transform(~'translateX(-120%) !important');
-  &.task-cell-inner-left-add {
+  &.thing-cell-inner-left-add {
     .transition(200ms ease-out all);
   }
 
-  &.task-cell-inner-left-add-active {
+  &.thing-cell-inner-left-add-active {
     .transform(~'translateX(-120%) !important');
   }
 }

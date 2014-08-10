@@ -49,32 +49,32 @@ angular.module('mushin', ['bp', 'angular-loading-bar', 'hoodie', 'monospaced.ela
         controller: 'ListCtrl',
         data: {
           title: 'Archive',
-          taskType: 2,
+          thingType: 2,
         }
       })
-      .state('inboxTask', {
+      .state('inboxThing', {
         url: '/inbox/:id',
-        templateUrl: 'views/task.html',
-        controller: 'TaskCtrl',
+        templateUrl: 'views/thing.html',
+        controller: 'ThingCtrl',
         data: {
           title: 'Edit Thing',
         }
       })
 /*
-      .state('mitTask', {
+      .state('mitThing', {
         url: '/mit/:id',
-        templateUrl: 'views/task.html',
-        controller: 'TaskCtrl',
+        templateUrl: 'views/thing.html',
+        controller: 'ThingCtrl',
         data: {
-          taskType: 2
+          thingType: 2
         }
       })
-      .state('brTask', {
+      .state('brThing', {
         url: '/br/:id',
-        templateUrl: 'views/task.html',
-        controller: 'TaskCtrl',
+        templateUrl: 'views/thing.html',
+        controller: 'ThingCtrl',
         data: {
-          taskType: 3
+          thingType: 3
         }
       })
 */

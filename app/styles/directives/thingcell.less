@@ -1,12 +1,12 @@
-[task-cell] {
-  @task-cell-height: 66px;
+[thing-cell] {
+  @thing-cell-height: 66px;
 
   position: relative;
   display: block;
   padding: 0 !important;
   margin: 0 !important;
   background: darkgray;
-  height: @task-cell-height;
+  height: @thing-cell-height;
   .box-shadow(none);
   .content {
     box-sizing: border-box;
@@ -166,7 +166,7 @@
       text-align: center;
       width: 40px;
       height: 100%;
-      line-height: @task-cell-height;
+      line-height: @thing-cell-height;
       text-align: center;
     }
   }
@@ -196,7 +196,7 @@
   }
 }
 
-.inbox [task-cell] {
+.inbox [thing-cell] {
   &.left {
     &:before {
       content: '\e605'; // fa-calendar
@@ -237,7 +237,7 @@
   }
 }
 
-.mit [task-cell] {
+.mit [thing-cell] {
   &.left {
     &:before {
       content: '\e604'; // fa-inbox
@@ -276,7 +276,7 @@
   }
 }
 
-.br [task-cell] {
+.br [thing-cell] {
   &.left {
     &:before {
       content: '\e601'; // fa-check

@@ -1,6 +1,6 @@
-angular.module('mushin').controller('InboxCtrl', function ($scope, $rootScope, $filter, $location, tasks, Task, lists) {
+angular.module('mushin').controller('InboxCtrl', function ($scope, $rootScope, $filter, $location, things, Thing, lists) {
 
-  var debug = new window.$debug('mushin:task');
+  var debug = new window.$debug('mushin:thing');
   var search = $location.search();
   debug('controllers/inbox.js: search params ' + JSON.stringify(search));
 
@@ -9,23 +9,23 @@ angular.module('mushin').controller('InboxCtrl', function ($scope, $rootScope, $
 
   $scope.inbox = [];
 
-  /* this adds proxy functions to Task class functions */
-  tasks.extend($scope);
+  /* this adds proxy functions to Thing class functions */
+  things.extend($scope);
 
   // http://cubiq.org/add-to-home-screen
   addToHomescreen({
     maxDisplayCount: 3
   })
 
-  function fetchTasks() {
-    tasks.getAll(Task.ACTIVE)
-      .then(function(tasks) {
+  function fetchThings() {
+    things.getAll(Thing.ACTIVE)
+      .then(function(things) {
         // at this time, the rootScope contexts/projects are set and thus
         // available through $scope too
 
-        $scope.inbox = $filter('filter')(tasks, function(task) {
+        $scope.inbox = $filter('filter')(things, function(thing) {
           // FIXME: I'm filtering on complete/end in a filter func
-          if (!task.done && !task.deleted) return true
+          if (!thing.done && !thing.deleted) return true
         })
 
         // parse query params now
@@ -56,16 +56,16 @@ angular.module('mushin').controller('InboxCtrl', function ($scope, $rootScope, $
       })
   }
 
-  fetchTasks()
+  fetchThings()
 
-  $scope.$on('taskChange', function() {
-    debug('taskChange');
-    fetchTasks()
+  $scope.$on('thingChange', function() {
+    debug('thingChange');
+    fetchThings()
   })
 
-  $scope.newTask = function() {
+  $scope.newThing = function() {
 
-    var title = ($scope.taskTitle || '').trim()
+    var title = ($scope.thingTitle || '').trim()
     var parser = new window.Parser();
     var parsed = parser.parse(title);
 
@@ -74,14 +74,14 @@ angular.module('mushin').controller('InboxCtrl', function ($scope, $rootScope, $
 
     if (!title) return
 
-    // see app/scripts/services/tasks.js
-    tasks.add(title, '', parsed)
+    // see app/scripts/services/things.js
+    things.add(title, '', parsed)
 
-    $scope.taskTitle = ''
-    $scope.taskInput.$setPristine()
+    $scope.thingTitle = ''
+    $scope.thingInput.$setPristine()
   }
 
-  // filter tasks by context/project
+  // filter things by context/project
   // FIXME: this now loops over all contexts/projects for each thing;
   // would be faster to precalculate the selection once into an array on
   // each click event in a taglist, then compare here
@@ -129,7 +129,7 @@ angular.module('mushin').controller('InboxCtrl', function ($scope, $rootScope, $
     }
     }
 
-    // filter tasks by importance/urgency
+    // filter things by importance/urgency
     $scope.filterByNumber = function(thing) {
 
       var keep;

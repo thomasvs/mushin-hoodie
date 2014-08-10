@@ -1,29 +1,29 @@
 <bp-navbar-config bp-navbar-title="" ng-class="{mit: mit, br: br}">
   <bp-action
     ng-class="{active: mit}"
-    ng-click="handle(convertToMit(task))"
+    ng-click="handle(convertToMit(thing))"
     class="bp-icon mit fa-list-ol">
-    Convert to most important tasks
+    Convert to most important things
   </bp-action>
   <bp-action
     ng-class="{active: br}"
-    ng-click="handle(convertToBr(task))"
+    ng-click="handle(convertToBr(thing))"
     class="bp-icon br fa-calendar">
     Convert to big rock
   </bp-action>
   <bp-action
     ng-class="{active: inbox}"
-    ng-click="handle(convertToInbox(task))"
+    ng-click="handle(convertToInbox(thing))"
     class="bp-icon inbox fa-inbox">
     Inbox
   </bp-action>
   <bp-action
-    ng-click="handle(setDone(task))"
+    ng-click="handle(setDone(thing))"
     class="bp-icon do fa-check">
     Done
   </bp-action>
   <bp-action
-    ng-click="handle(setDeleted(task))"
+    ng-click="handle(setDeleted(thing))"
     class="bp-icon delete fa-times">
     Delete
   </bp-action>
@@ -43,14 +43,14 @@
   </div>
 
 
-<bp-table ng-controller="TaskCtrl" bp-scroll>
+<bp-table ng-controller="ThingCtrl" bp-scroll>
   <form>
     <bp-table-header>
-      Created {{ task.date | date : 'MMM d' }}
+      Created {{ thing.date | date : 'MMM d' }}
       <span
-        ng-if="task.dueDate && !task.done && mit"
+        ng-if="thing.dueDate && !thing.done && mit"
         ng-pluralize
-        count="{{ unit | unitsOff: task.dueDate : task.date }}"
+        count="{{ unit | unitsOff: thing.dueDate : thing.date }}"
         when="{
           0: '– due today',
           'one': '– due tomorrow',
@@ -58,9 +58,9 @@
         }">
       </span>
       <span
-        ng-if="task.dueDate && !task.done && br"
+        ng-if="thing.dueDate && !thing.done && br"
         ng-pluralize
-        count="{{ unit | unitsOff: task.dueDate : task.date }}"
+        count="{{ unit | unitsOff: thing.dueDate : thing.date }}"
         when="{
           0: '– due this week',
           'one': '– due next week',
@@ -81,7 +81,7 @@
     <bp-cell>
       <input
         type="text"
-        ng-model="task.title"
+        ng-model="thing.title"
         ng-blur="update()"
         ng-change="update()">
     </bp-cell>
@@ -89,8 +89,8 @@
       <textarea
         rows="16"
         msd-elastic
-        placeholder="Task description…"
-        ng-model="task.description"
+        placeholder="Thing description…"
+        ng-model="thing.description"
         ng-blur="update()"
         ng-change="update()">
       </textarea>

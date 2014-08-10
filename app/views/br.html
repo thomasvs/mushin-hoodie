@@ -23,21 +23,21 @@
     }">
   </bp-table-header>
   <bp-cell
-    task-cell
-    class="task-cell-animation"
-    ng-class="{done: task.done}"
+    thing-cell
+    class="thing-cell-animation"
+    ng-class="{done: thing.done}"
     ng-repeat-end
-    ng-repeat="task in day track by task.id"
-    ui-sref="brTask({id:task.id})"
-    swipe-right="setDone(task)"
-    swipe-left="convertToInbox(task)"
-    swipe-long-right="setDeleted(task)"
-    swipe-long-left="convertToMit(task)">
+    ng-repeat="thing in day track by thing.id"
+    ui-sref="brThing({id:thing.id})"
+    swipe-right="setDone(thing)"
+    swipe-left="convertToInbox(thing)"
+    swipe-long-right="setDeleted(thing)"
+    swipe-long-left="convertToMit(thing)">
     <div class="content">
-      <bp-action ng-if="task.overdue" class="bp-icon fa-clock-o" aria-label="Overdue"></bp-action>
-      <div class="title">{{ task.title }}</div>
-      <time datetime="{{ task.date | date : 'yyyy-MM-dd hh:mm' }}">{{ task.date | date : 'MMM d, h:mm' }}</time>
-      <div class="description" ng-if="task.description">{{ task.description }}</div>
+      <bp-action ng-if="thing.overdue" class="bp-icon fa-clock-o" aria-label="Overdue"></bp-action>
+      <div class="title">{{ thing.title }}</div>
+      <time datetime="{{ thing.date | date : 'yyyy-MM-dd hh:mm' }}">{{ thing.date | date : 'MMM d, h:mm' }}</time>
+      <div class="description" ng-if="thing.description">{{ thing.description }}</div>
     </div>
   </bp-cell>
 </bp-table>

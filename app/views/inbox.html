@@ -4,12 +4,12 @@
   </bp-action>
 </bp-navbar-config>
 
-<form ng-submit="newTask()" name="taskInput">
+<form ng-submit="newThing()" name="thingInput">
   <bp-search>
     <input
       type="search"
-      ng-model="taskTitle"
-      placeholder=" Enter your task here">
+      ng-model="thingTitle"
+      placeholder=" Enter your thing here">
   </bp-search>
 </form>
 
@@ -44,53 +44,53 @@
   bp-scroll-sticky
   class="inbox">
 
-  <bp-table-header><!--Tasks--></bp-table-header>
+  <bp-table-header><!--Things--></bp-table-header>
 
 
   <bp-cell
-    task-cell
-    class="task-cell-animation"
-    ng-repeat="task in inboxFound = (inbox | filter:notRecentlyCompleted | filter:filterByTag | filter:filterByNumber | filter:{title: searchString}) track by task.id"
-    swipe-right="convertToBr(task)"
-    swipe-left="convertToMit(task)"
-    swipe-long-right="setDeleted(task)"
-    swipe-long-left="setDone(task)">
+    thing-cell
+    class="thing-cell-animation"
+    ng-repeat="thing in inboxFound = (inbox | filter:notRecentlyCompleted | filter:filterByTag | filter:filterByNumber | filter:{title: searchString}) track by thing.id"
+    swipe-right="convertToBr(thing)"
+    swipe-left="convertToMit(thing)"
+    swipe-long-right="setDeleted(thing)"
+    swipe-long-left="setDone(thing)">
     <div class="content">
       <div class="complete">
-        <span ng-if="task.recurrence" ng-class="{ 'repeat-fade': completed }" class="repeat">
-          <i class="glyphicon glyphicon-repeat" ng-click="setComplete(task); completed = !completed;"></i>
+        <span ng-if="thing.recurrence" ng-class="{ 'repeat-fade': completed }" class="repeat">
+          <i class="glyphicon glyphicon-repeat" ng-click="setComplete(thing); completed = !completed;"></i>
         </span>
-        <span ng-if="!task.recurrence">
-          <i class="glyphicon glyphicon-check" ng-class="{ true: 'unchecked' }[task.complete != 100]" ng-click="setComplete(task)"></i>
+        <span ng-if="!thing.recurrence">
+          <i class="glyphicon glyphicon-check" ng-class="{ true: 'unchecked' }[thing.complete != 100]" ng-click="setComplete(thing)"></i>
         </span>
       </div>
-      <div class="title" ui-sref="inboxTask({id:task.id})">
-        {{ task.title }}
+      <div class="title" ui-sref="inboxThing({id:thing.id})">
+        {{ thing.title }}
       </div>
-      <div class="recurrence"><span ng-if="task.recurrence">every {{ task.recurrence }} s</span></div>
-      <time ng-if="task.end" datetime="{{ task.end | date : 'yyyy-MM-dd' }}">done {{ task.end | date : 'MMM d yyyy' }}</time>
-      <time ng-if="task.due && !task.end" datetime="{{ task.due | date : 'yyyy-MM-dd' }}">due {{ task.due | date : 'MMM d yyyy' }}</time>
-      <div class="description" ng-if="task.description">{{ task.description }}</div>
-      <div class="contexts" ng-if="task.contexts">
-        <b ng-repeat="context in task.contexts">@{{context}}{{$last ? '' : ', '}}</b>
+      <div class="recurrence"><span ng-if="thing.recurrence">every {{ thing.recurrence }} s</span></div>
+      <time ng-if="thing.end" datetime="{{ thing.end | date : 'yyyy-MM-dd' }}">done {{ thing.end | date : 'MMM d yyyy' }}</time>
+      <time ng-if="thing.due && !thing.end" datetime="{{ thing.due | date : 'yyyy-MM-dd' }}">due {{ thing.due | date : 'MMM d yyyy' }}</time>
+      <div class="description" ng-if="thing.description">{{ thing.description }}</div>
+      <div class="contexts" ng-if="thing.contexts">
+        <b ng-repeat="context in thing.contexts">@{{context}}{{$last ? '' : ', '}}</b>
       </div>
-      <div class="importance" ng-if="task.importance">
-        I:{{task.importance}}
+      <div class="importance" ng-if="thing.importance">
+        I:{{thing.importance}}
       </div>
-      <div class="urgency" ng-if="task.urgency">
-        U:{{task.urgency}}
+      <div class="urgency" ng-if="thing.urgency">
+        U:{{thing.urgency}}
       </div>
-      <div class="projects" ng-if="task.projects">
-        <b ng-repeat="project in task.projects">p:{{project}}{{$last ? '' : ', '}}</b>
+      <div class="projects" ng-if="thing.projects">
+        <b ng-repeat="project in thing.projects">p:{{project}}{{$last ? '' : ', '}}</b>
       </div>
     </div>
   </bp-cell>
 </bp-table>
 
-<form ng-if="saveListActive" ng-submit="saveList(taskList); saveListActive = false;" name="listInput">
+<form ng-if="saveListActive" ng-submit="saveList(thingList); saveListActive = false;" name="listInput">
   <bp-search>
     <input
-      ng-model="taskList"
+      ng-model="thingList"
       placeholder=" Enter your list name here">
   </bp-search>
 </form>

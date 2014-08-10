@@ -1,5 +1,5 @@
 angular.module('mushin')
-  .directive('taskCell', function ($animate) {
+  .directive('thingCell', function ($animate) {
     return {
       restrict: 'A',
       link: function (scope, element, attrs) {
@@ -11,7 +11,7 @@ angular.module('mushin')
           dragLockToAxis: true,
         }
 
-        if (scope.task.done) {
+        if (scope.thing.done) {
           return
         }
 
@@ -76,18 +76,18 @@ angular.module('mushin')
 
           if (event.gesture.deltaX > secondTreshold) {
             action = attrs.swipeLongRight
-            move = 'task-cell-inner-right'
+            move = 'thing-cell-inner-right'
           } else if (-event.gesture.deltaX > secondTreshold) {
             action = attrs.swipeLongLeft
-            move = 'task-cell-inner-left'
+            move = 'thing-cell-inner-left'
           } else if (event.gesture.deltaX > firstTreshold) {
             action = attrs.swipeRight
-            move = 'task-cell-inner-right'
+            move = 'thing-cell-inner-right'
           } else if (-event.gesture.deltaX > firstTreshold) {
             action = attrs.swipeLeft
-            move = 'task-cell-inner-left'
+            move = 'thing-cell-inner-left'
           } else {
-            move = 'task-cell-inner-back'
+            move = 'thing-cell-inner-back'
           }
 
           $animate.addClass($text, move, function() {

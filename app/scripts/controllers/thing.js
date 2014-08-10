@@ -1,14 +1,14 @@
 // vi:si:et:sw=2:sts=2:ts=2
 angular.module('mushin').controller(
-  'TaskCtrl',
-  function (tasks, Task, $scope, $state, hoodie, $rootScope) {
+  'ThingCtrl',
+  function (things, Thing, $scope, $state, hoodie, $rootScope) {
     var lastType;
     var params = $state.params;
     var current = $state.current;
-    var debug = new window.$debug('mushin:controllers/TaskCtrl');
-    debug('new task controller');
+    var debug = new window.$debug('mushin:controllers/ThingCtrl');
+    debug('new thing controller');
 
-    $scope.task = {};
+    $scope.thing = {};
 
     $scope.contexts = $rootScope.contexts;
     $scope.projects = $rootScope.projects;
@@ -21,10 +21,10 @@ angular.module('mushin').controller(
     $scope.urgencyActive = {};
 
     $scope.$on('TAG_TOGGLED', function(event, type, name) {
-      var taglist = $scope.task[type + 's'];
+      var taglist = $scope.thing[type + 's'];
       if (!taglist) {
-        $scope.task[type + 's'] = [];
-        taglist = $scope.task[type + 's'];
+        $scope.thing[type + 's'] = [];
+        taglist = $scope.thing[type + 's'];
       }
       var i = taglist.indexOf(name);
       if (i > -1) {
@@ -36,18 +36,18 @@ angular.module('mushin').controller(
       $scope.update();
       // FIXME: hack: toggling can change the count for each tag, so
       // force a recount
-      tasks.getAll(Task.ACTIVE);
+      things.getAll(Thing.ACTIVE);
     });
 
     $scope.$on('NUMBER_TOGGLED', function(event, type, name) {
-      var number = $scope.task[type];
+      var number = $scope.thing[type];
       debug('NUMBER TOGGLED for ' + name + ' when I have ' + number);
       if (number == name) {
         // remove
-        $scope.task[type] = undefined;
+        $scope.thing[type] = undefined;
       } else {
         // set
-        $scope.task[type] = name;
+        $scope.thing[type] = name;
       }
       debug('running $scope.update for NUMBER_TOGGLED');
       $scope.update();
@@ -58,26 +58,26 @@ angular.module('mushin').controller(
     //        not loaded.  force a load.
     //        only works with ECMA5
     if (Object.keys($scope.contexts).length === 0) {
-      debug('controller/task.js: getting all tasks');
-      tasks.getAll(Task.ACTIVE);
+      debug('controller/thing.js: getting all things');
+      things.getAll(Thing.ACTIVE);
     }
-    tasks.get(params.id).then(function(data) {
+    things.get(params.id).then(function(data) {
       goToCorrectType(data);
-      $scope.task = data;
-      $scope.unit = data.taskType === Task.MIT ? Task.ONE_DAY : Task.ONE_WEEK;
-      lastType = $scope.task.taskType;
-      $scope[Task.types[lastType]] = true;
+      $scope.thing = data;
+      $scope.unit = data.thingType === Thing.MIT ? Thing.ONE_DAY : Thing.ONE_WEEK;
+      lastType = $scope.thing.thingType;
+      $scope[Thing.types[lastType]] = true;
 
       if (data.due) $scope.due = new Date(data.due);
 
-      debug ('controllers/task.js: contexts ' + JSON.stringify(data.contexts));
+      debug ('controllers/thing.js: contexts ' + JSON.stringify(data.contexts));
       if (data.contexts && data.contexts.length > 0) {
         angular.forEach(data.contexts, function(context) {
           $scope.contextsActive[context] = { active: true};
           debug('$scope.contextsActive now ' + JSON.stringify($scope.contextsActive));
         });
       }
-      debug ('controllers/task.js: projects ' + JSON.stringify(data.projects));
+      debug ('controllers/thing.js: projects ' + JSON.stringify(data.projects));
       if (data.projects && data.projects.length > 0) {
         angular.forEach(data.projects, function(project) {
           $scope.projectsActive[project] = { active: true};
@@ -96,36 +96,36 @@ angular.module('mushin').controller(
 
     });
 
-    tasks.extend($scope);
+    things.extend($scope);
 
     function goToCollection() {
       var navbarCtrl = angular.element('bp-navbar').controller('bpNavbar');
       $state.go(navbarCtrl.getUpFromState(current).state);
     }
 
-    function goToCorrectType(task) {
-      if (current.data.taskType !== task.taskType) {
-        $state.go(Task.types[task.taskType] + 'Task', {id: task.id});
+    function goToCorrectType(thing) {
+      if (current.data.thingType !== thing.thingType) {
+        $state.go(Thing.types[thing.thingType] + 'Thing', {id: thing.id});
       }
     }
 
     $scope.handle = function(promise) {
-      promise.then(function(task) {
-        if (task.taskType === Task.ARCHIVE || task.done) {
+      promise.then(function(thing) {
+        if (thing.thingType === Thing.ARCHIVE || thing.done) {
           return goToCollection();
         }
-        goToCorrectType(task);
+        goToCorrectType(thing);
       });
     }
 
     $scope.update = function() {
-      debug('updating task in hoodie');
+      debug('updating thing in hoodie');
       debug('scope due date: ' + $scope.due);
-      debug('task due date: ' + $scope.task.due);
-      debug('importance: ' + $scope.task.importance);
-      debug('urgency: ' + $scope.task.urgency);
-      if ($scope.due) $scope.task.due = $scope.due.toISOString();
-      return hoodie.store.update('task', $scope.task.id, $scope.task);
+      debug('thing due date: ' + $scope.thing.due);
+      debug('importance: ' + $scope.thing.importance);
+      debug('urgency: ' + $scope.thing.urgency);
+      if ($scope.due) $scope.thing.due = $scope.due.toISOString();
+      return hoodie.store.update('thing', $scope.thing.id, $scope.thing);
     }
   }
 );

@@ -218,7 +218,8 @@ module.exports = (grunt) ->
     'ngtemplates'
     'copy'
     'concat'
-    'uglify'
+# FIXME: uglify seems to fail
+#    'uglify'
     'cssmin'
     'rev'
     'usemin'

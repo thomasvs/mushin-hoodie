@@ -39,6 +39,21 @@ angular.module('zentodone').controller(
       tasks.getAll(Task.INBOX);
     });
 
+    $scope.$on('NUMBER_TOGGLED', function(event, type, name) {
+      var number = $scope.task[type];
+      debug('NUMBER TOGGLED for ' + name + ' when I have ' + number);
+      if (number == name) {
+        // remove
+        $scope.task[type] = undefined;
+      } else {
+        // set
+        $scope.task[type] = name;
+      }
+      debug('running $scope.update for NUMBER_TOGGLED');
+      $scope.update();
+    });
+
+
     // FIXME: hack: if the page was reloaded, contexts and projects are
     //        not loaded.  force a load.
     //        only works with ECMA5
@@ -107,6 +122,8 @@ angular.module('zentodone').controller(
       debug('updating task in hoodie');
       debug('scope due date: ' + $scope.due);
       debug('task due date: ' + $scope.task.due);
+      debug('importance: ' + $scope.task.importance);
+      debug('urgency: ' + $scope.task.urgency);
       if ($scope.due) $scope.task.due = $scope.due.toISOString();
       return hoodie.store.update('task', $scope.task.id, $scope.task);
     }

@@ -224,7 +224,7 @@ module.exports = (grunt) ->
     'rev'
     'usemin'
     'manifest'
-    'jsdoc'
+    'ngdocs'
   ]
 
   grunt.registerTask 'test', ['jshint', 'build']

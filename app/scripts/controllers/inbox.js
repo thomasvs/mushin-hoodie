@@ -157,10 +157,10 @@ angular.module('zentodone').controller('InboxCtrl', function ($scope, $rootScope
 
         if (!keep) {
           return false;
+        }
       }
 
       return true;
-    }
     }
 
     $scope.notRecentlyCompleted = function(thing) {

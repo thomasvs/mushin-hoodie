@@ -67,7 +67,8 @@
       <div class="title" ui-sref="inboxTask({id:task.id})">
         {{ task.title }}
       </div>
-      <time datetime="{{ task.due | date : 'yyyy-MM-dd hh:mm' }}" ng-show="task.due">due {{ task.due | date : 'MMM d yyyy, h:mm' }}</time>
+      <time ng-if="task.end" datetime="{{ task.end | date : 'yyyy-MM-dd' }}">done {{ task.end | date : 'MMM d yyyy' }}</time>
+      <time ng-if="task.due && !task.end" datetime="{{ task.due | date : 'yyyy-MM-dd' }}">due {{ task.due | date : 'MMM d yyyy' }}</time>
       <div class="description" ng-if="task.description">{{ task.description }}</div>
       <div class="contexts" ng-if="task.contexts">
         <b ng-repeat="context in task.contexts">@{{context}}{{$last ? '' : ', '}}</b>

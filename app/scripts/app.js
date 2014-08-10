@@ -41,7 +41,6 @@ angular.module('zentodone', ['bp', 'angular-loading-bar', 'hoodie', 'monospaced.
         controller: 'ListCtrl',
         data: {
           title: 'Lists',
-          taskType: 2
         }
       })
       .state('br', {
@@ -61,6 +60,7 @@ angular.module('zentodone', ['bp', 'angular-loading-bar', 'hoodie', 'monospaced.
           taskType: 1
         }
       })
+/*
       .state('mitTask', {
         url: '/mit/:id',
         templateUrl: 'views/task.html',
@@ -77,6 +77,7 @@ angular.module('zentodone', ['bp', 'angular-loading-bar', 'hoodie', 'monospaced.
           taskType: 3
         }
       })
+*/
   })
   .run(function($rootScope, $state, $q, $window) {
     var defer = $q.defer()

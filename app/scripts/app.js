@@ -1,13 +1,13 @@
 /*!
  * Zen To Done
- * https://git.io/zentodone
+ * https://git.io/mushin
  *
  * Copyright 2014 Stephan Boennemann
  *
  * Released under the MIT license.
  */
 
-angular.module('zentodone', ['bp', 'angular-loading-bar', 'hoodie', 'monospaced.elastic', 'datePicker'])
+angular.module('mushin', ['bp', 'angular-loading-bar', 'hoodie', 'monospaced.elastic', 'datePicker'])
   .config(function($urlRouterProvider, $stateProvider, bpAppProvider, cfpLoadingBarProvider) {
 
     bpAppProvider.setConfig({

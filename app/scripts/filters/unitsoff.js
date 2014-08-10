@@ -1,4 +1,4 @@
-angular.module('zentodone').filter('unitsOff', function () {
+angular.module('mushin').filter('unitsOff', function () {
   return function (unit, date1, date2) {
     date1 = new Date(date1)
     date2 = new Date(date2 ? date2 : Date.now())

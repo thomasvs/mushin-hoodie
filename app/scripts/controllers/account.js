@@ -1,4 +1,4 @@
-angular.module('zentodone').controller('AccountCtrl', function ($q, $window, $scope, $state, $http, hoodie, hoodieAccount) {
+angular.module('mushin').controller('AccountCtrl', function ($q, $window, $scope, $state, $http, hoodie, hoodieAccount) {
   var data = $scope.data = {}
   var CONNECTION_ERROR = 'HoodieConnectionError'
 

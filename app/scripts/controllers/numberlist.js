@@ -1,7 +1,7 @@
 // vi:si:et:sw=2:sts=2:ts=2
 /**
  * @ngdoc     controller
- * @name      zentodone.controller:NumberListCtrl
+ * @name      mushin.controller:NumberListCtrl
  * @requires  $scope
  *
  * @description <p>The number list controller controls the number list
@@ -29,11 +29,11 @@
  *
  * @author    Thomas Vander Stichele <thomas (at) apestaart (dot) org>
  */
-angular.module('zentodone').controller(
+angular.module('mushin').controller(
   'NumberListCtrl',
   function($scope, $attrs) {
 
-    var debug = new window.$debug('zentodone:controllers/numberlist');
+    var debug = new window.$debug('mushin:controllers/numberlist');
 
     /* projects or contexts */
     if (!$attrs.type) {
@@ -77,8 +77,8 @@ angular.module('zentodone').controller(
 
     /**
      * @ngdoc    method
-     * @name     zentodone.controller:NumberListCtrl#toggle
-     * @methodOf zentodone.controller:NumberListCtrl
+     * @name     mushin.controller:NumberListCtrl#toggle
+     * @methodOf mushin.controller:NumberListCtrl
      * @param    {string} name the name of the tag to toggle.
      *
      * @description
@@ -111,8 +111,8 @@ angular.module('zentodone').controller(
 
     /**
      * @ngdoc    method
-     * @name     zentodone.controller:NumberListCtrl#clear
-     * @methodOf zentodone.controller:NumberListCtrl
+     * @name     mushin.controller:NumberListCtrl#clear
+     * @methodOf mushin.controller:NumberListCtrl
      *
      * @description
      *
@@ -127,8 +127,8 @@ angular.module('zentodone').controller(
 
     /**
      * @ngdoc    method
-     * @name     zentodone.controller:NumberListCtrl#getCount
-     * @methodOf zentodone.controller:NumberListCtrl
+     * @name     mushin.controller:NumberListCtrl#getCount
+     * @methodOf mushin.controller:NumberListCtrl
      *
      * @description
      *
@@ -147,8 +147,8 @@ angular.module('zentodone').controller(
 
     /**
      * @ngdoc    method
-     * @name     zentodone.controller:NumberListCtrl#filterByTag
-     * @methodOf zentodone.controller:NumberListCtrl
+     * @name     mushin.controller:NumberListCtrl#filterByTag
+     * @methodOf mushin.controller:NumberListCtrl
      *
      * @description
      *

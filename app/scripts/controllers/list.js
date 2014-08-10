@@ -1,4 +1,4 @@
-angular.module('zentodone').controller('ListCtrl', function ($state, $scope, tasks, Task, sortTasks) {
+angular.module('mushin').controller('ListCtrl', function ($state, $scope, tasks, Task, sortTasks) {
   var state = $state.current
   var name = state.name
   var type = state.data.taskType

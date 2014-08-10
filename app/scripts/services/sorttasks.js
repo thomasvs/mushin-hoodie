@@ -1,4 +1,4 @@
-angular.module('zentodone').service('sortTasks', function ($filter, Task, hoodie) {
+angular.module('mushin').service('sortTasks', function ($filter, Task, hoodie) {
   return function(collection, unit) {
     var sortedTasks = []
     var rescheduledTasks = []

@@ -1,4 +1,4 @@
-angular.module('zentodone').controller('InboxCtrl', function ($scope, $rootScope, $filter, $location, tasks, Task, lists) {
+angular.module('mushin').controller('InboxCtrl', function ($scope, $rootScope, $filter, $location, tasks, Task, lists) {
 
   var debug = new window.$debug('mushin:task');
   var search = $location.search();

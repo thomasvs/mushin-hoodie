@@ -1,4 +1,4 @@
-angular.module('zentodone').factory('Task', function ($q, $filter, hoodie) {
+angular.module('mushin').factory('Task', function ($q, $filter, hoodie) {
   // Task types
   var ACTIVE = 1
   var ARCHIVE = 2
@@ -6,7 +6,7 @@ angular.module('zentodone').factory('Task', function ($q, $filter, hoodie) {
   var ONE_DAY = 24*60*60*1000
   var ONE_WEEK = 7*24*60*60*1000
 
-  var debug = new window.$debug('zentodone:Task');
+  var debug = new window.$debug('mushin:Task');
 
   function Task(title, description, data) {
     debug('new Task with title ' + title + ' and desc ' + description)

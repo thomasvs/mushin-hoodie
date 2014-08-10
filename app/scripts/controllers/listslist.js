@@ -1,5 +1,5 @@
-angular.module('zentodone').controller('ListsListCtrl', function ($state, $scope, lists) {
-  var debug = new window.$debug('zentodone:controllers/listslist');
+angular.module('mushin').controller('ListsListCtrl', function ($state, $scope, lists) {
+  var debug = new window.$debug('mushin:controllers/listslist');
 
   var state = $state.current
   var name = state.name

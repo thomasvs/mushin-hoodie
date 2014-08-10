@@ -1,4 +1,4 @@
-angular.module('zentodone')
+angular.module('mushin')
   .directive('taskCell', function ($animate) {
     return {
       restrict: 'A',

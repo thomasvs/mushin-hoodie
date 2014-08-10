@@ -2,16 +2,16 @@
 
 /**
  * @ngdoc directive
- * @name  zentodone.directive:numberList
+ * @name  mushin.directive:numberList
  *
  * @description
  * A directive that displays a list of numbers to select.
  */
 
-var debug = new window.$debug('zentodone:directives/numberlist');
+var debug = new window.$debug('mushin:directives/numberlist');
 debug('directives/numberlist.js: loading');
 
-angular.module('zentodone').directive(
+angular.module('mushin').directive(
   'numberList',
   function () {
     debug('numberList: creating');

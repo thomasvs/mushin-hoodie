@@ -1,11 +1,11 @@
 // vi:si:et:sw=2:sts=2:ts=2
-angular.module('zentodone').controller(
+angular.module('mushin').controller(
   'TaskCtrl',
   function (tasks, Task, $scope, $state, hoodie, $rootScope) {
     var lastType;
     var params = $state.params;
     var current = $state.current;
-    var debug = new window.$debug('zentodone:controllers/TaskCtrl');
+    var debug = new window.$debug('mushin:controllers/TaskCtrl');
     debug('new task controller');
 
     $scope.task = {};

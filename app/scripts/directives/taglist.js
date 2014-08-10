@@ -2,16 +2,16 @@
 
 /**
  * @ngdoc directive
- * @name  zentodone.directive:tagList
+ * @name  mushin.directive:tagList
  *
  * @description
  * A directive that displays a list of tags to select.
  */
 
-var debug = new window.$debug('zentodone:directives/taglist');
+var debug = new window.$debug('mushin:directives/taglist');
 debug('directives/taglist.js: loading');
 
-angular.module('zentodone').directive(
+angular.module('mushin').directive(
   'tagList',
   function () {
     debug('tagList: creating');

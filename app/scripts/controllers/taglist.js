@@ -1,7 +1,7 @@
 // vi:si:et:sw=2:sts=2:ts=2
 /**
  * @ngdoc     controller
- * @name      zentodone.controller:TagListCtrl
+ * @name      mushin.controller:TagListCtrl
  * @requires  $scope
  *
  * @description <p>The tag list controller controls the tag list directive,
@@ -28,11 +28,11 @@
  *
  * @author    Thomas Vander Stichele <thomas (at) apestaart (dot) org>
  */
-angular.module('zentodone').controller(
+angular.module('mushin').controller(
   'TagListCtrl',
   function($scope, $attrs) {
 
-    var debug = new window.$debug('zentodone:controllers/taglist');
+    var debug = new window.$debug('mushin:controllers/taglist');
 
     /* projects or contexts */
     if (!$attrs.type) {
@@ -70,8 +70,8 @@ angular.module('zentodone').controller(
 
     /**
      * @ngdoc    method
-     * @name     zentodone.controller:TagListCtrl#toggle
-     * @methodOf zentodone.controller:TagListCtrl
+     * @name     mushin.controller:TagListCtrl#toggle
+     * @methodOf mushin.controller:TagListCtrl
      * @param    {string} name the name of the tag to toggle.
      *
      * @description
@@ -99,8 +99,8 @@ angular.module('zentodone').controller(
 
     /**
      * @ngdoc    method
-     * @name     zentodone.controller:TagListCtrl#clear
-     * @methodOf zentodone.controller:TagListCtrl
+     * @name     mushin.controller:TagListCtrl#clear
+     * @methodOf mushin.controller:TagListCtrl
      *
      * @description
      *
@@ -115,8 +115,8 @@ angular.module('zentodone').controller(
 
     /**
      * @ngdoc    method
-     * @name     zentodone.controller:TagListCtrl#getCount
-     * @methodOf zentodone.controller:TagListCtrl
+     * @name     mushin.controller:TagListCtrl#getCount
+     * @methodOf mushin.controller:TagListCtrl
      *
      * @description
      *
@@ -135,8 +135,8 @@ angular.module('zentodone').controller(
 
     /**
      * @ngdoc    method
-     * @name     zentodone.controller:TagListCtrl#filterByTag
-     * @methodOf zentodone.controller:TagListCtrl
+     * @name     mushin.controller:TagListCtrl#filterByTag
+     * @methodOf mushin.controller:TagListCtrl
      *
      * @description
      *

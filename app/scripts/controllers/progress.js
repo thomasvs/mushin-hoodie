@@ -1,4 +1,4 @@
-angular.module('zentodone').controller('ProgressCtrl', function ($scope, $q, hoodie) {
+angular.module('mushin').controller('ProgressCtrl', function ($scope, $q, hoodie) {
 
   $scope.instructions = true
 

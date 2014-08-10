@@ -1,6 +1,6 @@
-angular.module('zentodone').factory('lists', function ($rootScope, hoodie, $q) {
+angular.module('mushin').factory('lists', function ($rootScope, hoodie, $q) {
 
-  var debug = new window.$debug('zentodone:services/list');
+  var debug = new window.$debug('mushin:services/list');
 
   hoodie.store.on('change:list', function(name, list) {
     $rootScope.$broadcast('listChange', {

@@ -1,4 +1,4 @@
-angular.module('zentodone')
+angular.module('mushin')
   .directive('tabBar', function () {
 
     return {

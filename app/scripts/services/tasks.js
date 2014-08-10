@@ -1,6 +1,6 @@
-angular.module('zentodone').factory('tasks', function ($rootScope, hoodie, $q, Task) {
+angular.module('mushin').factory('tasks', function ($rootScope, hoodie, $q, Task) {
 
-  var debug = new window.$debug('zentodone:services/task');
+  var debug = new window.$debug('mushin:services/task');
   $rootScope.contexts = {}; // context name -> obj with tasks, active, ...
   $rootScope.projects = {};
   $rootScope.importance = {}; // importance level -> obj with tasks, active, ...

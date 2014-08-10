@@ -39,6 +39,17 @@ angular.module('zentodone').controller('InboxCtrl', function ($scope, $rootScope
             angular.forEach(parsed.projects, function (project) {
                 $scope.projects[project].active = true;
             });
+            var i;
+            if (parsed.importance) {
+              for (i = 0; i < parsed.importance.length; ++i) {
+                $scope.importance[parsed.importance.charAt(i)].active = true;
+              }
+            }
+            if (parsed.urgency) {
+              for (i = 0; i < parsed.urgency.length; ++i) {
+                $scope.urgency[parsed.urgency.charAt(i)].active = true;
+              }
+            }
         }
 
 
@@ -192,6 +203,7 @@ angular.module('zentodone').controller('InboxCtrl', function ($scope, $rootScope
 
        // construct query from state of filtering
        var parts = [];
+
        angular.forEach($scope.contexts, function (context) {
          if (context.active) {
            parts.push('@' + context.name);
@@ -202,6 +214,31 @@ angular.module('zentodone').controller('InboxCtrl', function ($scope, $rootScope
            parts.push('p:' + project.name);
          }
        });
+       /* collect importance and urgency lists as a single word so
+        * that the normal parse, which only allows one value for them,
+        * still works
+        */
+       var numbers;
+
+       numbers = [];
+       angular.forEach($scope.importance, function (importance) {
+         if (importance.active) {
+           numbers.push(importance.name);
+         }
+       });
+       if (numbers.length > 0) {
+         parts.push('I:' + numbers.join(''));
+       }
+       numbers = [];
+       angular.forEach($scope.urgency, function (urgency) {
+         if (urgency.active) {
+           numbers.push(urgency.name);
+         }
+       });
+       if (numbers.length > 0) {
+         parts.push('U:' + numbers.join(''));
+       }
+
        var query = parts.join(' ');
 
        debug('saveList: query ' + query);

@@ -6,6 +6,7 @@ angular.module('zentodone').controller(
     var params = $state.params;
     var current = $state.current;
     var debug = new window.$debug('zentodone:controllers/TaskCtrl');
+    debug('new task controller');
 
     $scope.task = {};
 
@@ -27,6 +28,7 @@ angular.module('zentodone').controller(
       } else {
         taglist.push(name);
       }
+      debug('running $scope.update');
       $scope.update();
       // FIXME: hack: toggling can change the count for each tag, so
       // force a recount
@@ -46,6 +48,8 @@ angular.module('zentodone').controller(
       $scope.unit = data.taskType === Task.MIT ? Task.ONE_DAY : Task.ONE_WEEK;
       lastType = $scope.task.taskType;
       $scope[Task.types[lastType]] = true;
+
+      if (data.due) $scope.due = new Date(data.due);
 
       debug ('controllers/task.js: contexts ' + JSON.stringify(data.contexts));
       if (data.contexts && data.contexts.length > 0) {
@@ -86,6 +90,10 @@ angular.module('zentodone').controller(
     }
 
     $scope.update = function() {
+      debug('updating task in hoodie');
+      debug('scope due date: ' + $scope.due);
+      debug('task due date: ' + $scope.task.due);
+      if ($scope.due) $scope.task.due = $scope.due.toISOString();
       return hoodie.store.update('task', $scope.task.id, $scope.task);
     }
   }

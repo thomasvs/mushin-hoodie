@@ -12,9 +12,13 @@ angular.module('zentodone').controller(
 
     $scope.contexts = $rootScope.contexts;
     $scope.projects = $rootScope.projects;
+    $scope.importance = $rootScope.importance;
+    $scope.urgency = $rootScope.urgency;
 
     $scope.contextsActive = {};
     $scope.projectsActive = {};
+    $scope.importanceActive = {};
+    $scope.urgencyActive = {};
 
     $scope.$on('TAG_TOGGLED', function(event, type, name) {
       var taglist = $scope.task[type + 's'];
@@ -65,6 +69,16 @@ angular.module('zentodone').controller(
           debug('$scope.projectsActive now ' + JSON.stringify($scope.projectsActive));
         });
       }
+
+      if (data.importance) {
+        $scope.importanceActive[data.importance] = { active: true};
+        debug('$scope.importanceActive now ' + JSON.stringify($scope.importanceActive));
+      }
+      if (data.urgency) {
+        $scope.urgencyActive[data.urgency] = { active: true};
+        debug('$scope.urgencyActive now ' + JSON.stringify($scope.urgencyActive));
+      }
+
     });
 
     tasks.extend($scope);

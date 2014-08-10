@@ -32,6 +32,12 @@
   <div>
     <span>
       <span tag-list ng-controller="TagListCtrl as cl" type="context" all="false" data="contexts" active="contextsActive"></span>
+
+      <span number-list ng-controller="NumberListCtrl as ul" type="importance" all="false" data="importance" active="importanceActive"></span>
+
+      <span number-list ng-controller="NumberListCtrl as ul" type="urgency" all="false" data="urgency" active="urgencyActive"></span>
+
+
       <span tag-list ng-controller="TagListCtrl as pl" type="project" all="false" data="projects" active="projectsActive"></span>
     </span>
   </div>

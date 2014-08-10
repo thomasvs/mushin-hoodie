@@ -3,6 +3,8 @@ angular.module('zentodone').factory('tasks', function ($rootScope, hoodie, $q, T
   var debug = new window.$debug('zentodone:services/task');
   $rootScope.contexts = {}; // context name -> obj with tasks, active, ...
   $rootScope.projects = {};
+  $rootScope.importance = {}; // importance level -> obj with tasks, active, ...
+  $rootScope.urgency = {};
 
   hoodie.store.on('change:task', function(name, task) {
     $rootScope.$broadcast('taskChange', {
@@ -28,10 +30,29 @@ angular.module('zentodone').factory('tasks', function ($rootScope, hoodie, $q, T
         // for now, ignore completed tasks
         if (task.complete == 100) { return; }
 
-        hash[name].things.push(task)
+        hash[name].things.push(task);
       }
     }
   }
+  // update the importance/urgency hash based on the task
+  var trackNumberHash = function(hash, type, task) {
+    var number = task[type];
+
+    if (number) {
+      if (!(number in hash)) {
+        hash[number] = {
+          'name': number,
+          'active': false,
+          'things': [],
+        };
+      }
+      // for now, ignore completed tasks
+      if (task.complete == 100) { return; }
+
+      hash[number].things.push(task);
+    }
+  }
+
   var resetHash = function(hash) {
     for (var key in hash) {
       hash[key].things = [];
@@ -55,6 +76,8 @@ angular.module('zentodone').factory('tasks', function ($rootScope, hoodie, $q, T
         // reset when we recount
         resetHash($rootScope.projects);
         resetHash($rootScope.contexts);
+        resetHash($rootScope.importance);
+        resetHash($rootScope.urgency);
 
         for (var i = 0; i < tasksData.length; i++) {
           // FIXME: not sure if it's better to deal with taskData here or
@@ -65,10 +88,14 @@ angular.module('zentodone').factory('tasks', function ($rootScope, hoodie, $q, T
           }
           trackHash($rootScope.projects, 'project', task);
           trackHash($rootScope.contexts, 'context', task);
+          trackNumberHash($rootScope.importance, 'importance', task);
+          trackNumberHash($rootScope.urgency, 'urgency', task);
         }
         debug('loaded ' + tasksDataOfType.length + ' tasks of type ' + type)
         debug('loaded ' + Object.keys($rootScope.projects).length + ' projects')
         debug('loaded ' + Object.keys($rootScope.contexts).length + ' contexts')
+        debug('loaded ' + Object.keys($rootScope.importance).length + ' importance levels')
+        debug('loaded ' + Object.keys($rootScope.urgency).length + ' urgency levels')
         deferred.resolve(tasksDataOfType)
       })
       return deferred.promise

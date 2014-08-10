@@ -97,6 +97,7 @@ angular.module('zentodone').controller(
       if ($scope.selectedAll != all) {
         $scope.selectedAll = all;
       }
+      debug('active: ' + JSON.stringify($scope.active));
     }
 
     /**

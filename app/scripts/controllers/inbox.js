@@ -18,7 +18,7 @@ angular.module('zentodone').controller('InboxCtrl', function ($scope, $rootScope
   })
 
   function fetchTasks() {
-    tasks.getAll(Task.INBOX)
+    tasks.getAll(Task.ACTIVE)
       .then(function(tasks) {
         // at this time, the rootScope contexts/projects are set and thus
         // available through $scope too

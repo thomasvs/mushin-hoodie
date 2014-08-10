@@ -36,7 +36,7 @@ angular.module('zentodone').controller(
       $scope.update();
       // FIXME: hack: toggling can change the count for each tag, so
       // force a recount
-      tasks.getAll(Task.INBOX);
+      tasks.getAll(Task.ACTIVE);
     });
 
     $scope.$on('NUMBER_TOGGLED', function(event, type, name) {
@@ -59,7 +59,7 @@ angular.module('zentodone').controller(
     //        only works with ECMA5
     if (Object.keys($scope.contexts).length === 0) {
       debug('controller/task.js: getting all tasks');
-      tasks.getAll(Task.INBOX);
+      tasks.getAll(Task.ACTIVE);
     }
     tasks.get(params.id).then(function(data) {
       goToCorrectType(data);

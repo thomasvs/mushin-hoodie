@@ -1,9 +1,8 @@
 angular.module('zentodone').factory('Task', function ($q, $filter, hoodie) {
   // Task types
-  var INBOX = 1
-  var MIT = 2
-  var BR = 3
-  var ARCHIVE = 4
+  var ACTIVE = 1
+  var ARCHIVE = 2
+
   var ONE_DAY = 24*60*60*1000
   var ONE_WEEK = 7*24*60*60*1000
 
@@ -22,7 +21,7 @@ angular.module('zentodone').factory('Task', function ($q, $filter, hoodie) {
       id: Math.random().toString(36).substr(2, 9),
       date: Date.now(),
       dueDate: null,
-      taskType: INBOX,
+      taskType: ACTIVE,
       done: false,
       deleted: false,
       title: title,
@@ -31,22 +30,22 @@ angular.module('zentodone').factory('Task', function ($q, $filter, hoodie) {
     debug('created new task ' + JSON.stringify(this.data, null, 4));
   }
 
-  Task.INBOX = INBOX
-  Task.MIT = MIT
-  Task.BR = BR
+  Task.ACTIVE = ACTIVE
   Task.ARCHIVE = ARCHIVE
   Task.ONE_DAY = ONE_DAY
   Task.ONE_WEEK = ONE_WEEK
   Task.types = [,'inbox','mit','br','archive']
 
   Task.isType = function(type) {
-    return type === INBOX || type === MIT || type ===  BR || type === ARCHIVE
+    return type === ACTIVE || type === ARCHIVE
   }
 
   Task.prototype.setDone = function() {
     var data = this.data
     var taskType = data.taskType
 
+    // FIXME: this code was used to auto-archive tasks after some time */
+    /*
     switch (this.data.taskType) {
     case MIT:
       if ($filter('unitsOff')(ONE_DAY, data.dueDate) > 0) {
@@ -59,6 +58,7 @@ angular.module('zentodone').factory('Task', function ($q, $filter, hoodie) {
       }
       break;
     }
+    */
 
     return $q.when(hoodie.store.update('task', this.data.id, {
       done: true,

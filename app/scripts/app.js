@@ -48,8 +48,8 @@ angular.module('zentodone', ['bp', 'angular-loading-bar', 'hoodie', 'monospaced.
         templateUrl: 'views/br.html',
         controller: 'ListCtrl',
         data: {
-          title: 'Big Rocks',
-          taskType: 3
+          title: 'Archive',
+          taskType: 2,
         }
       })
       .state('inboxTask', {
@@ -57,7 +57,7 @@ angular.module('zentodone', ['bp', 'angular-loading-bar', 'hoodie', 'monospaced.
         templateUrl: 'views/task.html',
         controller: 'TaskCtrl',
         data: {
-          taskType: 1
+          title: 'Edit Thing',
         }
       })
 /*

@@ -155,6 +155,10 @@ module.exports = (grunt) ->
       styles:
         src: ['<%=app.app%>/styles/main.less']
         dest: '.tmp/styles/main.css'
+        options:
+          sourceMap: true
+          sourceMapFilename: '.tmp/styles/main.css.map',
+          sourceMapBasepath: '.tmp/styles',
 
     copy:
       dist:

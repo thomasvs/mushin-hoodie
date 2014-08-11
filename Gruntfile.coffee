@@ -156,9 +156,14 @@ module.exports = (grunt) ->
         src: ['<%=app.app%>/styles/main.less']
         dest: '.tmp/styles/main.css'
         options:
+          # see http://lesscss.org/usage/#command-line-usage-source-map-rootpath
           sourceMap: true
-          sourceMapFilename: '.tmp/styles/main.css.map',
-          sourceMapBasepath: '.tmp/styles',
+          sourceMapFilename: '.tmp/styles/main.css.map'
+          sourceMapURL: '/styles/main.css.map'
+          # a path which should be prepended to each of the less file paths
+          sourceMapRootpath: '/'
+          # a path which should be removed from the output paths
+          sourceMapBasepath: 'app'
 
     copy:
       dist:

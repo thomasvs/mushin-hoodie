@@ -1,10 +1,8 @@
 /*!
- * Zen To Done
- * https://git.io/mushin
+ * mushin
+ * https://github.com/thomasvs/mushin-hoodie
  *
- * Copyright 2014 Stephan Boennemann
- *
- * Released under the MIT license.
+ * Copyright 2014 Thomas Vander Stichele
  */
 
 angular.module('mushin', ['bp', 'angular-loading-bar', 'hoodie', 'monospaced.elastic', 'datePicker'])

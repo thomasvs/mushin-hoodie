@@ -83,21 +83,25 @@ angular.module('mushin').factory('things', function ($rootScope, hoodie, $q, Thi
           // FIXME: not sure if it's better to deal with thingData here or
           //        full thing objects
           var thing = thingsData[i];
-          if (thing.thingType === type) {
-            thingsDataOfType.push(thing)
+          debug('loaded thing ' + thing.title);
+          if ((thing.thingType === type) ||
+              (type == Thing.ACTIVE && !thing.thingType)) {
+            thingsDataOfType.push(thing);
+            trackHash($rootScope.projects, 'project', thing);
+            trackHash($rootScope.contexts, 'context', thing);
+            trackNumberHash($rootScope.importance, 'importance', thing);
+            trackNumberHash($rootScope.urgency, 'urgency', thing);
           }
-          trackHash($rootScope.projects, 'project', thing);
-          trackHash($rootScope.contexts, 'context', thing);
-          trackNumberHash($rootScope.importance, 'importance', thing);
-          trackNumberHash($rootScope.urgency, 'urgency', thing);
         }
-        debug('loaded ' + thingsDataOfType.length + ' things of type ' + type)
-        debug('loaded ' + Object.keys($rootScope.projects).length + ' projects')
-        debug('loaded ' + Object.keys($rootScope.contexts).length + ' contexts')
-        debug('loaded ' + Object.keys($rootScope.importance).length + ' importance levels')
-        debug('loaded ' + Object.keys($rootScope.urgency).length + ' urgency levels')
-        deferred.resolve(thingsDataOfType)
-      })
+        debug('loaded ' + thingsDataOfType.length + ' things of type ' + type);
+        debug('loaded ' + Object.keys($rootScope.projects).length + ' projects');
+        debug('loaded ' + Object.keys($rootScope.contexts).length + ' contexts');
+        debug('loaded ' + Object.keys($rootScope.importance).length +
+            ' importance levels');
+        debug('loaded ' + Object.keys($rootScope.urgency).length +
+            ' urgency levels');
+        deferred.resolve(thingsDataOfType);
+      });
       return deferred.promise
     },
     add: function(title, description, data) {

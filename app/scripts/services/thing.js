@@ -108,9 +108,11 @@ angular.module('mushin').factory('Thing', function ($q, $filter, hoodie) {
   Thing.prototype.convertTo = function(type) {
     if (type !== this.data.thingType && Thing.isType(type)) {
       var changes = {thingType: type}
+      /*
       if (type === MIT || type === BR) {
         changes.dueDate = Date.now()
       }
+      */
       return $q.when(hoodie.store.update('thing', this.data.id, changes))
     }
 

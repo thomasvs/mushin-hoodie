@@ -5,25 +5,25 @@ angular.module('mushin').service('sortThings', function ($filter, Thing, hoodie)
     var today = new Date()
 
     function reschedule(thing) {
-      delete thing.dueDate
+      delete thing.due
       rescheduledThings.push(thing)
     }
 
     collection = $filter('orderBy')(collection, function(thing) {
-      return thing.dueDate
+      return thing.due
     })
 
     // Fill up units w/things
     for (var i = 0; i < collection.length; i++) {
       var currentThing = collection[i]
 
-      // Things w/o dueDate have lowest priority and are therefore rescheduled
-      if (!currentThing.dueDate) {
+      // Things w/o due have lowest priority and are therefore rescheduled
+      if (!currentThing.due) {
         reschedule(currentThing)
         continue
       }
 
-      var unitOffset = $filter('unitsOff')(unit, currentThing.dueDate)
+      var unitOffset = $filter('unitsOff')(unit, currentThing.due)
 
       // Overdue things are inherited for this unit with highest priority
       if (unitOffset < 0) {
@@ -35,7 +35,7 @@ angular.module('mushin').service('sortThings', function ($filter, Thing, hoodie)
         }
 
         var overdue = Math.abs(unitOffset)
-        currentThing.dueDate += (overdue * unit)
+        currentThing.due += (overdue * unit)
 
         if (!angular.isNumber(currentThing.overdue)) {
           currentThing.overdue = 0
@@ -81,7 +81,7 @@ angular.module('mushin').service('sortThings', function ($filter, Thing, hoodie)
       }
 
       var thingToAssign = rescheduledThings[j]
-      thingToAssign.dueDate = today.getTime() + (unitIndex * unit)
+      thingToAssign.due = today.getTime() + (unitIndex * unit)
       unitToFill.offset = unitIndex
       unitToFill.push(thingToAssign)
 

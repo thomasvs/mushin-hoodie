@@ -47,7 +47,7 @@ angular.module('mushin', ['bp', 'angular-loading-bar', 'hoodie', 'monospaced.ela
         controller: 'ListCtrl',
         data: {
           title: 'Archive',
-          thingType: 2,
+          state: 2,
         }
       })
       .state('inboxThing', {
@@ -64,7 +64,7 @@ angular.module('mushin', ['bp', 'angular-loading-bar', 'hoodie', 'monospaced.ela
         templateUrl: 'views/thing.html',
         controller: 'ThingCtrl',
         data: {
-          thingType: 2
+          state: 2
         }
       })
       .state('brThing', {
@@ -72,7 +72,7 @@ angular.module('mushin', ['bp', 'angular-loading-bar', 'hoodie', 'monospaced.ela
         templateUrl: 'views/thing.html',
         controller: 'ThingCtrl',
         data: {
-          thingType: 3
+          state: 3
         }
       })
 */

@@ -64,8 +64,8 @@ angular.module('mushin').controller(
     things.get(params.id).then(function(data) {
       goToCorrectType(data);
       $scope.thing = data;
-      $scope.unit = data.thingType === Thing.MIT ? Thing.ONE_DAY : Thing.ONE_WEEK;
-      lastType = $scope.thing.thingType;
+      $scope.unit = data.state === Thing.MIT ? Thing.ONE_DAY : Thing.ONE_WEEK;
+      lastType = $scope.thing.state;
       $scope[Thing.types[lastType]] = true;
 
       if (data.due) $scope.due = new Date(data.due);
@@ -104,14 +104,14 @@ angular.module('mushin').controller(
     }
 
     function goToCorrectType(thing) {
-      if (current.data.thingType !== thing.thingType) {
-        $state.go(Thing.types[thing.thingType] + 'Thing', {id: thing.id});
+      if (current.data.state !== thing.state) {
+        $state.go(Thing.types[thing.state] + 'Thing', {id: thing.id});
       }
     }
 
     $scope.handle = function(promise) {
       promise.then(function(thing) {
-        if (thing.thingType === Thing.ARCHIVE || thing.done) {
+        if (thing.state === Thing.ARCHIVE || thing.done) {
           return goToCollection();
         }
         goToCorrectType(thing);

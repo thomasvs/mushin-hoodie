@@ -84,8 +84,8 @@ angular.module('mushin').factory('things', function ($rootScope, hoodie, $q, Thi
           //        full thing objects
           var thing = thingsData[i];
           debug('loaded thing ' + thing.title);
-          if ((thing.thingType === type) ||
-              (type == Thing.ACTIVE && !thing.thingType)) {
+          if ((thing.state === type) ||
+              (type == Thing.ACTIVE && !thing.state)) {
             thingsDataOfType.push(thing);
             trackHash($rootScope.projects, 'project', thing);
             trackHash($rootScope.contexts, 'context', thing);
@@ -125,10 +125,10 @@ angular.module('mushin').factory('things', function ($rootScope, hoodie, $q, Thi
 
       angular.forEach(conversions, function(conversion) {
         var method = 'convertTo' + conversion[0].toUpperCase() + conversion.substring(1)
-        var thingType = Thing[conversion.toUpperCase()]
+        var state = Thing[conversion.toUpperCase()]
         scope[method] = function(data) {
           var thing = new Thing(data)
-          return thing.convertTo(thingType)
+          return thing.convertTo(state)
         }
       })
     }

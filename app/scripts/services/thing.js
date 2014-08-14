@@ -21,7 +21,7 @@ angular.module('mushin').factory('Thing', function ($q, $filter, hoodie) {
       id: Math.random().toString(36).substr(2, 9),
       date: Date.now(),
       dueDate: null,
-      thingType: ACTIVE,
+      state: ACTIVE,
       done: false,
       deleted: false,
       title: title,
@@ -42,19 +42,19 @@ angular.module('mushin').factory('Thing', function ($q, $filter, hoodie) {
 
   Thing.prototype.setDone = function() {
     var data = this.data
-    var thingType = data.thingType
+    var state = data.state
 
     // FIXME: this code was used to auto-archive things after some time */
     /*
-    switch (this.data.thingType) {
+    switch (this.data.state) {
     case MIT:
       if ($filter('unitsOff')(ONE_DAY, data.dueDate) > 0) {
-        thingType = ARCHIVE
+        state = ARCHIVE
       }
       break;
     case BR:
       if ($filter('unitsOff')(ONE_WEEK, data.dueDate) > 0) {
-        thingType = ARCHIVE
+        state = ARCHIVE
       }
       break;
     }
@@ -62,7 +62,7 @@ angular.module('mushin').factory('Thing', function ($q, $filter, hoodie) {
 
     return $q.when(hoodie.store.update('thing', this.data.id, {
       done: true,
-      thingType: thingType
+      state: state
     }))
   }
 
@@ -101,13 +101,13 @@ angular.module('mushin').factory('Thing', function ($q, $filter, hoodie) {
   Thing.prototype.setDeleted = function() {
     return $q.when(hoodie.store.update('thing', this.data.id, {
       deleted: true,
-      thingType: ARCHIVE
+      state: ARCHIVE
     }))
   }
 
   Thing.prototype.convertTo = function(type) {
-    if (type !== this.data.thingType && Thing.isType(type)) {
-      var changes = {thingType: type}
+    if (type !== this.data.state && Thing.isType(type)) {
+      var changes = {state: type}
       /*
       if (type === MIT || type === BR) {
         changes.dueDate = Date.now()

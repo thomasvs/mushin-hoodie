@@ -15,3 +15,38 @@ Currently using ng-docs.
 grunt ngdocs
 
 - go to http://localhost:9000/docs/
+
+Reset database from backup
+--------------------------
+export HOODIE_PASSWORD=...
+export HOODIE_DB=user/xbnjwxg
+export HOODIE_DB_QUOTE=user%2Fxbnjwxg
+curl -X DELETE http://admin:$HOODIE_PASSWORD@localhost:6006/$HOODIE_DB_QUOTE
+curl -X PUT http://admin:$HOODIE_PASSWORD@localhost:6006/$HOODIE_DB_QUOTE
+couchdb-load -u admin -p $HOODIE_PASSWORD http://localhost:6006/$HOODIE_DB_QUOTE < xbnjwxg.dump
+
+Log out from mushin-hoodie, log back in to have empty db
+
+Migrate from mushin couchdb
+---------------------------
+drop/recreate mushin-hoodie if needed
+
+  curl -X DELETE http://localhost:5984/mushin-hoodie
+  curl -X PUT http://localhost:5984/mushin-hoodie
+
+copy mushin to mushin-hoodie
+
+  paisley -D mushin replicate add -t single -d forward localhost/mushin-hoodie
+
+transform all docs
+
+   paisley -D mushin-hoodie document apply examples/mushin-hoodie.py
+
+delete all non-transformed docs, which are peeled back conflicted docs
+
+  paisley -D mushin-hoodie document delete --dry-run examples/delete-non-mushin-hoodie.py
+
+replicate
+
+  paisley -D $HOODIE_DB -u admin -p $HOODIE_PASSWORD -P 6006 replicate add -t single -d backward localhost/mushin-hoodie
+  FIXME: doesn't work; they don't show up.  Only after making a trivial edit does it show up in mushin-hoodie

@@ -11,7 +11,7 @@ angular.module('mushin')
           dragLockToAxis: true,
         }
 
-        if (scope.thing.done) {
+        if (scope.thing.end) {
           return
         }
 

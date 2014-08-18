@@ -25,7 +25,7 @@
   <bp-cell
     thing-cell
     class="thing-cell-animation"
-    ng-class="{done: thing.done}"
+    ng-class="{done: thing.complete == 100}"
     ng-repeat-end
     ng-repeat="thing in day track by thing.id"
     ui-sref="brThing({id:thing.id})"

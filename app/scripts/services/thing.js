@@ -22,7 +22,6 @@ angular.module('mushin').factory('Thing', function ($q, $filter, hoodie) {
       date: Date.now(),
       due: null,
       state: ACTIVE,
-      done: false,
       deleted: false,
       title: title,
       description: description

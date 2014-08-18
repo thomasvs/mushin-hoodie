@@ -111,7 +111,7 @@ angular.module('mushin').controller(
 
     $scope.handle = function(promise) {
       promise.then(function(thing) {
-        if (thing.state === Thing.ARCHIVE || thing.done) {
+        if (thing.state === Thing.ARCHIVE || thing.end) {
           return goToCollection();
         }
         goToCorrectType(thing);

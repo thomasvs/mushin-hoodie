@@ -71,7 +71,7 @@ angular.module('mushin').factory('things', function ($rootScope, hoodie, $q, Thi
 
       var deferred = $q.defer()
       promise.then(function(thingsData) {
-        var thingsDataOfType = []
+        var thingsDataOfType = [];
 
         // reset when we recount
         resetHash($rootScope.projects);
@@ -79,6 +79,7 @@ angular.module('mushin').factory('things', function ($rootScope, hoodie, $q, Thi
         resetHash($rootScope.importance);
         resetHash($rootScope.urgency);
 
+        debug('loaded ' + thingsData.length + ' hoodie things');
         for (var i = 0; i < thingsData.length; i++) {
           // FIXME: not sure if it's better to deal with thingData here or
           //        full thing objects

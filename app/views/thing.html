@@ -48,9 +48,9 @@
     <bp-table-header>
       Created {{ thing.date | date : 'MMM d' }}
       <span
-        ng-if="thing.dueDate && !thing.done && mit"
+        ng-if="thing.due && !thing.done && mit"
         ng-pluralize
-        count="{{ unit | unitsOff: thing.dueDate : thing.date }}"
+        count="{{ unit | unitsOff: thing.due : thing.date }}"
         when="{
           0: '– due today',
           'one': '– due tomorrow',
@@ -58,9 +58,9 @@
         }">
       </span>
       <span
-        ng-if="thing.dueDate && !thing.done && br"
+        ng-if="thing.due && !thing.done && br"
         ng-pluralize
-        count="{{ unit | unitsOff: thing.dueDate : thing.date }}"
+        count="{{ unit | unitsOff: thing.due : thing.date }}"
         when="{
           0: '– due this week',
           'one': '– due next week',

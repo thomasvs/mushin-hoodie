@@ -20,7 +20,7 @@ angular.module('mushin').factory('Thing', function ($q, $filter, hoodie) {
     angular.extend(this.data, {
       id: Math.random().toString(36).substr(2, 9),
       date: Date.now(),
-      dueDate: null,
+      due: null,
       state: ACTIVE,
       done: false,
       deleted: false,

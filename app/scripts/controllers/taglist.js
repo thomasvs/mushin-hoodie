@@ -115,17 +115,40 @@ angular.module('mushin').controller(
 
     /**
      * @ngdoc    method
-     * @name     mushin.controller:TagListCtrl#getCount
+     * @name     mushin.controller:TagListCtrl#getActiveCount
      * @methodOf mushin.controller:TagListCtrl
      *
      * @description
      *
-     * Get the number of things for the given tag.
+     * Get the total number of active/selected things for the given tag.
+     */
+    $scope.getActiveCount = function() {
+      if ($scope.selectedAll) {
+        return $scope.getTotalCount();
+      }
+
+      var count = 0;
+
+      for (var key in $scope.active) {
+        if ($scope.active[key].active) { count++; }
+      }
+      return count;
+    }
+
+
+    /**
+     * @ngdoc    method
+     * @name     mushin.controller:TagListCtrl#getTotalCount
+     * @methodOf mushin.controller:TagListCtrl
+     *
+     * @description
+     *
+     * Get the total number of things for the given tag.
      *
      * @param    {string} tag the name of the tag to get a count for;
-     *                        leave undefined to get the total count of tags
+     *                    leave undefined to get the total count of tags
      */
-    $scope.getCount = function(tag) {
+    $scope.getTotalCount = function(tag) {
       if (tag) {
         return $scope.tags[tag].things.length;
       } else {

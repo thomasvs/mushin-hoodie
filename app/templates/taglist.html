@@ -8,7 +8,7 @@
     <li ng-show="showAll" class="divider"></li>
     <li ng-repeat="tag in tags|orderBy:name" ng-class="{ 'active': active[tag.name].active}">
       <a href="" ng-click="toggle(tag.name);">{{ tag.name }}
-      <span class="badge pull-right">{{ getCount(tag.name) }}</span></a>
+      <span class="badge pull-right">{{ getTotalCount(tag.name) }}</span></a>
     </li>
   </ul>
 </div>

@@ -19,6 +19,9 @@ angular.module('mushin').factory('things', function ($rootScope, hoodie, $q, Thi
 
     if (thing[plural]) {
       for (var j = 0; j < thing[plural].length; ++j) {
+        // for now, ignore completed things
+        if (thing.complete == 100) { return; }
+
         var name = thing[plural][j];
         if (!(name in hash)) {
           hash[name] = {
@@ -27,8 +30,6 @@ angular.module('mushin').factory('things', function ($rootScope, hoodie, $q, Thi
             'things': [],
           }
         }
-        // for now, ignore completed things
-        if (thing.complete == 100) { return; }
 
         hash[name].things.push(thing);
       }

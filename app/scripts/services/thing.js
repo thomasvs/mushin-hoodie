@@ -75,7 +75,7 @@ angular.module('mushin').factory('Thing', function ($q, $filter, hoodie) {
     if (this.data.recurrence) {
       start = due;
       // interestingly, setSeconds handles wrapping
-      due.setSeconds(due.getSeconds() + this.data.recurrence * 60 * 60);
+      due.setSeconds(due.getSeconds() + this.data.recurrence);
       debug('handle recurrence ' + this.data.recurrence + ', start ' + start + ' due ' + due);
     } else {
       if (this.data.complete == 100) {

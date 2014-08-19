@@ -113,7 +113,7 @@ angular.module('mushin').controller('InboxCtrl', function ($scope, $rootScope, $
             selectedAll = false;
 //            debug('thing tags: ' + JSON.stringify(thing));
             if (thing[type + 's'] && thing[type + 's'].indexOf(tag.name) > -1) {
-              debug('filter: keeping ' + thing.title);
+//              debug('filter: keeping ' + thing.title);
               keep = true;
             }
           }

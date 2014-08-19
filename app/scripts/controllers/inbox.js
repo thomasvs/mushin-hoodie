@@ -123,10 +123,10 @@ angular.module('mushin').controller('InboxCtrl', function ($scope, $rootScope, $
 
         if (!keep) {
           return false;
-      }
+        }
 
+      }
       return true;
-    }
     }
 
     // filter things by importance/urgency

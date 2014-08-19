@@ -50,3 +50,11 @@ replicate
 
   paisley -D $HOODIE_DB -u admin -p $HOODIE_PASSWORD -P 6006 replicate add -t single -d backward localhost/mushin-hoodie
   FIXME: doesn't work; they don't show up.  Only after making a trivial edit does it show up in mushin-hoodie
+
+  instead, dump and load
+
+  couchdb-dump http://localhost:5984/mushin-hoodie > mushin-hoodie.dump
+  couchdb-load -u admin -p $HOODIE_PASSWORD http://localhost:6006/$HOODIE_DB_QUOTE < mushin-hoodie.dump
+
+
+

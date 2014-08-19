@@ -84,7 +84,6 @@ angular.module('mushin').factory('things', function ($rootScope, hoodie, $q, Thi
           // FIXME: not sure if it's better to deal with thingData here or
           //        full thing objects
           var thing = thingsData[i];
-          debug('loaded thing ' + thing.title);
           if ((thing.state === type) ||
               (type == Thing.ACTIVE && !thing.state)) {
             thingsDataOfType.push(thing);

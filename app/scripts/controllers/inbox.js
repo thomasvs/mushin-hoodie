@@ -158,7 +158,7 @@ angular.module('mushin').controller('InboxCtrl', function ($scope, $rootScope, $
             selectedAll = false;
 //            debug('thing tags: ' + JSON.stringify(thing));
             if (thing[type] && thing[type] == number) {
-              debug('filter: keeping ' + thing.title);
+//              debug('filter: keeping ' + thing.title);
               keep = true;
             }
           }

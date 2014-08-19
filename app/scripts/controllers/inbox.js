@@ -18,8 +18,10 @@ angular.module('mushin').controller('InboxCtrl', function ($scope, $rootScope, $
   })
 
   function fetchThings() {
+    debug('calling fetchThings');
     things.getAll(Thing.ACTIVE)
       .then(function(things) {
+        debug('called fetchThings');
         // at this time, the rootScope contexts/projects are set and thus
         // available through $scope too
 
@@ -54,13 +56,14 @@ angular.module('mushin').controller('InboxCtrl', function ($scope, $rootScope, $
 
 
       })
+      debug('finished fetchThings');
   }
 
-  fetchThings()
+  fetchThings();
 
   $scope.$on('thingChange', function() {
     debug('thingChange');
-    fetchThings()
+    fetchThings();
   })
 
   $scope.newThing = function() {

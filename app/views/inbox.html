@@ -44,7 +44,11 @@
   bp-scroll-sticky
   class="inbox">
 
-  <bp-table-header><!--Things--></bp-table-header>
+  <!-- bp-table-header is part of the table and scrolls away
+       but inboxFound's scope is limited -->
+  <bp-table-header>
+    {{ inboxFound.length }} things
+  </bp-table-header>
 
 
   <bp-cell

@@ -67,7 +67,9 @@ angular.module('mushin').controller(
     }
 
     /* load the thing and process it */
-    things.get(params.id).then(function(data) {
+    things.get(params.id).then(loaded);
+
+    function loaded(data) {
       goToCorrectType(data);
       $scope.thing = data;
       $scope.unit = data.state === Thing.MIT ? Thing.ONE_DAY : Thing.ONE_WEEK;
@@ -100,7 +102,7 @@ angular.module('mushin').controller(
         debug('$scope.urgencyActive now ' + JSON.stringify($scope.urgencyActive));
       }
 
-    });
+    }
 
     things.extend($scope);
 

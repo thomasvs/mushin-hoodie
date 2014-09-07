@@ -21,3 +21,6 @@
     }
     The last two are not there in zentodone; what is generating them?
     Maybe roll back to earlier version to see?
+
+- How do I override colors in bradypodion?
+  app/bower_components/bradypodion/src/styles/variables/ios.less has values

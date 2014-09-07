@@ -1,13 +1,25 @@
 .contexts-dropdown {
     float: left;
+/*
     width: 15%;
+*/
     height: 34px;
     line-height: 34px;
     font-weight: bold;
 }
 
+/* setting a width causes the button group to break into two when
+ * resizing to a smaller screen
 .btn-group-importance {
     width: 25%;
+}
+*/
+
+#importance-list .btn-group, #urgency-list .btn-group {
+    /* this removes the 1 pixel addition at the top when you drag
+     * the screen larger so that Search moves up to the same line
+     */
+    vertical-align: top;
 }
 
 .btn-group-importance button.btn-default:focus {
@@ -24,9 +36,11 @@
     display: inline-block;
 }
 
+/*
 .btn-group-urgency {
     width: 25%;
 }
+*/
 
 .btn-group-urgency button.btn-default:focus {
     border-color: blue;
@@ -39,6 +53,7 @@
     height: 34px;
     line-height: 34px;
     font-weight: bold;
+    vertical-align: top;
 }
 
 .projects-dropdown button {

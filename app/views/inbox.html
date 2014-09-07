@@ -13,21 +13,25 @@
   </bp-search>
 </form>
 
-  <div>
+<div>
   <span>
     <span tag-list ng-controller="TagListCtrl as cl" type="context" all="true" data="contexts" active="contexts"></span>
     <span id="importance-list" number-list ng-controller="NumberListCtrl as il" type="importance" all="true" data="importance" active="importance" multiple="true"></span>
+  </span>
 
+  <span>
     <div class="search">
       <input type="text" class="form-control" placeholder="Search" ng-model="searchString">
     </div>
+  </span>
+
+  <span>
     <span id="urgency-list" number-list ng-controller="NumberListCtrl as ul" type="urgency" all="true" data="urgency" active="urgency" multiple="true"></span>
 
     <span tag-list ng-controller="TagListCtrl as pl" type="project" all="true" data="projects" active="projects"></span>
-
-
   </span>
-  </div>
+
+</div>
 
 <bp-table
   class="inbox"

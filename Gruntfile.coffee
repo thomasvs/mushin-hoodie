@@ -43,9 +43,9 @@ module.exports = (grunt) ->
 
     connect:
       options:
-        port: 9000
+        port: 9001
         hostname: '0.0.0.0'
-        livereload: 35729
+        livereload: 35728
         middleware: (connect, options) ->
           unless Array.isArray options.base
             options.base = [options.base]

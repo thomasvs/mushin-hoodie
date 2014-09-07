@@ -10,4 +10,14 @@
 - format due date with due in/overdue ...
 - when completing non-recurring items, gray them out, then add timeout for 5 mins
 - fix glitch with number buttons; when deselecting a number the background stays gray even when active class is gone
+
 - fix problem with opacity of repeat password when creating new account
+  - it seems some css is dynamically added that is not there in zentodone:
+    [name="loginForm"] .repeat {
+      -webkit-opacity: 0.5;
+      opacity: 0.5;
+      opacity: 0.005;
+      filter: alpha(opacity=0.5);
+    }
+    The last two are not there in zentodone; what is generating them?
+    Maybe roll back to earlier version to see?

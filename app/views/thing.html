@@ -82,8 +82,10 @@
       <input
         type="text"
         ng-model="thing.title"
+        ng-model-options="{ updateOn: 'blur' }"
         ng-blur="update()"
-        ng-change="update()">
+        ng-change="update()"
+        ng-keyup="cancel($event)" />
     </bp-cell>
     <bp-cell class="multiline">
       <textarea

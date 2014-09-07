@@ -78,6 +78,9 @@ angular.module('mushin').controller(
 
       if (data.due) $scope.due = new Date(data.due);
 
+      /* we copy over title so it can be edited and re-parsed too */
+      $scope.title = data.title;
+
       debug ('controllers/thing.js: contexts ' + JSON.stringify(data.contexts));
       if (data.contexts && data.contexts.length > 0) {
         angular.forEach(data.contexts, function(context) {
@@ -126,13 +129,31 @@ angular.module('mushin').controller(
       });
     }
 
+    /* called immediately every time anything changes;
+     * except for description, thanks to the new ng-model-options */
     $scope.update = function() {
       debug('updating thing in hoodie');
       debug('scope due date: ' + $scope.due);
       debug('thing due date: ' + $scope.thing.due);
       debug('importance: ' + $scope.thing.importance);
       debug('urgency: ' + $scope.thing.urgency);
+
       if ($scope.due) $scope.thing.due = $scope.due.toISOString();
+
+      /* reparse title as we may use it to change some properties
+       */
+      var parser = new window.Parser();
+      var parsed = parser.parse($scope.title);
+      debug('parsed: ' + JSON.stringify(parsed));
+      debug('scope.thing: ' + JSON.stringify($scope.thing));
+
+      angular.extend($scope.thing, parsed);
+      debug('new scope.thing: ' + JSON.stringify($scope.thing));
+
+      /* FIXME: we tried to call the same function as on getting to
+       * update contexts and projects and other things, but not
+       * working.  Ideally this should be through a listener anyway */
+      loaded($scope.thing);
       return hoodie.store.update('thing', $scope.thing.id, $scope.thing);
     }
   }

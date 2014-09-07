@@ -79,8 +79,8 @@
       <time ng-if="thing.end" datetime="{{ thing.end | date : 'yyyy-MM-dd' }}">done {{ thing.end | date : 'MMM d yyyy' }}</time>
       <time ng-if="thing.due && !thing.end" datetime="{{ thing.due | date : 'yyyy-MM-dd' }}">due {{ thing.due | date : 'MMM d yyyy' }}</time>
       <div class="description" ng-if="thing.description">{{ thing.description }}</div>
-      <div class="contexts" ng-if="thing.contexts">
-        <b ng-repeat="context in thing.contexts">@{{context}}{{$last ? '' : ', '}}</b>
+      <div class="contexts">
+        <b ng-if="thing.contexts" ng-repeat="context in thing.contexts">@{{context}}{{$last ? '' : ', '}}</b>
       </div>
       <div class="importance" ng-if="thing.importance">
         I:{{thing.importance}}
@@ -88,8 +88,8 @@
       <div class="urgency" ng-if="thing.urgency">
         U:{{thing.urgency}}
       </div>
-      <div class="projects" ng-if="thing.projects">
-        <b ng-repeat="project in thing.projects">p:{{project}}{{$last ? '' : ', '}}</b>
+      <div class="projects">
+        <b ng-if="thing.projects" ng-repeat="project in thing.projects">p:{{project}}{{$last ? '' : ', '}}</b>
       </div>
     </div>
   </bp-cell>

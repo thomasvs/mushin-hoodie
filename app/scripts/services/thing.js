@@ -15,12 +15,18 @@ angular.module('mushin').factory('Thing', function ($q, $filter, hoodie) {
       return
     }
 
-    this.data = data && angular.copy(data) || {};
+    // defaults
+    this.data = {
+      due: null,
+    }
+
+    if (data) {
+      angular.extend(this.data, data);
+    }
 
     angular.extend(this.data, {
       id: Math.random().toString(36).substr(2, 9),
       date: Date.now(),
-      due: null,
       state: ACTIVE,
       deleted: false,
       title: title,

@@ -20,6 +20,8 @@ angular.module('mushin').controller(
     $scope.importanceActive = {};
     $scope.urgencyActive = {};
 
+    /* when we receive a TAG_TOGGLED event, update the appropriate
+     * TagList */
     $scope.$on('TAG_TOGGLED', function(event, type, name) {
       var taglist = $scope.thing[type + 's'];
       if (!taglist) {
@@ -39,6 +41,8 @@ angular.module('mushin').controller(
       things.getAll(Thing.ACTIVE);
     });
 
+    /* when we receive a NUMBER_TOGGLED event, update the appropriate
+     * NumberList */
     $scope.$on('NUMBER_TOGGLED', function(event, type, name) {
       var number = $scope.thing[type];
       debug('NUMBER TOGGLED for ' + name + ' when I have ' + number);
@@ -61,6 +65,8 @@ angular.module('mushin').controller(
       debug('controller/thing.js: getting all things');
       things.getAll(Thing.ACTIVE);
     }
+
+    /* load the thing and process it */
     things.get(params.id).then(function(data) {
       goToCorrectType(data);
       $scope.thing = data;

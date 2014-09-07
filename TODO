@@ -1,14 +1,25 @@
-- reuse it both in the main things view as well as in the thing edit view
-  for assigning projects and contexts
-- add a way to add projects or contexts on the thing edit screen
+FEATURES
+--------
+
+- add a way to add projects or contexts on the thing edit screen;
+  for example a + icon next to it
+
 - emit events when taglists change in inbox, so that we can recalculate the
   array of selected contexts/projects for use in the filter function
+
 - use angular-tour to:
   - explain how the app works
   - suggest things to type and click
   - walk you through the main features with about five tasks
+
 - format due date with due in/overdue ...
-- when completing non-recurring items, gray them out, then add timeout for 5 mins
+
+COSMETICS
+---------
+
+- when completing non-recurring items, gray them out, then add timeout for 5
+
+  mins
 - fix glitch with number buttons; when deselecting a number the background stays gray even when active class is gone
 
 - fix problem with opacity of repeat password when creating new account
@@ -21,10 +32,13 @@
     }
     The last two are not there in zentodone; what is generating them?
     Maybe roll back to earlier version to see?
+  - For now I avoided it by removing opacity completely
 
 - How do I override colors in bradypodion?
   app/bower_components/bradypodion/src/styles/variables/ios.less has values
 
+VERSIONS
+--------
 - angular added utc timezone formatting to time filter in 1.3.0-beta7, which
   fixes wrong due date being shown
 - angular-datepicker breaks with newer angular 1.3.0-beta7 which is rc1

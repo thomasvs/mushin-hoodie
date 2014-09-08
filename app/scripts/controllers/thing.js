@@ -81,28 +81,34 @@ angular.module('mushin').controller(
       /* we copy over title so it can be edited and re-parsed too */
       $scope.title = data.title;
 
-      debug ('controllers/thing.js: contexts ' + JSON.stringify(data.contexts));
+      debug ('controllers/thing.js: contexts ' +
+        JSON.stringify(data.contexts));
       if (data.contexts && data.contexts.length > 0) {
         angular.forEach(data.contexts, function(context) {
           $scope.contextsActive[context] = { active: true};
-          debug('$scope.contextsActive now ' + JSON.stringify($scope.contextsActive));
+          debug('$scope.contextsActive now ' +
+            JSON.stringify($scope.contextsActive));
         });
       }
-      debug ('controllers/thing.js: projects ' + JSON.stringify(data.projects));
+      debug ('controllers/thing.js: projects ' +
+        JSON.stringify(data.projects));
       if (data.projects && data.projects.length > 0) {
         angular.forEach(data.projects, function(project) {
           $scope.projectsActive[project] = { active: true};
-          debug('$scope.projectsActive now ' + JSON.stringify($scope.projectsActive));
+          debug('$scope.projectsActive now ' +
+            JSON.stringify($scope.projectsActive));
         });
       }
 
       if (data.importance) {
         $scope.importanceActive[data.importance] = { active: true};
-        debug('$scope.importanceActive now ' + JSON.stringify($scope.importanceActive));
+        debug('$scope.importanceActive now ' +
+          JSON.stringify($scope.importanceActive));
       }
       if (data.urgency) {
         $scope.urgencyActive[data.urgency] = { active: true};
-        debug('$scope.urgencyActive now ' + JSON.stringify($scope.urgencyActive));
+        debug('$scope.urgencyActive now ' +
+          JSON.stringify($scope.urgencyActive));
       }
 
     }

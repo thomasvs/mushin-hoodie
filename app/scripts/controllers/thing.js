@@ -76,7 +76,11 @@ angular.module('mushin').controller(
       lastType = $scope.thing.state;
       $scope[Thing.types[lastType]] = true;
 
-      if (data.due) $scope.due = new Date(data.due);
+      if (data.due) {
+        $scope.due = new Date(data.due);
+        debug ('controllers/thing.js: due date: ' +
+          data.due + ', as Date: ' + $scope.due);
+      }
 
       /* we copy over title so it can be edited and re-parsed too */
       $scope.title = data.title;

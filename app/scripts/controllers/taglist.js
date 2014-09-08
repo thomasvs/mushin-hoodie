@@ -123,7 +123,7 @@ angular.module('mushin').controller(
      * Get the total number of active/selected things for the given tag.
      */
     $scope.getActiveCount = function() {
-      if ($scope.selectedAll) {
+      if ($scope.showAll && $scope.selectedAll) {
         return $scope.getTotalCount();
       }
 

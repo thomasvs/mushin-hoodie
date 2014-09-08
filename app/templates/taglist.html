@@ -1,7 +1,8 @@
 <div class="btn-group {{type}}s-dropdown" dropdown ng-class="{open: open}">
   <button type="button" class="btn btn-primary dropdown-toggle" ng-disabled="disabled" ng-click="open=!open">
     <span class="badge">{{ getActiveCount() }}</span>
-    <ng-pluralize count="getActiveCount()"
+    of {{ getTotalCount() }}
+    <ng-pluralize count="getTotalCount()"
                   when="{
                     '0': '{{ type }}s',
                     'one': '{{ type }}',

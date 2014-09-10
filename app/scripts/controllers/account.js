@@ -2,6 +2,8 @@ angular.module('mushin').controller('AccountCtrl', function ($q, $window, $scope
   var data = $scope.data = {}
   var CONNECTION_ERROR = 'HoodieConnectionError'
 
+  var debug = new window.$debug('mushin:controllers/account');
+
   $scope.allowSignUp = false
   $scope.account = hoodieAccount
 
@@ -18,9 +20,12 @@ angular.module('mushin').controller('AccountCtrl', function ($q, $window, $scope
         $scope.errors.down = true
       }
     })
-
     if (!$window.navigator.onLine) {
-      return $scope.errors.offline = true
+      if (hoodie.baseUrl.indexOf('http://0.0.0.0') != 0) {
+        return $scope.errors.offline = true
+      } else {
+        debug('localhost server, allowing login');
+      }
     }
 
     if (data.password2) {

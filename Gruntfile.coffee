@@ -43,7 +43,7 @@ module.exports = (grunt) ->
 
     connect:
       options:
-        port: 9001
+        port: 8999
         hostname: '0.0.0.0'
         livereload: 35728
         middleware: (connect, options) ->

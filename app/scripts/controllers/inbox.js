@@ -188,46 +188,43 @@ angular.module('mushin').controller('InboxCtrl', function ($scope, $rootScope, $
     // filter things based on due date
     $scope.filterByDueSelector = function(thing) {
 
-      var keep;
-      var selectedAll;
+      var now = new Date();
+      var due = new Date(thing.due);
 
-      // either numberlist may reject a thing
-      // don't convert to angular.forEach as that does not allow breaks
-      var types = [ 'importance', 'urgency' ];
-      var type;
-      var tags;
+      var dayStart = new Date(now.valueOf());
+      dayStart.setHours(0);
+      dayStart.setMinutes(0);
+      dayStart.setSeconds(0);
+      dayStart.setMilliseconds(0);
 
-      for (var i = 0; i < types.length; ++i) {
-        type = types[i];
-        tags = $scope[type];
+      var dayEnd = new Date(dayStart.valueOf());
+      dayEnd.setDate(dayStart.getDate() + 1);
 
-//        debug('filter: looking at type ' + type);
-        keep = false;
-        selectedAll = true; // guilty until proven innocent
+      var ret = false;
 
-        for (var number in tags) {
-          var tag = tags[number];
-
-//          debug('filter: looking at tag ' + tag.name);
-          if (tag.active) {
-//            debug('filter: tag.name active ' + tag.name);
-            selectedAll = false;
-//            debug('thing tags: ' + JSON.stringify(thing));
-            if (thing[type] && thing[type] == number) {
-//              debug('filter: keeping ' + thing.title);
-              keep = true;
-            }
-          }
-        }
-        /* also keep if no tag is selected, which means all are */
-        if (selectedAll) keep = true;
-
-        if (!keep) {
-          return false;
-        }
+      switch ($scope.dueSelect) {
+        case 'all':
+          ret = true;
+          break;
+        case 'overdue':
+          if (now > due)
+            ret = true;
+          break;
+        case 'today':
+          if (dayStart <= due && due < dayEnd)
+            ret = true;
+            break;
+        case 'due':
+          if (now < due)
+            ret = true;
+            break;
+        case 'no':
+          if (!thing.due)
+            ret = true;
+            break;
       }
 
-      return true;
+      return ret;
     }
 
     $scope.notRecentlyCompleted = function(thing) {

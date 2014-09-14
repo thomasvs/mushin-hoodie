@@ -23,8 +23,6 @@ angular.module('mushin').controller(
   'OrderCtrl',
   function($scope, $attrs) {
 
-    var debug = new window.$debug('mushin:controllers/order');
-
     /* projects or contexts */
     if (!$attrs.type) {
       throw new Error("No type attribute for OrderCtrl");

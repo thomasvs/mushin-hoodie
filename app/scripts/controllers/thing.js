@@ -66,9 +66,6 @@ angular.module('mushin').controller(
       things.getAll(Thing.ACTIVE);
     }
 
-    /* load the thing and process it */
-    things.get(params.id).then(loaded);
-
     function loaded(data) {
       goToCorrectType(data);
       $scope.thing = data;
@@ -116,6 +113,10 @@ angular.module('mushin').controller(
       }
 
     }
+
+    /* load the thing and process it */
+    things.get(params.id).then(loaded);
+
 
     things.extend($scope);
 

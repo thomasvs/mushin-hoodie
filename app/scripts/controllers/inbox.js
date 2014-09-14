@@ -253,23 +253,13 @@ angular.module('mushin').controller('InboxCtrl', function ($scope, $rootScope, $
        lists.add(name, query);
    }
 
-    $scope.toggleSortAlpha = function() {
-        debug('toggleSortAlpha');
-        if ($scope.predicate == 'title') {
-           $scope.predicate = '-title';
+    $scope.toggleOrder = function(type) {
+        debug('toggleOrder: ' + type);
+        if ($scope.predicate == type) {
+           $scope.predicate = '-' + type;
         } else {
-           $scope.predicate = 'title';
+           $scope.predicate = type;
         }
     };
-
-    $scope.toggleSortDue = function() {
-        debug('toggleSortDue');
-        if ($scope.predicate == 'due') {
-           $scope.predicate = '-due';
-        } else {
-           $scope.predicate = 'due';
-        }
-    };
-
 
 })

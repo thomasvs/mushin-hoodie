@@ -1,0 +1,8 @@
+<button type="button" class="btn btn-primary" ng-click="toggleOrder(type)">
+  {{ label }}
+  <!-- ng-switch only works for literal values, so use ng-show -->
+  <span ng-show="predicate == type"> &#x25B2;</span>
+  <span ng-show="predicate == '-' + type"> &#x25BC;</span>
+  <span ng-show="predicate.indexOf(type) == -1" style="visibility: hidden"> &#x25B2;</span>
+</button>
+

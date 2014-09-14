@@ -21,7 +21,7 @@ angular.module('mushin').controller('AccountCtrl', function ($q, $window, $scope
       }
     })
     if (!$window.navigator.onLine) {
-      if (hoodie.baseUrl.indexOf('http://0.0.0.0') != 0) {
+      if (hoodie.baseUrl.indexOf('http://0.0.0.0') !== 0) {
         return $scope.errors.offline = true
       } else {
         debug('localhost server, allowing login');

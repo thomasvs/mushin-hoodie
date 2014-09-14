@@ -51,10 +51,10 @@
 
   <!-- pull sort options to the right -->
   <span id="sort-options" class="pull-right">
-    <button type="button" class="btn btn-primary">
+    <button type="button" class="btn btn-primary" ng-click="toggleSortAlpha()">
       A-Z
     </button>
-    <button type="button" class="btn btn-primary">
+    <button type="button" class="btn btn-primary" ng-click="toggleSortDue()">
       Due
     </button>
   </span>
@@ -85,7 +85,7 @@
   <bp-cell
     thing-cell
     class="thing-cell-animation"
-    ng-repeat="thing in inboxFound = (inbox | filter:notRecentlyCompleted | filter:filterByTag | filter:filterByNumber | filter:{title: searchString}) track by thing.id"
+    ng-repeat="thing in inboxFound = (inbox | filter:notRecentlyCompleted | filter:filterByTag | filter:filterByNumber | filter:{title: searchString} | orderBy:predicate) track by thing.id"
     swipe-right="convertToBr(thing)"
     swipe-left="convertToMit(thing)"
     swipe-long-right="setDeleted(thing)"

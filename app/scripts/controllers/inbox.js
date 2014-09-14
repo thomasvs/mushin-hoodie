@@ -2,6 +2,11 @@ angular.module('mushin').controller('InboxCtrl', function ($scope, $rootScope, $
 
   var debug = new window.$debug('mushin:thing');
   var search = $location.search();
+
+  // order of the things listed
+  $scope.predicate = 'title';
+
+
   debug('controllers/inbox.js: search params ' + JSON.stringify(search));
 
   $scope.saveListActive = false;
@@ -247,4 +252,24 @@ angular.module('mushin').controller('InboxCtrl', function ($scope, $rootScope, $
        debug('saveList: query ' + query);
        lists.add(name, query);
    }
+
+    $scope.toggleSortAlpha = function() {
+        debug('toggleSortAlpha');
+        if ($scope.predicate == 'title') {
+           $scope.predicate = '-title';
+        } else {
+           $scope.predicate = 'title';
+        }
+    };
+
+    $scope.toggleSortDue = function() {
+        debug('toggleSortDue');
+        if ($scope.predicate == 'due') {
+           $scope.predicate = '-due';
+        } else {
+           $scope.predicate = 'due';
+        }
+    };
+
+
 })

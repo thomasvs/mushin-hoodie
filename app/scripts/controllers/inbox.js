@@ -6,6 +6,9 @@ angular.module('mushin').controller('InboxCtrl', function ($scope, $rootScope, $
   // order of the things listed
   $scope.predicate = 'title';
 
+  // state of the by due date filter
+  $scope.dueSelect = 'all';
+
 
   debug('controllers/inbox.js: search params ' + JSON.stringify(search));
 
@@ -139,6 +142,51 @@ angular.module('mushin').controller('InboxCtrl', function ($scope, $rootScope, $
 
     // filter things by importance/urgency
     $scope.filterByNumber = function(thing) {
+
+      var keep;
+      var selectedAll;
+
+      // either numberlist may reject a thing
+      // don't convert to angular.forEach as that does not allow breaks
+      var types = [ 'importance', 'urgency' ];
+      var type;
+      var tags;
+
+      for (var i = 0; i < types.length; ++i) {
+        type = types[i];
+        tags = $scope[type];
+
+//        debug('filter: looking at type ' + type);
+        keep = false;
+        selectedAll = true; // guilty until proven innocent
+
+        for (var number in tags) {
+          var tag = tags[number];
+
+//          debug('filter: looking at tag ' + tag.name);
+          if (tag.active) {
+//            debug('filter: tag.name active ' + tag.name);
+            selectedAll = false;
+//            debug('thing tags: ' + JSON.stringify(thing));
+            if (thing[type] && thing[type] == number) {
+//              debug('filter: keeping ' + thing.title);
+              keep = true;
+            }
+          }
+        }
+        /* also keep if no tag is selected, which means all are */
+        if (selectedAll) keep = true;
+
+        if (!keep) {
+          return false;
+        }
+      }
+
+      return true;
+    }
+
+    // filter things based on due date
+    $scope.filterByDueSelector = function(thing) {
 
       var keep;
       var selectedAll;

@@ -53,9 +53,19 @@
   <span id="sort-options" class="pull-right">
     <button type="button" class="btn btn-primary" ng-click="toggleSortAlpha()">
       A-Z
+    <span ng-switch='predicate'>
+      <span ng-switch-when="title"> &#x25B2;</span>
+      <span ng-switch-when="-title"> &#x25BC;</span>
+      <span ng-switch-default style="visibility: hidden"> &#x25B2;</span>
+    </span>
     </button>
     <button type="button" class="btn btn-primary" ng-click="toggleSortDue()">
       Due
+    <span ng-switch='predicate'>
+      <span ng-switch-when="due"> &#x25B2;</span>
+      <span ng-switch-when="-due"> &#x25BC;</span>
+      <span ng-switch-default style="visibility: hidden"> &#x25B2;</span>
+    </span>
     </button>
   </span>
 </div>

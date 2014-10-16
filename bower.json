@@ -11,7 +11,7 @@
     "bradypodion": "^0.5.3",
     "angular-loading-bar": "^0.3.0",
     "jquery-hammerjs": "^1.0.6",
-    "angular-datepicker": "~1.0.3",
+    "angular-datepicker": "thomasvs/angular-datepicker#ffc62e0a6a69645f74c524a6340ed4abf2e6525a",
     "angular-duration-filter": "*",
     "angular-bootstrap": "~0.11.0",
     "bootstrap": "~3.2.0",

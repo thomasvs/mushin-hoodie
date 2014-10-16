@@ -43,3 +43,6 @@ VERSIONS
   fixes wrong due date being shown
 - angular-datepicker breaks with newer angular 1.3.0-beta7 which is rc1
   https://github.com/g00fy-/angular-datepicker/issues/58
+
+- BUG with angular-animate:
+  https://github.com/chieffancypants/angular-loading-bar/issues/98

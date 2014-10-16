@@ -5,7 +5,7 @@
   "dependencies": {
     "add-to-homescreen": "~3.0.5",
     "angular": "^1.3.0-beta.7",
-    "angular-animate": "^1.3.0-beta.7",
+    "angular-animate": "1.3.0-build.3121+sha.a4520a7",
     "angular-elastic": "~2.3.2",
     "angular-touch": "^1.3.0-beta.7",
     "bradypodion": "^0.5.3",

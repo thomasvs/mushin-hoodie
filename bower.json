@@ -12,7 +12,12 @@
     "angular-loading-bar": "^0.3.0",
     "jquery-hammerjs": "^1.0.6",
     "angular-datepicker": "~1.0.3",
-    "angular-duration-filter": "*"
+    "angular-duration-filter": "*",
+    "angular-bootstrap": "~0.11.0",
+    "bootstrap": "~3.2.0",
+    "debug-browser": "~0.0.2",
+    "bootstrap-css": "~3.2.0"
+
   },
   "resolutions": {
     "angular-animate": "^1.3.0-beta.7",

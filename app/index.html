@@ -25,6 +25,11 @@
     <meta name="msapplication-TileImage" content="/mstile-144x144.png">
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
+    <!-- added for mushin -->
+    <link rel="stylesheet" href="bower_components/angular-datepicker/app/styles/style.less">
+    <link rel="stylesheet" href="bower_components/bootstrap-css/css/bootstrap.css">
+    <!-- end added for mushin -->
+
     <!-- endbuild -->
   </head>
   <body ng-app="mushin" bp-app bp-navigation>
@@ -51,12 +56,15 @@
     <script src="bower_components/angular-datepicker/app/scripts/dateRange.js"></script>
     <script src="bower_components/angular-datepicker/app/scripts/input.js"></script>
     <script src="bower_components/angular-duration-filter/src/duration.js"></script>
-    <script>window.DEBUG='mushin:*'</script>
-    <link rel="stylesheet" href="bower_components/angular-datepicker/app/styles/style.less">
     <script src="bower_components/debug-browser/debug.js"></script>
-    <link rel="stylesheet" href="bower_components/bootstrap-css/css/bootstrap.css">
+    <!-- end added for mushin -->
 
     <!-- endbuild -->
+
+    <!-- added for mushin -->
+    <script>window.DEBUG='mushin:*'</script>
+    <!-- end added for mushin -->
+
     <script src="/_api/_files/hoodie.js"></script>
 
     <!-- build:js(.tmp) scripts/app.js -->

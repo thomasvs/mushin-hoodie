@@ -228,7 +228,7 @@ module.exports = (grunt) ->
     'copy'
     'concat'
 # FIXME: uglify seems to fail
-#    'uglify'
+    'uglify'
     'cssmin'
     'rev'
     'usemin'

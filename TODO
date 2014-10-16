@@ -43,3 +43,15 @@ VERSIONS
   fixes wrong due date being shown
 - angular-datepicker breaks with newer angular 1.3.0-beta7 which is rc1
   https://github.com/g00fy-/angular-datepicker/issues/58
+- angular-datepicker triggers a less error:
+    Running "less:styles" (less) task
+    >> ParseError: Unrecognised input in app/bower_components/angular-datepicker
+/app/styles/mixins.less on line 558, column 3:
+    >> 557 
+    >> 558   .core (@gridColumnWidth, @gridGutterWidth) {
+    >> 559
+    Warning: Error compiling app/styles/main.less Use --force to continue.
+    
+    Aborted due to warnings.
+
+  works with a patch to mixins.less

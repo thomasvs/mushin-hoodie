@@ -15,11 +15,13 @@ angular.module(
     'filter.duration'
   ]
 )
-.config(function($urlRouterProvider, $stateProvider, bpAppProvider, cfpLoadingBarProvider) {
+  .config(function(
+    $urlRouterProvider, $stateProvider, bpAppProvider,
+    cfpLoadingBarProvider) {
 
     bpAppProvider.setConfig({
       platform: 'ios'
-    })
+    });
 
     cfpLoadingBarProvider.includeSpinner = false;
 

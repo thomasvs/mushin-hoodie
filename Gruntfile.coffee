@@ -66,6 +66,15 @@ module.exports = (grunt) ->
           ]
         # proxies: set by hoodie
 
+      test:
+        options:
+          port: 9001
+          base: [
+            '.tmp'
+            '<%= app.app %>'
+          ]
+
+
       dist:
         options:
           base: '<%= app.dist %>'
@@ -202,6 +211,15 @@ module.exports = (grunt) ->
         options:
             dest: 'app/docs'
 
+# See http://blog.revolunet.com/blog/2013/12/05/unit-testing-angularjs-directive/
+    karma:
+      unit:
+        configFile: 'karma.conf.js'
+#        background: false
+#        browsers: [ 'Chrome', 'Firefox' ]
+        singleRun: true
+
+
   grunt.registerTask 'release', ->
     @args.unshift 'bump-only'
     grunt.task.run [
@@ -236,7 +254,9 @@ module.exports = (grunt) ->
     'ngdocs'
   ]
 
-  grunt.registerTask 'test', ['jshint', 'build']
+  grunt.registerTask 'test', ['connect:test', 'karma']
   grunt.registerTask 'default', ['build']
   grunt.loadNpmTasks 'grunt-jsdoc'
   grunt.loadNpmTasks 'grunt-ngdocs'
+  grunt.loadNpmTasks 'grunt-karma'
+

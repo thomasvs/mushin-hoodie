@@ -6,11 +6,23 @@ describe(
     beforeEach(
       inject(
         function ($controller, $rootScope) {
-          it('should initialize', function () {
-            var $nlc = $controller('NumberListCtrl', {});
-          });
+          scope = $rootScope.$new();
+          controller = $controller;
+
         }
       )
     );
+
+    it('should initialize', function () {
+      attrs = {
+        type: 'unknown-type'
+      };
+
+      var $nlc = controller('NumberListCtrl', {
+        $scope: scope,
+        $attrs: attrs,
+      });
+
+    });
   }
 );

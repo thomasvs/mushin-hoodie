@@ -217,7 +217,7 @@ module.exports = (grunt) ->
         configFile: 'karma.conf.js'
 #        background: false
 #        browsers: [ 'Chrome', 'Firefox' ]
-        singleRun: true
+        singleRun: false
 
 
   grunt.registerTask 'release', ->

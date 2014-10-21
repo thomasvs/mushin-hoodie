@@ -36,31 +36,31 @@ angular.module('mushin').controller(
     var debug = new window.$debug('mushin:controllers/numberlist');
 
     /* projects or contexts */
-    if (!$attrs.type) {
+    if ($attrs.type == undefined) {
       throw new Error("No type attribute for NumberListCtrl");
     }
     $scope.type = $attrs.type;
     $scope.typeletter = $scope.type.toUpperCase().charAt(0);
 
     /* whether to show the All ... header */
-    if (!$attrs.all) {
-      throw new Error("No all attribute for NumberListCtrl");
+    if ($attrs.all == undefined) {
+      throw new Error("No all attribute " + JSON.stringify($attrs) + " for NumberListCtrl");
     } else {
       /* convert string to boolean */
       $scope.showAll = ($attrs.all == 'true');
     }
 
-    if (!$attrs.data) {
+    if ($attrs.data == undefined) {
       throw new Error("No data attribute for NumberListCtrl");
     }
     $scope.tags = $scope[$attrs.data];
 
-    if (!$attrs.active) {
+    if ($attrs.active == undefined) {
       throw new Error("No active attribute for NumberListCtrl");
     }
     $scope.active = $scope[$attrs.active];
 
-    if (!$attrs.multiple) {
+    if ($attrs.multiple == undefined) {
       throw new Error("No multiple attribute for NumberListCtrl");
     }
     $scope.multiple = ($attrs.multiple == 'true');

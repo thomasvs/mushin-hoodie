@@ -13,9 +13,14 @@ describe(
       )
     );
 
-    it('should initialize', function () {
+
+    it('should initialize even with boolean properties', function () {
       attrs = {
-        type: 'unknown-type'
+        'all':  false,
+        'type': 'unknown-type',
+        'data': 'haha',
+        'active': true,
+        'multiple': true,
       };
 
       var $nlc = controller('NumberListCtrl', {

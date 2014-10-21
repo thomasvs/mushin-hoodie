@@ -37,6 +37,11 @@ COSMETICS
 - How do I override colors in bradypodion?
   app/bower_components/bradypodion/src/styles/variables/ios.less has values
 
+DEVELOPMENT
+-----------
+
+- Figure out how to get coverage report
+
 VERSIONS
 --------
 - angular added utc timezone formatting to time filter in 1.3.0-beta7, which

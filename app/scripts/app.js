@@ -44,9 +44,9 @@ angular.module(
           modal: true
         }
       })
-      .state('mit', {
-        url: '/mit',
-        templateUrl: 'views/mit.html',
+      .state('lists', {
+        url: '/lists',
+        templateUrl: 'views/lists.html',
         controller: 'ListCtrl',
         data: {
           title: 'Lists',

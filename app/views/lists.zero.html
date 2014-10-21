@@ -1,15 +1,15 @@
 <bp-cell
   class="multiline"
   ng-if="instructions"
-  ng-init="sawInstructions('mit')">
+  ng-init="sawInstructions('lists')">
   <span>
     It’s very simple: your <strong>three Most Important Things</strong> are the ones you most want or need to get done today.
     <br><br>
     Sure, you get a lot more done than three things a day,
     but the idea is that <strong>no matter what else you do today</strong>, these are the things you want to be <strong>sure of doing</strong>.
     <br><br>
-    Go to your <bp-action class="bp-button mit" ui-sref="inbox">Inbox</bp-action> and assign some MITs
-    or <bp-action class="bp-button mit" ng-click><a href="http://zenhabits.net/purpose-your-day-most-important-thing/">read more</a></bp-action> on the concept.
+    Go to your <bp-action class="bp-button lists" ui-sref="inbox">Inbox</bp-action> and assign some MITs
+    or <bp-action class="bp-button lists" ng-click><a href="http://zenhabits.net/purpose-your-day-most-important-thing/">read more</a></bp-action> on the concept.
 
   </span>
 </bp-cell>
@@ -20,6 +20,6 @@
   <div>
     <bp-action class="bp-icon fa-list-ol"></bp-action>
     No MIT assigned
-    <bp-action class="bp-button mit" ui-sref="inbox({query: '@shop'})">shopping list</bp-action>
+    <bp-action class="bp-button lists" ui-sref="inbox({query: '@shop'})">shopping list</bp-action>
    </div>
 </div>

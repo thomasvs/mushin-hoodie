@@ -5,8 +5,17 @@
  * Copyright 2014 Thomas Vander Stichele
  */
 
-angular.module('mushin', ['bp', 'angular-loading-bar', 'hoodie', 'monospaced.elastic', 'datePicker', 'filter.duration'])
-  .config(function($urlRouterProvider, $stateProvider, bpAppProvider, cfpLoadingBarProvider) {
+angular.module(
+  'mushin', [
+    'bp',
+    'angular-loading-bar',
+    'hoodie',
+    'monospaced.elastic',
+    'datePicker',
+    'filter.duration'
+  ]
+)
+.config(function($urlRouterProvider, $stateProvider, bpAppProvider, cfpLoadingBarProvider) {
 
     bpAppProvider.setConfig({
       platform: 'ios'

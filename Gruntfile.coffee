@@ -195,6 +195,15 @@ module.exports = (grunt) ->
           ]
         ,
           '<%= app.dist %>/package.json': 'package.json'
+        ,
+          expand: true
+          dot: true
+          flatten: true
+          cwd: '<%= app.app %>'
+          dest: '<%= app.dist %>/fonts'
+          src: [
+            'bower_components/bootstrap-css/fonts/glyphicons-halflings-regular.*'
+          ]
         ]
 
     concurrent:

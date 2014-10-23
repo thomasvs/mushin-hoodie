@@ -141,7 +141,9 @@ module.exports = (grunt) ->
         dest: '.tmp/templates.js'
         options:
           htmlmin:
-            collapseBooleanAttributes: on
+	    # THOMAS: this removes multiple=false if on
+            # collapseBooleanAttributes: on
+            collapseBooleanAttributes: off
             collapseWhitespace: off
             removeAttributeQuotes: on
             removeComments: on

@@ -137,7 +137,10 @@ module.exports = (grunt) ->
     ngtemplates:
       mushin:
         cwd: '<%= app.app %>'
-        src: 'views/*.html'
+        src: [
+            'views/*.html'
+            'bower_components/**/templates/*.html'
+        ]
         dest: '.tmp/templates.js'
         options:
           htmlmin:
@@ -185,6 +188,7 @@ module.exports = (grunt) ->
           dest: '<%= app.dist %>'
           src: [
             'fonts/*'
+            'templates/*'
             '../package.json'
             '*.{png,ico,xml}'
             'index.html'

@@ -51,17 +51,20 @@ angular.module('mushin').controller(
     }
 
     if ($attrs.data == undefined) {
-      throw new Error("No data attribute for NumberListCtrl");
+      throw new Error("No data attribute for NumberListCtrl for "
+        + $scope.type);
     }
     $scope.tags = $scope[$attrs.data];
 
     if ($attrs.active == undefined) {
-      throw new Error("No active attribute for NumberListCtrl");
+      throw new Error("No active attribute for NumberListCtrl for "
+        + $scope.type);
     }
     $scope.active = $scope[$attrs.active];
 
     if ($attrs.multiple == undefined) {
-      throw new Error("No multiple attribute for NumberListCtrl");
+      throw new Error("No multiple attribute for NumberListCtrl for "
+        + $scope.type);
     }
     $scope.multiple = ($attrs.multiple == 'true');
 

@@ -14,8 +14,13 @@
  *                 <dt>all</dt>
  *                 <dd>true or false;
  *                     whether to allow selecting all tags</dd>
- *                 <dt>data</dt><dd>the parent scope's variable that contains the hash of tags</dd>
- *                 <dt>active</dt><dd>the parent scope's variable that contains the hash of tag selection; the controller will manipulate .active</dd>
+ *                 <dt>data</dt>
+ *                 <dd>the parent scope's variable that contains the hash
+ *                     of tags</dd>
+ *                 <dt>active</dt>
+ *                 <dd>the parent scope's variable that contains the hash
+ *                     of tag selection; the controller will
+ *                     manipulate .active</dd>
  *               </dl>
  *            </p>
  *

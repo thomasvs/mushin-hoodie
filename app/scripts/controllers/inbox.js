@@ -44,9 +44,23 @@ angular.module('mushin').controller('InboxCtrl', function ($scope, $rootScope, $
             var parsed = parser.parse(search.query);
             debug('controllers/inbox: parsed query ' + JSON.stringify(parsed));
             angular.forEach(parsed.contexts, function (context) {
+                // it's possible we're asking for a non-existing context
+                // FIXME: maybe extract to a contexts initter ?
+                if ($scope.contexts[context] == undefined ) {
+                  $scope.contexts[context] = {
+                    'name': context,
+                    'things': [],
+                  };
+                }
                 $scope.contexts[context].active = true;
             });
             angular.forEach(parsed.projects, function (project) {
+                if ($scope.projects[project] == undefined ) {
+                  $scope.projects[project] = {
+                    'name': project,
+                    'things': [],
+                  };
+                }
                 $scope.projects[project].active = true;
             });
             var i;

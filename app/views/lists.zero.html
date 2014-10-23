@@ -1,0 +1,26 @@
+<bp-cell
+  class="multiline"
+  ng-if="instructions"
+  ng-init="sawInstructions('lists')">
+  <span>
+    Lists contain things to get done.
+    <br><br>
+    Lists make a selection of things to get done and order them.
+    <br><br>
+    The selection is dynamic: the list specifies how to select things,
+    and any time a thing matches that selection, it gets added to the
+    list.
+    <br><br>
+    Here is an example of a shopping list, which contains all things
+    in the 'shop' context
+    <bp-action class="bp-button lists" ui-sref="inbox({query: '@shop'})">shopping list</bp-action>
+  </span>
+</bp-cell>
+
+<div
+  class="inboxzero"
+  ng-if="!instructions">
+  <div>
+    <bp-action class="bp-button lists" ui-sref="inbox({query: '@shop'})">shopping list</bp-action>
+   </div>
+</div>

@@ -1,4 +1,4 @@
-angular.module('mushin').controller('InboxCtrl', function ($scope, $rootScope, $filter, $location, things, Thing, lists) {
+angular.module('mushin').controller('InboxCtrl', function ($scope, $rootScope, $filter, $location, $q, things, Thing, lists) {
 
   var debug = new window.$debug('mushin:thing');
   var search = $location.search();
@@ -26,6 +26,9 @@ angular.module('mushin').controller('InboxCtrl', function ($scope, $rootScope, $
   })
 
   function fetchThings() {
+
+    var deferred = $q.defer();
+
     debug('fetchThings: calling getAll');
     things.getAll(Thing.ACTIVE)
       .then(function(things) {
@@ -76,21 +79,24 @@ angular.module('mushin').controller('InboxCtrl', function ($scope, $rootScope, $
             }
         }
 
-      debug('fetchThings: finished');
-
+        debug('fetchThings: finished');
+        deferred.resolve(undefined);
       })
       debug('fetchThings: returning');
+      return deferred.promise;
   }
 
   debug('inbox.js: calling fetchThings');
-  fetchThings();
-  debug('inbox.js: called fetchThings');
+  fetchThings()
+    .then(function() {
+      $scope.$on('thingChange', function() {
+        debug('thingChange, calling fetchThings');
+        fetchThings();
+        debug('thingChange, called fetchThings');
+      });
 
-  $scope.$on('thingChange', function() {
-    debug('thingChange, calling fetchThings');
-    fetchThings();
-    debug('thingChange, called fetchThings');
-  })
+  });
+  debug('inbox.js: called fetchThings');
 
   $scope.newThing = function() {
 

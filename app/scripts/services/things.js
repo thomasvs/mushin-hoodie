@@ -104,7 +104,7 @@ angular.module('mushin').factory('things', function ($rootScope, hoodie, $q, Thi
             ' urgency levels');
         deferred.resolve(thingsDataOfType);
       });
-      return deferred.promise
+      return deferred.promise;
     },
     add: function(title, description, data) {
       var newThing = new Thing(title, description, data)

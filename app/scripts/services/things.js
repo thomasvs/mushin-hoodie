@@ -70,7 +70,8 @@ angular.module('mushin').factory('things', function ($rootScope, hoodie, $q, Thi
         return promise;
       }
 
-      var deferred = $q.defer()
+      var deferred = $q.defer();
+
       promise.then(function(thingsData) {
         var thingsDataOfType = [];
 

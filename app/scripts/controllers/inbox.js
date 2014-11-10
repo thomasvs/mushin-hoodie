@@ -90,11 +90,11 @@ angular.module('mushin').controller('InboxCtrl', function ($scope, $rootScope, $
   fetchThings()
     .then(function() {
       $scope.$on('thingChange', function() {
-        // debug('thingChange, calling fetchThings');
+        debug('thingChange, calling fetchThings');
         // FIXME: this is too expensive to redo every time;
         // figure out which thing chnaged instead
-        // fetchThings();
-        // debug('thingChange, called fetchThings');
+        fetchThings();
+        debug('thingChange, called fetchThings');
       });
 
   });

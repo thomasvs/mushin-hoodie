@@ -62,12 +62,12 @@ angular.module('mushin').factory('things', function ($rootScope, hoodie, $q, Thi
 
   return {
     get: function(id) {
-      return $q.when(hoodie.store.find('thing', id))
+      return $q.when(hoodie.store.find('thing', id));
     },
     getAll: function(type) {
-      var promise = $q.when(hoodie.store.findAll('thing'))
+      var promise = $q.when(hoodie.store.findAll('thing'));
       if (!Thing.isType(type)) {
-        return promise
+        return promise;
       }
 
       var deferred = $q.defer()

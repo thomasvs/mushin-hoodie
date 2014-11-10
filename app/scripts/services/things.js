@@ -6,13 +6,6 @@ angular.module('mushin').factory('things', function ($rootScope, hoodie, $q, Thi
   $rootScope.importance = {}; // importance level -> obj with things, active, ...
   $rootScope.urgency = {};
 
-  hoodie.store.on('change:thing', function(name, thing) {
-    $rootScope.$broadcast('thingChange', {
-      type: name,
-      thing: thing
-    })
-  })
-
   // update the contexts/projects hash based on the thing
   var trackHash = function(hash, type, thing) {
     var plural = type + 's'
@@ -102,6 +95,16 @@ angular.module('mushin').factory('things', function ($rootScope, hoodie, $q, Thi
             ' importance levels');
         debug('loaded ' + Object.keys($rootScope.urgency).length +
             ' urgency levels');
+
+        // now that we've loaded, make sure we start broadcasting
+        // changes
+        hoodie.store.on('change:thing', function(name, thing) {
+          $rootScope.$broadcast('thingChange', {
+            type: name,
+            thing: thing
+          })
+        });
+
         deferred.resolve(thingsDataOfType);
       });
       return deferred.promise;

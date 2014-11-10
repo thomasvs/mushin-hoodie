@@ -38,6 +38,8 @@ COSMETICS
 
 - How do I override colors in bradypodion?
   app/bower_components/bradypodion/src/styles/variables/ios.less has values
+  seems like I can just add them in my own app/styles/main.less, but I
+  cannot find all of them
 
 DEVELOPMENT
 -----------

@@ -36,35 +36,35 @@ angular.module('mushin').controller(
     var debug = new window.$debug('mushin:controllers/numberlist');
 
     /* projects or contexts */
-    if ($attrs.type == undefined) {
+    if ($attrs.type === undefined) {
       throw new Error("No type attribute for NumberListCtrl");
     }
     $scope.type = $attrs.type;
     $scope.typeletter = $scope.type.toUpperCase().charAt(0);
 
     /* whether to show the All ... header */
-    if ($attrs.all == undefined) {
+    if ($attrs.all === undefined) {
       throw new Error("No all attribute " + JSON.stringify($attrs) + " for NumberListCtrl");
     } else {
       /* convert string to boolean */
       $scope.showAll = ($attrs.all == 'true');
     }
 
-    if ($attrs.data == undefined) {
-      throw new Error("No data attribute for NumberListCtrl for "
-        + $scope.type);
+    if ($attrs.data === undefined) {
+      throw new Error("No data attribute for NumberListCtrl for " +
+        $scope.type);
     }
     $scope.tags = $scope[$attrs.data];
 
-    if ($attrs.active == undefined) {
-      throw new Error("No active attribute for NumberListCtrl for "
-        + $scope.type);
+    if ($attrs.active === undefined) {
+      throw new Error("No active attribute for NumberListCtrl for " +
+        $scope.type);
     }
     $scope.active = $scope[$attrs.active];
 
-    if ($attrs.multiple == undefined) {
-      throw new Error("No multiple attribute for NumberListCtrl for "
-        + $scope.type);
+    if ($attrs.multiple === undefined) {
+      throw new Error("No multiple attribute for NumberListCtrl for " +
+        $scope.type);
     }
     $scope.multiple = ($attrs.multiple == 'true');
 

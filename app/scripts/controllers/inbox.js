@@ -49,7 +49,7 @@ angular.module('mushin').controller('InboxCtrl', function ($scope, $rootScope, $
             angular.forEach(parsed.contexts, function (context) {
                 // it's possible we're asking for a non-existing context
                 // FIXME: maybe extract to a contexts initter ?
-                if ($scope.contexts[context] == undefined ) {
+                if ($scope.contexts[context] === undefined ) {
                   $scope.contexts[context] = {
                     'name': context,
                     'things': [],
@@ -58,7 +58,7 @@ angular.module('mushin').controller('InboxCtrl', function ($scope, $rootScope, $
                 $scope.contexts[context].active = true;
             });
             angular.forEach(parsed.projects, function (project) {
-                if ($scope.projects[project] == undefined ) {
+                if ($scope.projects[project] === undefined ) {
                   $scope.projects[project] = {
                     'name': project,
                     'things': [],

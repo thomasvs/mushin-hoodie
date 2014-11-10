@@ -14,12 +14,14 @@ FEATURES
 
 - format due date with due in/overdue ...
 
+- modal dialog to name current list
+
 COSMETICS
 ---------
 
 - when completing non-recurring items, gray them out, then add timeout for 5
-
   mins
+
 - fix glitch with number buttons; when deselecting a number the background stays gray even when active class is gone
 
 - fix problem with opacity of repeat password when creating new account

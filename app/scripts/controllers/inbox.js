@@ -109,13 +109,13 @@ angular.module('mushin').controller('InboxCtrl', function ($scope, $rootScope, $
     title = parsed.title;
     debug('parsed new thing ' + JSON.stringify(parsed, null, 4));
 
-    if (!title) return
+    if (!title) return;
 
     // see app/scripts/services/things.js
-    things.add(title, '', parsed)
+    things.add(title, '', parsed);
 
-    $scope.thingTitle = ''
-    $scope.thingInput.$setPristine()
+    $scope.thingTitle = '';
+    $scope.thingInput.$setPristine();
   }
 
   // filter things by context/project

@@ -1,28 +1,30 @@
-angular.module('mushin').controller('InboxCtrl', function ($scope, $rootScope, $filter, $location, $q, things, Thing, lists) {
+angular.module('mushin').controller(
+  'InboxCtrl',
+  function($scope, $rootScope, $filter, $location, $q, things, Thing, lists) {
 
   /* module functions */
-  $scope.newThing = function() {
+    $scope.newThing = function() {
 
-    var title = ($scope.thingTitle || '').trim()
-    var parser = new window.Parser();
-    var parsed = parser.parse(title);
+      var title = ($scope.thingTitle || '').trim()
+      var parser = new window.Parser();
+      var parsed = parser.parse(title);
 
-    title = parsed.title;
-    debug('parsed new thing ' + JSON.stringify(parsed, null, 4));
+      title = parsed.title;
+      debug('parsed new thing ' + JSON.stringify(parsed, null, 4));
 
-    if (!title) return;
+      if (!title) return;
 
-    // see app/scripts/services/things.js
-    things.add(title, '', parsed);
+      // see app/scripts/services/things.js
+      things.add(title, '', parsed);
 
-    $scope.thingTitle = '';
-    $scope.thingInput.$setPristine();
-  }
+      $scope.thingTitle = '';
+      $scope.thingInput.$setPristine();
+    };
 
-  // filter things by context/project
-  // FIXME: this now loops over all contexts/projects for each thing;
-  // would be faster to precalculate the selection once into an array on
-  // each click event in a taglist, then compare here
+    // filter things by context/project
+    // FIXME: this now loops over all contexts/projects for each thing;
+    // would be faster to precalculate the selection once into an array on
+    // each click event in a taglist, then compare here
     $scope.filterByTag = function(thing) {
 
       var keep;
@@ -65,7 +67,7 @@ angular.module('mushin').controller('InboxCtrl', function ($scope, $rootScope, $
 
       }
       return true;
-    }
+    };
 
     // filter things by importance/urgency
     $scope.filterByNumber = function(thing) {
@@ -110,7 +112,7 @@ angular.module('mushin').controller('InboxCtrl', function ($scope, $rootScope, $
       }
 
       return true;
-    }
+    };
 
     // filter things based on due date
     $scope.filterByDueSelector = function(thing) {
@@ -152,7 +154,7 @@ angular.module('mushin').controller('InboxCtrl', function ($scope, $rootScope, $
       }
 
       return ret;
-    }
+    };
 
     $scope.notRecentlyCompleted = function(thing) {
       if (thing.complete != 100) {
@@ -174,64 +176,64 @@ angular.module('mushin').controller('InboxCtrl', function ($scope, $rootScope, $
 
 //      debug(thing.title + ' done just now, keeping, ms' + diff);
       return true;
-    }
+    };
 
     // save the current state of the list of things as a saved list
     $scope.saveList = function(name) {
-        debug('saveList ' + name);
-        $scope.saveListActive = false;
+      debug('saveList ' + name);
+      $scope.saveListActive = false;
 
-        // construct query from state of filtering
-        var parts = [];
+      // construct query from state of filtering
+      var parts = [];
 
-        angular.forEach($scope.contexts, function (context) {
-          if (context.active) {
-            parts.push('@' + context.name);
-          }
-        });
-        angular.forEach($scope.projects, function (project) {
-          if (project.active) {
-            parts.push('p:' + project.name);
-          }
-        });
-        /* collect importance and urgency lists as a single word so
-         * that the normal parse, which only allows one value for them,
-         * still works
-         */
-        var numbers;
-
-        numbers = [];
-        angular.forEach($scope.importance, function (importance) {
-          if (importance.active) {
-            numbers.push(importance.name);
-          }
-        });
-        if (numbers.length > 0) {
-          parts.push('I:' + numbers.join(''));
+      angular.forEach($scope.contexts, function (context) {
+        if (context.active) {
+          parts.push('@' + context.name);
         }
-        numbers = [];
-        angular.forEach($scope.urgency, function (urgency) {
-          if (urgency.active) {
-            numbers.push(urgency.name);
-          }
-        });
-        if (numbers.length > 0) {
-          parts.push('U:' + numbers.join(''));
+      });
+      angular.forEach($scope.projects, function (project) {
+        if (project.active) {
+          parts.push('p:' + project.name);
         }
+      });
+      /* collect importance and urgency lists as a single word so
+       * that the normal parse, which only allows one value for them,
+       * still works
+       */
+      var numbers;
 
-        var query = parts.join(' ');
+      numbers = [];
+      angular.forEach($scope.importance, function (importance) {
+        if (importance.active) {
+          numbers.push(importance.name);
+        }
+      });
+      if (numbers.length > 0) {
+        parts.push('I:' + numbers.join(''));
+      }
+      numbers = [];
+      angular.forEach($scope.urgency, function (urgency) {
+        if (urgency.active) {
+          numbers.push(urgency.name);
+        }
+      });
+      if (numbers.length > 0) {
+        parts.push('U:' + numbers.join(''));
+      }
 
-        debug('saveList: query ' + query);
-        lists.add(name, query);
-    }
+      var query = parts.join(' ');
+
+      debug('saveList: query ' + query);
+      lists.add(name, query);
+    };
 
     $scope.toggleOrder = function(type) {
-        debug('toggleOrder: ' + type);
-        if ($scope.predicate == type) {
-           $scope.predicate = '-' + type;
-        } else {
-           $scope.predicate = type;
-        }
+      debug('toggleOrder: ' + type);
+      if ($scope.predicate == type) {
+        $scope.predicate = '-' + type;
+      } else {
+        $scope.predicate = type;
+      }
     };
 
   /* private functions */
@@ -256,19 +258,19 @@ angular.module('mushin').controller('InboxCtrl', function ($scope, $rootScope, $
 
         // parse query params now
         if (search.query) {
-            var parser = new window.Parser();
-            var parsed = parser.parse(search.query);
-            debug('controllers/inbox: parsed query ' + JSON.stringify(parsed));
-            angular.forEach(parsed.contexts, function (context) {
-                // it's possible we're asking for a non-existing context
-                // FIXME: maybe extract to a contexts initter ?
-                if ($scope.contexts[context] === undefined ) {
-                  $scope.contexts[context] = {
-                    'name': context,
-                    'things': [],
-                  };
-                }
-                $scope.contexts[context].active = true;
+          var parser = new window.Parser();
+          var parsed = parser.parse(search.query);
+          debug('controllers/inbox: parsed query ' + JSON.stringify(parsed));
+          angular.forEach(parsed.contexts, function (context) {
+              // it's possible we're asking for a non-existing context
+              // FIXME: maybe extract to a contexts initter ?
+              if ($scope.contexts[context] === undefined ) {
+                $scope.contexts[context] = {
+                  'name': context,
+                  'things': [],
+                };
+              }
+              $scope.contexts[context].active = true;
             });
             angular.forEach(parsed.projects, function (project) {
                 if ($scope.projects[project] === undefined ) {
@@ -340,4 +342,4 @@ angular.module('mushin').controller('InboxCtrl', function ($scope, $rootScope, $
   });
   debug('controllers/inbox.js: called fetchThings');
 
-})
+});

@@ -60,11 +60,20 @@ VERSIONS
     Running "less:styles" (less) task
     >> ParseError: Unrecognised input in app/bower_components/angular-datepicker
 /app/styles/mixins.less on line 558, column 3:
-    >> 557 
+    >> 557
     >> 558   .core (@gridColumnWidth, @gridGutterWidth) {
     >> 559
     Warning: Error compiling app/styles/main.less Use --force to continue.
-    
+
     Aborted due to warnings.
 
   works with a patch to mixins.less
+
+SPEED
+-----
+
+- see if we can convert the current multiple filter approach to one where:
+  - each filter input tracks which things it affects
+  - when changing any filter input, we recalculate visibility of each of
+    the things it affects
+  - the view filter only checks this boolean on each thing

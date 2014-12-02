@@ -278,54 +278,54 @@ angular.module('mushin').controller('InboxCtrl', function ($scope, $rootScope, $
       return true;
     }
 
-   // save the current state of the list of things as a saved list
-   $scope.saveList = function(name) {
-       debug('saveList ' + name);
-       $scope.saveListActive = false;
+    // save the current state of the list of things as a saved list
+    $scope.saveList = function(name) {
+        debug('saveList ' + name);
+        $scope.saveListActive = false;
 
-       // construct query from state of filtering
-       var parts = [];
+        // construct query from state of filtering
+        var parts = [];
 
-       angular.forEach($scope.contexts, function (context) {
-         if (context.active) {
-           parts.push('@' + context.name);
-         }
-       });
-       angular.forEach($scope.projects, function (project) {
-         if (project.active) {
-           parts.push('p:' + project.name);
-         }
-       });
-       /* collect importance and urgency lists as a single word so
-        * that the normal parse, which only allows one value for them,
-        * still works
-        */
-       var numbers;
+        angular.forEach($scope.contexts, function (context) {
+          if (context.active) {
+            parts.push('@' + context.name);
+          }
+        });
+        angular.forEach($scope.projects, function (project) {
+          if (project.active) {
+            parts.push('p:' + project.name);
+          }
+        });
+        /* collect importance and urgency lists as a single word so
+         * that the normal parse, which only allows one value for them,
+         * still works
+         */
+        var numbers;
 
-       numbers = [];
-       angular.forEach($scope.importance, function (importance) {
-         if (importance.active) {
-           numbers.push(importance.name);
-         }
-       });
-       if (numbers.length > 0) {
-         parts.push('I:' + numbers.join(''));
-       }
-       numbers = [];
-       angular.forEach($scope.urgency, function (urgency) {
-         if (urgency.active) {
-           numbers.push(urgency.name);
-         }
-       });
-       if (numbers.length > 0) {
-         parts.push('U:' + numbers.join(''));
-       }
+        numbers = [];
+        angular.forEach($scope.importance, function (importance) {
+          if (importance.active) {
+            numbers.push(importance.name);
+          }
+        });
+        if (numbers.length > 0) {
+          parts.push('I:' + numbers.join(''));
+        }
+        numbers = [];
+        angular.forEach($scope.urgency, function (urgency) {
+          if (urgency.active) {
+            numbers.push(urgency.name);
+          }
+        });
+        if (numbers.length > 0) {
+          parts.push('U:' + numbers.join(''));
+        }
 
-       var query = parts.join(' ');
+        var query = parts.join(' ');
 
-       debug('saveList: query ' + query);
-       lists.add(name, query);
-   }
+        debug('saveList: query ' + query);
+        lists.add(name, query);
+    }
 
     $scope.toggleOrder = function(type) {
         debug('toggleOrder: ' + type);

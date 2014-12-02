@@ -27,12 +27,15 @@ angular.module('mushin').controller('InboxCtrl', function ($scope, $rootScope, $
 
   function fetchThings() {
 
+    var start = new Date();
     var deferred = $q.defer();
 
     debug('fetchThings: calling getAll');
     things.getAll(Thing.ACTIVE)
       .then(function(things) {
-        debug('fetchThings: called getAll');
+        debug('fetchThings: called getAll in ' +
+            (new Date().getTime() - start.getTime()) +
+            ' ms');
         // at this time, the rootScope contexts/projects are set and thus
         // available through $scope too
 
@@ -86,7 +89,7 @@ angular.module('mushin').controller('InboxCtrl', function ($scope, $rootScope, $
       return deferred.promise;
   }
 
-  debug('inbox.js: calling fetchThings');
+  debug('controllers/inbox.js: calling fetchThings');
   fetchThings()
     .then(function() {
       $scope.$on('thingChange', function() {
@@ -98,7 +101,7 @@ angular.module('mushin').controller('InboxCtrl', function ($scope, $rootScope, $
       });
 
   });
-  debug('inbox.js: called fetchThings');
+  debug('controllers/inbox.js: called fetchThings');
 
   $scope.newThing = function() {
 

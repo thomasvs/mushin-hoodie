@@ -58,6 +58,8 @@ angular.module('mushin').factory('things', function ($rootScope, hoodie, $q, Thi
       return $q.when(hoodie.store.find('thing', id));
     },
     getAll: function(type) {
+      var start = new Date();
+
       var promise = $q.when(hoodie.store.findAll('thing'));
       if (!Thing.isType(type)) {
         return promise;
@@ -68,13 +70,15 @@ angular.module('mushin').factory('things', function ($rootScope, hoodie, $q, Thi
       promise.then(function(thingsData) {
         var thingsDataOfType = [];
 
+        debug('loaded ' + thingsData.length + ' hoodie things in ' +
+            (new Date().getTime() - start.getTime()) + ' ms');
+
         // reset when we recount
         resetHash($rootScope.projects);
         resetHash($rootScope.contexts);
         resetHash($rootScope.importance);
         resetHash($rootScope.urgency);
 
-        debug('loaded ' + thingsData.length + ' hoodie things');
         for (var i = 0; i < thingsData.length; i++) {
           // FIXME: not sure if it's better to deal with thingData here or
           //        full thing objects
@@ -88,9 +92,13 @@ angular.module('mushin').factory('things', function ($rootScope, hoodie, $q, Thi
             trackNumberHash($rootScope.urgency, 'urgency', thing);
           }
         }
-        debug('loaded ' + thingsDataOfType.length + ' things of type ' + type);
-        debug('loaded ' + Object.keys($rootScope.projects).length + ' projects');
-        debug('loaded ' + Object.keys($rootScope.contexts).length + ' contexts');
+        debug('loaded ' + thingsDataOfType.length +
+            ' hoodie things of type ' + type + ' in ' +
+            (new Date().getTime() - start.getTime()) + ' ms');
+        debug('loaded ' + Object.keys($rootScope.projects).length +
+            ' projects');
+        debug('loaded ' + Object.keys($rootScope.contexts).length +
+            ' contexts');
         debug('loaded ' + Object.keys($rootScope.importance).length +
             ' importance levels');
         debug('loaded ' + Object.keys($rootScope.urgency).length +

@@ -41,6 +41,8 @@ COSMETICS
   seems like I can just add them in my own app/styles/main.less, but I
   cannot find all of them
 
+- set 'U' and 'I' letter in button to have same size with size-as-text trick
+
 DEVELOPMENT
 -----------
 

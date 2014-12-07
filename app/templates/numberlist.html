@@ -1,4 +1,4 @@
-<div class="btn-group btn-group-{{type}}">
+<div class="btn-group btn-group-{{type}} btn-group-sm">
   <button type="button" class="btn btn-default" ng-class="{ 'active': selectedAll }" ng-click="clear();">{{typeletter}}</button>
   <button ng-repeat="number in [ '1', '2', '3', '4', '5']" type="button" class="btn btn-default" ng-class="{ 'active': active[number].active }" ng-click="toggle(number);">{{ number }}</button>
 </div>

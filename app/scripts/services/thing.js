@@ -9,7 +9,7 @@ angular.module('mushin').factory('Thing', function ($q, $filter, hoodie) {
   var debug = new window.$debug('mushin:Thing');
 
   function Thing(title, description, data) {
-    debug('new Thing with title ' + title + ' and desc ' + description)
+    debug('new Thing object with title/data ' + JSON.stringify(title) + ' and desc ' + description)
     if (angular.isObject(title)) {
       this.data = title
       return

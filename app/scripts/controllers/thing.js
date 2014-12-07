@@ -67,6 +67,7 @@ angular.module('mushin').controller(
     }
 
     function loaded(data) {
+      debug('controllers/thing.js: loaded ' + JSON.stringify(data));
       goToCorrectType(data);
       $scope.thing = data;
       $scope.unit = data.state === Thing.MIT ? Thing.ONE_DAY : Thing.ONE_WEEK;

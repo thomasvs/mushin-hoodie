@@ -46,7 +46,11 @@
 <bp-table ng-controller="ThingCtrl" bp-scroll>
   <form>
     <bp-table-header>
-      Created {{ thing.date | date : 'MMM d' }}
+
+      <button ng-if="thing.createdAt">
+        Created {{ thing.createdAt | date : 'MMM d yyyy' }}
+      </button>
+
       <span
         ng-if="thing.due && !thing.end && mit"
         ng-pluralize

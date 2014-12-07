@@ -13,7 +13,8 @@
   </bp-search>
 </form>
 
-<div>
+<!-- div for tags/number lists -->
+<div ng-if="filterActive">
   <span>
     <span tag-list ng-controller="TagListCtrl as cl" type="context" all="true" data="contexts" active="contexts"></span>
     <span tag-list ng-controller="TagListCtrl as pl" type="project" all="true" data="projects" active="projects"></span>
@@ -23,18 +24,17 @@
     <span id="importance-list" number-list ng-controller="NumberListCtrl as il" type="importance" all="true" data="importance" active="importance" multiple="true"></span>
     <span id="urgency-list" number-list ng-controller="NumberListCtrl as ul" type="urgency" all="true" data="urgency" active="urgency" multiple="true"></span>
   </span>
-
-
 </div>
 
 <div>
   <span>
-    <div class="search">
+    <div class="search" ng-if="filterActive">
       <input type="text" class="form-control" placeholder="Search" ng-model="searchString">
     </div>
   </span>
 
-  <div class="btn-group due-dropdown" dropdown ng-class="{open: dueOpen}">
+  <!-- div for by due date filter -->
+  <div class="btn-group due-dropdown" ng-if="sortActive" dropdown ng-class="{open: dueOpen}">
 
     <button type="button" class="btn btn-primary dropdown-toggle btn-sm" ng-click="dueOpen=!dueOpen">
       By Due date: {{ dueSelect }}
@@ -54,8 +54,9 @@
     </ul>
 
   </div>
-  <!-- pull sort options to the right -->
-  <span id="sort-options" class="pull-right">
+
+  <!-- span for sort options; pull sort options to the right -->
+  <span id="sort-options" ng-if="sortActive" class="pull-right">
     <span id="importance-order" order ng-controller="OrderCtrl as io" type="importance" label="I"></span>
     <span id="urgency-order" order ng-controller="OrderCtrl as uo" type="urgency" label="U"></span>
     <span id="title-order" order ng-controller="OrderCtrl as to" type="title" label="Title"></span>
@@ -133,10 +134,18 @@
   </bp-search>
 </form>
 
+<!-- can't get glyphicons to work here
 <bp-toolbar>
-  <bp-action ng-click="saveListActive = !saveListActive" class="bp-icon fa-save">First
-  </bp-action>
+  <bp-action ng-click="saveListActive = !saveListActive" class="glyphicon glyphicon-list">  </bp-action>
+  <bp-action ng-click="filterActive = !filterActive" class="glyphicon glyphicon-filter">  </bp-action>
 </bp-toolbar>
+-->
+
+<div class="btn-group btn-group-toolbar btn-group-lg">
+  <button type="button" class="glyphicon glyphicon-list btn-lg">  </button>
+  <button type="button" ng-click="filterActive = !filterActive" class="glyphicon glyphicon-filter btn-lg">  </button>
+  <button type="button" ng-click="sortActive = !sortActive" class="glyphicon glyphicon-sort btn-lg">  </button>
+</div>
 
 <bp-tabbar tab-bar class="inbox">
 </bp-tabbar>

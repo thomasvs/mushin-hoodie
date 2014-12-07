@@ -81,3 +81,9 @@ SPEED
   - the view filter only checks this boolean on each thing
 - how can we measure loading time for an ng-repeat?
 - how can we measure loading time for the whole app?
+
+ISSUES
+------
+
+- why do a lot of things have a due date in 2015? see movies
+- figure out how to paginate or scroll the contexts/projects list so we can get to all of them

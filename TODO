@@ -19,6 +19,8 @@ FEATURES
 
 - modal dialog to name current list
 
+- see if we can use ng-repeat just to calculate the count of things for the filter in a fast enough way without limitTo
+
 COSMETICS
 ---------
 

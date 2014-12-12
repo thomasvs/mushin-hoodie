@@ -45,10 +45,17 @@ angular.module('mushin').factory('lists',
           if (existing) {
             var list = existing[0];
 
+            /* make sure we only keep one with this title */
+            if (existing.length > 1) {
+              for (var i = 1; i < existing.length; ++i) {
+                debug('removing duplicate list with id ' + existing[i].id);
+                hoodie.store.remove('list', existing[i].id);
+              }
+            }
+
             debug('updating existing list with title ' + list.title);
 
             return $q.when(hoodie.store.update('list', list.id, listData));
-
           } else {
             debug('saving new list with title ' + title);
 

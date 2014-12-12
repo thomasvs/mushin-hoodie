@@ -60,6 +60,18 @@
     }
   }
 
+  .repeat {
+    opacity: 1;
+    transition: opacity .25s ease-in-out;
+    -moz-transition: opacity .25s ease-in-out;
+    -webkit-transition: opacity .25s ease-in-out;
+  }
+
+  .repeat-fade {
+    opacity: 0.5;
+  }
+
+  /* first line: complete, title, recurrence/time */
   .complete {
     float: left;
     width: 10%;
@@ -72,26 +84,39 @@
   .complete .unchecked {
     opacity: 0.2;
   }
-  .repeat {
-    opacity: 1;
-    transition: opacity .25s ease-in-out;
-    -moz-transition: opacity .25s ease-in-out;
-    -webkit-transition: opacity .25s ease-in-out;
-  }
-
-  .repeat-fade {
-    opacity: 0.5;
-  }
 
   .title {
     float: left;
-    width: 50%;
+    width: 65%;
     height: 29px;
     line-height: 29px;
     font-weight: bold;
     &:extend(.ellipsis);
   }
 
+  .recurrence {
+    float: left;
+    width: 5%;
+    display: block;
+    text-align: right;
+    line-height: 29px;
+    height: 29px;
+    font-size: 12px;
+    color: @ios-text-secondary-color;
+  }
+
+  time {
+    float: left;
+    width: 20%;
+    display: block;
+    text-align: right;
+    line-height: 29px;
+    height: 29px;
+    font-size: 12px;
+    color: @ios-text-secondary-color;
+  }
+
+  /* second line: contexts, importance, urgency, projects */
   .contexts {
     width: 40%;
     float: left;
@@ -125,28 +150,6 @@
     &:extend(.ellipsis);
   }
 
-
-  .recurrence {
-    float: left;
-    width: 10%;
-    display: block;
-    text-align: right;
-    line-height: 29px;
-    height: 29px;
-    font-size: 12px;
-    color: @ios-text-secondary-color;
-  }
-
-  time {
-    float: left;
-    width: 30%;
-    display: block;
-    text-align: right;
-    line-height: 29px;
-    height: 29px;
-    font-size: 12px;
-    color: @ios-text-secondary-color;
-  }
 
   .description {
     float: left;

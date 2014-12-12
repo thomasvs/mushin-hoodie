@@ -1,22 +1,22 @@
 angular.module('mushin').controller('ListCtrl', function ($state, $scope, things, Thing, sortThings) {
-  var state = $state.current
-  var name = state.name
-  var type = state.data.state
-  var unit = type === Thing.MIT ? Thing.ONE_DAY : Thing.ONE_WEEK
+  var state = $state.current;
+  var name = state.name;
+  var type = state.data.state;
+  var unit = type === Thing.MIT ? Thing.ONE_DAY : Thing.ONE_WEEK;
 
-  $scope[name] = []
-  things.extend($scope)
+  $scope[name] = [];
+  things.extend($scope);
 
   function fetchThings() {
     things.getAll(type)
       .then(function(all) {
         $scope[name] = sortThings(all, unit);
-      })
+      });
   }
 
-  fetchThings()
+  fetchThings();
 
   $scope.$on('thingChange', function() {
-    fetchThings()
-  })
-})
+    fetchThings();
+  });
+});

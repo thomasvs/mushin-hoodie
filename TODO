@@ -1,6 +1,9 @@
 FEATURES
 --------
 
+- when typing in a new thing, when you hit @ or p: or any other special thing,
+  auto-suggest as you type
+
 - add a way to add projects or contexts on the thing edit screen;
   for example a + icon next to it
 
@@ -86,4 +89,6 @@ ISSUES
 ------
 
 - why do a lot of things have a due date in 2015? see movies
-- figure out how to paginate or scroll the contexts/projects list so we can get to all of them
+- why is their space eaten above and below the list?
+- get thing count outside of the scrolling list
+- reactivate sliding effect to editing that zentodone had

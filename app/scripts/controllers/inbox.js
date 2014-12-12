@@ -265,7 +265,19 @@ angular.module('mushin').controller(
           debug('controllers/inbox: parsed query ' + JSON.stringify(parsed));
 
 
-          /* FIXME: reset old filter state */
+          /* FIXME: reset old filter state; roll into helper */
+          angular.forEach($scope.contexts, function(value, key) {
+            $scope.contexts[key].active = false;
+          });
+          angular.forEach($scope.projects, function(value, key) {
+            $scope.projects[key].active = false;
+          });
+          angular.forEach($scope.importance, function(value, key) {
+            $scope.importance[key].active = false;
+          });
+          angular.forEach($scope.urgency, function(value, key) {
+            $scope.urgency[key].active = false;
+          });
 
           /* now set state based on query */
           angular.forEach(parsed.contexts, function (context) {

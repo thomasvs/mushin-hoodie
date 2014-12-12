@@ -1,10 +1,13 @@
 angular.module('mushin').factory('things', function ($rootScope, hoodie, $q, Thing) {
 
   var debug = new window.$debug('mushin:services/thing');
+
   $rootScope.contexts = {}; // context name -> obj with things, active, ...
   $rootScope.projects = {};
   $rootScope.importance = {}; // importance level -> obj with things, active, ...
   $rootScope.urgency = {};
+
+  /* private API */
 
   // update the contexts/projects hash based on the thing
   var trackHash = function(hash, type, thing) {
@@ -53,6 +56,7 @@ angular.module('mushin').factory('things', function ($rootScope, hoodie, $q, Thi
     }
   }
 
+  /* public API */
   return {
     get: function(id) {
       return $q.when(hoodie.store.find('thing', id));

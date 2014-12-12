@@ -21,6 +21,9 @@ FEATURES
 
 - see if we can use ng-repeat just to calculate the count of things for the filter in a fast enough way without limitTo
 
+- when clicking on a list title, pass the title of the list to the things view
+  until any filtering/ordering gets changed
+
 COSMETICS
 ---------
 
@@ -94,3 +97,8 @@ ISSUES
 - why is their space eaten above and below the list?
 - get thing count outside of the scrolling list
 - reactivate sliding effect to editing that zentodone had
+- when opening a saved list with @shop, the context dropdown has the wrong
+  number x of y, even if the selection is correct
+- saving a list with the same name should overwrite
+- should be possible to delete a list
+- should be possible to show query for a list

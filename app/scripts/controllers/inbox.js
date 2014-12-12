@@ -2,6 +2,8 @@ angular.module('mushin').controller(
   'InboxCtrl',
   function($scope, $rootScope, $filter, $location, $q, things, Thing, lists) {
 
+  /* lists is app/scripts/services/lists.js */
+
   /* module functions */
     $scope.newThing = function() {
 

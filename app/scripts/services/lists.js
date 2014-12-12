@@ -12,11 +12,7 @@ angular.module('mushin').factory('lists',
     })
   });
 
-  return {
-    get: function(id) {
-      return $q.when(hoodie.store.find('list', id));
-    },
-    getAll: function() {
+  var getAll = function() {
       var promise = $q.when(hoodie.store.findAll('list'));
 
       var deferred = $q.defer();
@@ -26,7 +22,13 @@ angular.module('mushin').factory('lists',
         deferred.resolve(listsData);
       });
       return deferred.promise;
+  };
+
+  return {
+    get: function(id) {
+      return $q.when(hoodie.store.find('list', id));
     },
+    getAll: getAll,
     /* add: if the title is the same, update if already exists */
     add: function(title, query) {
       var existing = $filter('filter')(lists, function(list) {

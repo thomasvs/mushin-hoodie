@@ -107,9 +107,12 @@
         {{ thing.title }}
       </div>
       <div class="recurrence"><span ng-if="thing.recurrence">every {{ thing.recurrence | duration }}</span></div>
+
       <time ng-if="thing.end" datetime="{{ thing.end | date : 'yyyy-MM-dd' }}">done {{ thing.end | date : 'MMM d yyyy' }}</time>
-      <time ng-if="thing.due && !thing.end" datetime="{{ thing.due | date : 'yyyy-MM-dd' : 'UTC' }}">{{ thing.due | date:'MMM d yyyy':'UTC' }}</time>
+      <time ng-if="thing.due && !thing.end" datetime="{{ thing.due | date : 'yyyy-MM-dd' : 'UTC' }}">due {{ thing.due | date:'MMM d yyyy':'UTC' }}</time>
+
       <div class="description" ng-if="thing.description">{{ thing.description }}</div>
+
       <div class="contexts">
         <b ng-if="thing.contexts" ng-repeat="context in thing.contexts">@{{context}}{{$last ? '' : ', '}}</b>
       </div>

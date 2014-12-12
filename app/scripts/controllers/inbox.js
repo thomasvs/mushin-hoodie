@@ -256,7 +256,7 @@ angular.module('mushin').controller(
           if (!thing.done && !thing.deleted) return true;
         });
 
-        // parse query params now
+        // parse query params from search entry now
         if (search.query) {
           var parser = new window.Parser();
           var parsed = parser.parse(search.query);

@@ -11,7 +11,7 @@
     </ng-pluralize>
     <span class="caret"></span>
   </button>
-  <ul class="dropdown-menu" ng-class="{ true: 'dropdown-menu-right' }[type == 'project']" role="menu">
+  <ul class="dropdown-menu scrollable-menu" ng-class="{ true: 'dropdown-menu-right' }[type == 'project']" role="menu">
     <li ng-show="showAll" ng-class="{ 'active': selectedAll }"><a href="" ng-click="clear();">All {{ type }}s</a></li>
     <li ng-show="showAll" class="divider"></li>
     <li ng-repeat="tag in tags|orderBy:name" ng-class="{ 'active': active[tag.name].active}">

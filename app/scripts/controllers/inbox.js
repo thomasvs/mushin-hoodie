@@ -263,44 +263,59 @@ angular.module('mushin').controller(
           var parser = new window.Parser();
           var parsed = parser.parse(search.query);
           debug('controllers/inbox: parsed query ' + JSON.stringify(parsed));
+
+
+          /* FIXME: reset old filter state */
+
+          /* now set state based on query */
           angular.forEach(parsed.contexts, function (context) {
-              // it's possible we're asking for a non-existing context
-              // FIXME: maybe extract to a contexts initter ?
-              if ($scope.contexts[context] === undefined ) {
-                $scope.contexts[context] = {
-                  'name': context,
-                  'things': [],
-                };
-              }
-              $scope.contexts[context].active = true;
-            });
-            angular.forEach(parsed.projects, function (project) {
-                if ($scope.projects[project] === undefined ) {
-                  $scope.projects[project] = {
-                    'name': project,
-                    'things': [],
-                  };
-                }
-                $scope.projects[project].active = true;
-            });
+            // it's possible we're asking for a non-existing context
+            // FIXME: maybe extract to a contexts initter ?
+            if ($scope.contexts[context] === undefined ) {
+              $scope.contexts[context] = {
+                'name': context,
+                'things': [],
+              };
+            }
+            $scope.contexts[context].active = true;
+          });
+
+          angular.forEach(parsed.projects, function (project) {
+            if ($scope.projects[project] === undefined ) {
+              $scope.projects[project] = {
+                'name': project,
+                'things': [],
+              };
+            }
+            $scope.projects[project].active = true;
+          });
+
             var i;
-            if (parsed.importance) {
-              for (i = 0; i < parsed.importance.length; ++i) {
-                $scope.importance[parsed.importance.charAt(i)].active = true;
-              }
+
+          if (parsed.importance) {
+            /* it was parsed as an int, convert to str */
+            var importance = '' + parsed.importance;
+            for (i = 0; i < importance.length; ++i) {
+              debug('filtering for importance ' + importance.charAt(i));
+              $scope.importance[importance.charAt(i)].active = true;
             }
-            if (parsed.urgency) {
-              for (i = 0; i < parsed.urgency.length; ++i) {
-                $scope.urgency[parsed.urgency.charAt(i)].active = true;
-              }
+          }
+
+          if (parsed.urgency) {
+            /* it was parsed as an int, convert to str */
+            var urgency = '' + parsed.urgency;
+            for (i = 0; i < urgency.length; ++i) {
+              debug('filtering for urgency ' + urgency.charAt(i));
+              $scope.urgency[urgency.charAt(i)].active = true;
             }
+          }
         }
 
         debug('fetchThings: finished');
         deferred.resolve(undefined);
-      })
-      debug('fetchThings: returning');
-      return deferred.promise;
+      });
+    debug('fetchThings: returning');
+    return deferred.promise;
   }
 
   /* module code */

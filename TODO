@@ -24,6 +24,8 @@ FEATURES
 - when clicking on a list title, pass the title of the list to the things view
   until any filtering/ordering gets changed
 
+- implement archive by reusing inbox but with completed and/or archived tasks
+
 COSMETICS
 ---------
 

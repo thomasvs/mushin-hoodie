@@ -33,7 +33,7 @@ angular.module(
         templateUrl: 'views/inbox.html',
         controller: 'InboxCtrl',
         data: {
-          title: '{{ thingCount }} Things'
+          title: 'Things'
         }
       })
       .state('account', {

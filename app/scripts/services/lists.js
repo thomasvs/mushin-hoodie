@@ -7,28 +7,28 @@ angular.module('mushin').factory('lists', function ($rootScope, hoodie, $q) {
       type: name,
       list: list
     })
-  })
+  });
 
   return {
     get: function(id) {
-      return $q.when(hoodie.store.find('list', id))
+      return $q.when(hoodie.store.find('list', id));
     },
     getAll: function() {
-      var promise = $q.when(hoodie.store.findAll('list'))
+      var promise = $q.when(hoodie.store.findAll('list'));
 
-      var deferred = $q.defer()
+      var deferred = $q.defer();
       promise.then(function(listsData) {
         debug('loaded ' + listsData.length + ' lists');
-        deferred.resolve(listsData)
-      })
-      return deferred.promise
+        deferred.resolve(listsData);
+      });
+      return deferred.promise;
     },
     add: function(title, query) {
       var listData = {
           title: title,
           query: query
       };
-      return $q.when(hoodie.store.add('list', listData))
+      return $q.when(hoodie.store.add('list', listData));
     },
   }
-})
+});

@@ -31,22 +31,30 @@ angular.module('mushin').factory('lists',
     getAll: getAll,
     /* add: if the title is the same, update if already exists */
     add: function(title, query) {
-      var existing = $filter('filter')(lists, function(list) {
-        return list.title == title;
+      getAll()
+        .then(function(lists) {
+
+          var existing = $filter('filter')(lists, function(list) {
+            return list.title == title;
+          });
+          var listData = {
+              title: title,
+              query: query
+          };
+
+          if (existing) {
+            var list = existing[0];
+
+            debug('updating existing list with title ' + list.title);
+
+            return $q.when(hoodie.store.update('list', list.id, listData));
+
+          } else {
+            debug('saving new list with title ' + title);
+
+            return $q.when(hoodie.store.add('list', listData));
+          }
       });
-      var listData = {
-          title: title,
-          query: query
-      };
-
-      if (existing) {
-        var list = existing[0];
-
-        debug('updating existing list with title ' + list.title);
-      } else {
-        debug('saving new list with title ' + title);
-        return $q.when(hoodie.store.add('list', listData));
-      }
     },
   }
 });

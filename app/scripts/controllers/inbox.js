@@ -2,8 +2,6 @@ angular.module('mushin').controller(
   'InboxCtrl',
   function($scope, $rootScope, $filter, $location, $q, things, Thing, lists) {
 
-  $scope.thingCount = '';
-
   /* module functions */
     $scope.newThing = function() {
 
@@ -257,7 +255,6 @@ angular.module('mushin').controller(
           // FIXME: I'm filtering on complete/end in a filter func
           if (!thing.done && !thing.deleted) return true;
         });
-        $scope.thingCount = $scope.inbox.length;
 
         // parse query params now
         if (search.query) {

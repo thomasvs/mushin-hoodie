@@ -2,9 +2,9 @@ angular.module('mushin').controller(
   'InboxCtrl',
   function($scope, $rootScope, $filter, $location, $q, things, Thing, lists) {
 
-  /* lists is app/scripts/services/lists.js */
+    /* lists is app/scripts/services/lists.js */
 
-  /* module functions */
+    /* module functions */
     $scope.newThing = function() {
 
       var title = ($scope.thingTitle || '').trim()

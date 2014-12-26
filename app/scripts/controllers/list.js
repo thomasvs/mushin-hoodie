@@ -7,6 +7,7 @@ angular.module('mushin').controller('ListCtrl', function ($state, $scope, things
   $scope[name] = [];
   things.extend($scope);
 
+  /*
   function fetchThings() {
     things.getAll(type)
       .then(function(all) {
@@ -19,4 +20,5 @@ angular.module('mushin').controller('ListCtrl', function ($state, $scope, things
   $scope.$on('thingChange', function() {
     fetchThings();
   });
+  */
 });

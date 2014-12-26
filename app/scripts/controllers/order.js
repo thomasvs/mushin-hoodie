@@ -1,7 +1,7 @@
 // vi:si:et:sw=2:sts=2:ts=2
 /**
  * @ngdoc     controller
- * @name      mushin.controller:OrderCtrl
+ * @name      mushin.controller:OrderController
  * @requires  $scope
  *
  * @description <p>The order controller controls an order button and
@@ -20,16 +20,16 @@
  * @author    Thomas Vander Stichele <thomas (at) apestaart (dot) org>
  */
 angular.module('mushin').controller(
-  'OrderCtrl',
+  'OrderController',
   function($scope, $attrs) {
 
     /* projects or contexts */
     if (!$attrs.type) {
-      throw new Error("No type attribute for OrderCtrl");
+      throw new Error("No type attribute for OrderController");
     }
     $scope.type = $attrs.type;
     if (!$attrs.label) {
-      throw new Error("No label attribute for OrderCtrl");
+      throw new Error("No label attribute for OrderController");
     }
     $scope.label = $attrs.label;
   }

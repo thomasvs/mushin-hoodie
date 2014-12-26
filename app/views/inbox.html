@@ -16,13 +16,13 @@
 <!-- div for tags/number lists -->
 <div ng-if="filterActive">
   <span>
-    <span tag-list ng-controller="TagListCtrl as cl" type="context" all="true" data="contexts" active="contexts"></span>
-    <span tag-list ng-controller="TagListCtrl as pl" type="project" all="true" data="projects" active="projects"></span>
+    <span tag-list ng-controller="TagListController as cl" type="context" all="true" data="contexts" active="contexts"></span>
+    <span tag-list ng-controller="TagListController as pl" type="project" all="true" data="projects" active="projects"></span>
   </span>
 
   <span>
-    <span id="importance-list" number-list ng-controller="NumberListCtrl as il" type="importance" all="true" data="importance" active="importance" multiple="true"></span>
-    <span id="urgency-list" number-list ng-controller="NumberListCtrl as ul" type="urgency" all="true" data="urgency" active="urgency" multiple="true"></span>
+    <span id="importance-list" number-list ng-controller="NumberListController as il" type="importance" all="true" data="importance" active="importance" multiple="true"></span>
+    <span id="urgency-list" number-list ng-controller="NumberListController as ul" type="urgency" all="true" data="urgency" active="urgency" multiple="true"></span>
   </span>
 </div>
 
@@ -57,10 +57,10 @@
 
   <!-- span for sort options; pull sort options to the right -->
   <span id="sort-options" ng-if="sortActive" class="pull-right">
-    <span id="importance-order" order ng-controller="OrderCtrl as io" type="importance" label="I"></span>
-    <span id="urgency-order" order ng-controller="OrderCtrl as uo" type="urgency" label="U"></span>
-    <span id="title-order" order ng-controller="OrderCtrl as to" type="title" label="Title"></span>
-    <span id="due-order" order ng-controller="OrderCtrl as do" type="due" label="Due"></span>
+    <span id="importance-order" order ng-controller="OrderController as io" type="importance" label="I"></span>
+    <span id="urgency-order" order ng-controller="OrderController as uo" type="urgency" label="U"></span>
+    <span id="title-order" order ng-controller="OrderController as to" type="title" label="Title"></span>
+    <span id="due-order" order ng-controller="OrderController as do" type="due" label="Due"></span>
   </span>
 </div>
 
@@ -68,7 +68,7 @@
   class="inbox"
   bp-scroll
   ng-if="!inbox.length"
-  ng-controller="ProgressCtrl"
+  ng-controller="ProgressController"
   src="'views/inbox.zero.html'"
   ng-include>
 </bp-table>

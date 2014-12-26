@@ -31,7 +31,7 @@ angular.module(
       .state('inbox', {
         url: '/inbox?query',
         templateUrl: 'views/inbox.html',
-        controller: 'InboxCtrl',
+        controller: 'InboxController',
         data: {
           title: 'Things'
         }
@@ -39,7 +39,7 @@ angular.module(
       .state('account', {
         url: '/inbox/account',
         templateUrl: 'views/account.html',
-        controller: 'AccountCtrl',
+        controller: 'AccountController',
         data: {
           modal: true
         }
@@ -47,7 +47,7 @@ angular.module(
       .state('lists', {
         url: '/lists',
         templateUrl: 'views/lists.html',
-        controller: 'ListCtrl',
+        controller: 'ListController',
         data: {
           title: 'Lists',
         }
@@ -55,7 +55,7 @@ angular.module(
       .state('br', {
         url: '/br',
         templateUrl: 'views/br.html',
-        controller: 'ListCtrl',
+        controller: 'ListController',
         data: {
           title: 'Archive',
           state: 2,
@@ -64,7 +64,7 @@ angular.module(
       .state('inboxThing', {
         url: '/inbox/:id',
         templateUrl: 'views/thing.html',
-        controller: 'ThingCtrl',
+        controller: 'ThingController',
         data: {
           title: 'Edit Thing',
         }
@@ -73,7 +73,7 @@ angular.module(
       .state('mitThing', {
         url: '/mit/:id',
         templateUrl: 'views/thing.html',
-        controller: 'ThingCtrl',
+        controller: 'ThingController',
         data: {
           state: 2
         }
@@ -81,7 +81,7 @@ angular.module(
       .state('brThing', {
         url: '/br/:id',
         templateUrl: 'views/thing.html',
-        controller: 'ThingCtrl',
+        controller: 'ThingController',
         data: {
           state: 3
         }

@@ -1,7 +1,7 @@
 // vi:si:et:sw=2:sts=2:ts=2
 /**
  * @ngdoc     controller
- * @name      mushin.controller:TagListCtrl
+ * @name      mushin.controller:TagListController
  * @requires  $scope
  *
  * @description <p>The tag list controller controls the tag list directive,
@@ -34,38 +34,38 @@
  * @author    Thomas Vander Stichele <thomas (at) apestaart (dot) org>
  */
 angular.module('mushin').controller(
-  'TagListCtrl',
+  'TagListController',
   function($scope, $attrs) {
 
     var debug = new window.$debug('mushin:controllers/taglist');
 
     /* projects or contexts */
     if (!$attrs.type) {
-      throw new Error("No type attribute for TagListCtrl");
+      throw new Error("No type attribute for TagListController");
     }
     $scope.type = $attrs.type;
 
     /* whether to show the All ... header */
     if (!$attrs.all) {
-      throw new Error("No all attribute for TagListCtrl");
+      throw new Error("No all attribute for TagListController");
     } else {
       /* convert string to boolean */
       $scope.showAll = ($attrs.all == 'true');
     }
 
     if (!$attrs.data) {
-      throw new Error("No data attribute for TagListCtrl");
+      throw new Error("No data attribute for TagListController");
     }
     $scope.tags = $scope[$attrs.data];
 
     if (!$attrs.active) {
-      throw new Error("No active attribute for TagListCtrl");
+      throw new Error("No active attribute for TagListController");
     }
     $scope.active = $scope[$attrs.active];
 
     $scope.open = false;
 
-    debug('new TagListCtrl of type ' + $scope.type);
+    debug('new TagListController of type ' + $scope.type);
 
     $scope.selectedAll = true;
 
@@ -75,8 +75,8 @@ angular.module('mushin').controller(
 
     /**
      * @ngdoc    method
-     * @name     mushin.controller:TagListCtrl#toggle
-     * @methodOf mushin.controller:TagListCtrl
+     * @name     mushin.controller:TagListController#toggle
+     * @methodOf mushin.controller:TagListController
      * @param    {string} name the name of the tag to toggle.
      *
      * @description
@@ -104,8 +104,8 @@ angular.module('mushin').controller(
 
     /**
      * @ngdoc    method
-     * @name     mushin.controller:TagListCtrl#clear
-     * @methodOf mushin.controller:TagListCtrl
+     * @name     mushin.controller:TagListController#clear
+     * @methodOf mushin.controller:TagListController
      *
      * @description
      *
@@ -120,8 +120,8 @@ angular.module('mushin').controller(
 
     /**
      * @ngdoc    method
-     * @name     mushin.controller:TagListCtrl#getActiveCount
-     * @methodOf mushin.controller:TagListCtrl
+     * @name     mushin.controller:TagListController#getActiveCount
+     * @methodOf mushin.controller:TagListController
      *
      * @description
      *
@@ -143,8 +143,8 @@ angular.module('mushin').controller(
 
     /**
      * @ngdoc    method
-     * @name     mushin.controller:TagListCtrl#getTotalCount
-     * @methodOf mushin.controller:TagListCtrl
+     * @name     mushin.controller:TagListController#getTotalCount
+     * @methodOf mushin.controller:TagListController
      *
      * @description
      *
@@ -163,8 +163,8 @@ angular.module('mushin').controller(
 
     /**
      * @ngdoc    method
-     * @name     mushin.controller:TagListCtrl#filterByTag
-     * @methodOf mushin.controller:TagListCtrl
+     * @name     mushin.controller:TagListController#filterByTag
+     * @methodOf mushin.controller:TagListController
      *
      * @description
      *

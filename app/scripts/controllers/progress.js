@@ -1,7 +1,7 @@
 // vi:si:et:sw=2:sts=2:ts=2
 /**
  * @ngdoc     controller
- * @name      mushin.controller:ProgressCtrl
+ * @name      mushin.controller:ProgressController
  * @requires  $scope
  * @requires  $q
  * @requires  hoodie
@@ -14,15 +14,15 @@
  * @author    Thomas Vander Stichele <thomas (at) apestaart (dot) org>
  */
 angular.module('mushin').controller(
-  'ProgressCtrl',
+  'ProgressController',
   function ($scope, $q, hoodie) {
 
     $scope.instructions = true;
 
       /**
        * @ngdoc    method
-       * @name     mushin.controller:ProgressCtrl#sawInstructions
-       * @methodOf mushin.controller:ProgressCtrl
+       * @name     mushin.controller:ProgressController#sawInstructions
+       * @methodOf mushin.controller:ProgressController
        * @param    {string} state the name of the section instructions have been
        *                          seen for (inbox, lists, ...)
        *
@@ -38,7 +38,7 @@ angular.module('mushin').controller(
       /* progress is stored in progress/(state) documents with id/count */
       $q.when(hoodie.store.find('progress', state))
         .then(function(data) {
-          debug('ProgressCtrl for state ' + state +
+          debug('ProgressController for state ' + state +
             ' is ' + JSON.stringify(data));
           $scope.instructions = data.count > 1 ? false : true;
           progress = data;

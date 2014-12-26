@@ -1,7 +1,7 @@
 // vi:si:et:sw=2:sts=2:ts=2
 /**
  * @ngdoc     controller
- * @name      mushin.controller:NumberListCtrl
+ * @name      mushin.controller:NumberListController
  * @requires  $scope
  *
  * @description <p>The number list controller controls the number list
@@ -30,47 +30,47 @@
  * @author    Thomas Vander Stichele <thomas (at) apestaart (dot) org>
  */
 angular.module('mushin').controller(
-  'NumberListCtrl',
+  'NumberListController',
   function($scope, $attrs) {
 
     var debug = new window.$debug('mushin:controllers/numberlist');
 
     /* projects or contexts */
     if ($attrs.type === undefined) {
-      throw new Error("No type attribute for NumberListCtrl");
+      throw new Error("No type attribute for NumberListController");
     }
     $scope.type = $attrs.type;
     $scope.typeletter = $scope.type.toUpperCase().charAt(0);
 
     /* whether to show the All ... header */
     if ($attrs.all === undefined) {
-      throw new Error("No all attribute " + JSON.stringify($attrs) + " for NumberListCtrl");
+      throw new Error("No all attribute " + JSON.stringify($attrs) + " for NumberListController");
     } else {
       /* convert string to boolean */
       $scope.showAll = ($attrs.all == 'true');
     }
 
     if ($attrs.data === undefined) {
-      throw new Error("No data attribute for NumberListCtrl for " +
+      throw new Error("No data attribute for NumberListController for " +
         $scope.type);
     }
     $scope.tags = $scope[$attrs.data];
 
     if ($attrs.active === undefined) {
-      throw new Error("No active attribute for NumberListCtrl for " +
+      throw new Error("No active attribute for NumberListController for " +
         $scope.type);
     }
     $scope.active = $scope[$attrs.active];
 
     if ($attrs.multiple === undefined) {
-      throw new Error("No multiple attribute for NumberListCtrl for " +
+      throw new Error("No multiple attribute for NumberListController for " +
         $scope.type);
     }
     $scope.multiple = ($attrs.multiple == 'true');
 
     $scope.open = false;
 
-    debug('new NumberListCtrl of type ' + $scope.type);
+    debug('new NumberListController of type ' + $scope.type);
 
     $scope.selectedAll = true;
 
@@ -80,8 +80,8 @@ angular.module('mushin').controller(
 
     /**
      * @ngdoc    method
-     * @name     mushin.controller:NumberListCtrl#toggle
-     * @methodOf mushin.controller:NumberListCtrl
+     * @name     mushin.controller:NumberListController#toggle
+     * @methodOf mushin.controller:NumberListController
      * @param    {string} name the name of the tag to toggle.
      *
      * @description
@@ -114,8 +114,8 @@ angular.module('mushin').controller(
 
     /**
      * @ngdoc    method
-     * @name     mushin.controller:NumberListCtrl#clear
-     * @methodOf mushin.controller:NumberListCtrl
+     * @name     mushin.controller:NumberListController#clear
+     * @methodOf mushin.controller:NumberListController
      *
      * @description
      *
@@ -130,8 +130,8 @@ angular.module('mushin').controller(
 
     /**
      * @ngdoc    method
-     * @name     mushin.controller:NumberListCtrl#getCount
-     * @methodOf mushin.controller:NumberListCtrl
+     * @name     mushin.controller:NumberListController#getCount
+     * @methodOf mushin.controller:NumberListController
      *
      * @description
      *
@@ -150,8 +150,8 @@ angular.module('mushin').controller(
 
     /**
      * @ngdoc    method
-     * @name     mushin.controller:NumberListCtrl#filterByTag
-     * @methodOf mushin.controller:NumberListCtrl
+     * @name     mushin.controller:NumberListController#filterByTag
+     * @methodOf mushin.controller:NumberListController
      *
      * @description
      *

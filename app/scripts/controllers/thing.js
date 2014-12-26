@@ -1,11 +1,20 @@
 // vi:si:et:sw=2:sts=2:ts=2
+//
+/**
+ * @ngdoc controller
+ * @name  mushin.controller:ThingController
+ *
+ * @description
+ * A controller to show and edit a single thing
+ */
+
 angular.module('mushin').controller(
-  'ThingCtrl',
+  'ThingController',
   function (things, Thing, $scope, $state, hoodie, $rootScope) {
     var lastType;
     var params = $state.params;
     var current = $state.current;
-    var debug = new window.$debug('mushin:controllers/ThingCtrl');
+    var debug = new window.$debug('mushin:controllers/ThingController');
     debug('new thing controller');
 
     $scope.thing = {};
@@ -122,8 +131,8 @@ angular.module('mushin').controller(
     things.extend($scope);
 
     function goToCollection() {
-      var navbarCtrl = angular.element('bp-navbar').controller('bpNavbar');
-      $state.go(navbarCtrl.getUpFromState(current).state);
+      var navbarController = angular.element('bp-navbar').controller('bpNavbar');
+      $state.go(navbarController.getUpFromState(current).state);
     }
 
     function goToCorrectType(thing) {

@@ -17,7 +17,7 @@ angular.module('mushin').directive(
     debug('tagList: creating');
     return {
       restrict: 'A',
-      require: '^InboxCtrl',
+      require: '^InboxController',
       templateUrl: 'templates/taglist.html'
     }
   }

@@ -1,4 +1,4 @@
-angular.module('mushin').controller('ListCtrl', function ($state, $scope, things, Thing, sortThings) {
+angular.module('mushin').controller('ListController', function ($state, $scope, things, Thing, sortThings) {
   var state = $state.current;
   var name = state.name;
   var type = state.data.state;

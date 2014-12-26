@@ -1,5 +1,5 @@
 angular.module('mushin').controller(
-  'InboxCtrl',
+  'InboxController',
   function($scope, $rootScope, $filter, $location, $q, things, Thing, lists) {
 
     /* lists is app/scripts/services/lists.js */
@@ -332,7 +332,7 @@ angular.module('mushin').controller(
 
   /* module code */
 
-  var debug = new window.$debug('mushin:InboxCtrl');
+  var debug = new window.$debug('mushin:InboxController');
   var search = $location.search();
 
   // order of the things listed

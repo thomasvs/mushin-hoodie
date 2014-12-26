@@ -1,4 +1,4 @@
-angular.module('mushin').controller('ListsListCtrl', function ($state, $scope, lists) {
+angular.module('mushin').controller('ListsListController', function ($state, $scope, lists) {
   var debug = new window.$debug('mushin:controllers/listslist');
 
   var state = $state.current

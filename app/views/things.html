@@ -103,7 +103,7 @@
           <i class="glyphicon glyphicon-check" ng-class="{ true: 'unchecked' }[thing.complete != 100]" ng-click="setComplete(thing)"></i>
         </span>
       </div>
-      <div class="title" ui-sref="inboxThing({id:thing.id})">
+      <div class="title" ui-sref="thingsThing({id:thing.id})">
         {{ thing.title }}
       </div>
       <div class="recurrence"><span ng-if="thing.recurrence">every {{ thing.recurrence | duration }}</span></div>

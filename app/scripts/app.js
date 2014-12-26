@@ -25,19 +25,19 @@ angular.module(
 
     cfpLoadingBarProvider.includeSpinner = false;
 
-    $urlRouterProvider.otherwise('/inbox');
+    $urlRouterProvider.otherwise('/things');
 
     $stateProvider
-      .state('inbox', {
-        url: '/inbox?query',
-        templateUrl: 'views/inbox.html',
+      .state('things', {
+        url: '/things?query',
+        templateUrl: 'views/things.html',
         controller: 'InboxController',
         data: {
           title: 'Things'
         }
       })
       .state('account', {
-        url: '/inbox/account',
+        url: '/things/account',
         templateUrl: 'views/account.html',
         controller: 'AccountController',
         data: {
@@ -61,8 +61,8 @@ angular.module(
           state: 2,
         }
       })
-      .state('inboxThing', {
-        url: '/inbox/:id',
+      .state('thingsThing', {
+        url: '/things/:id',
         templateUrl: 'views/thing.html',
         controller: 'ThingController',
         data: {

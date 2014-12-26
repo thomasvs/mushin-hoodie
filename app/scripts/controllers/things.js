@@ -342,7 +342,7 @@ angular.module('mushin').controller(
   $scope.dueSelect = 'all';
 
 
-  debug('controllers/inbox.js: search params ' + JSON.stringify(search));
+  debug('controllers/things.js: search params ' + JSON.stringify(search));
 
   $scope.saveListActive = false;
 
@@ -357,7 +357,7 @@ angular.module('mushin').controller(
     maxDisplayCount: 3
   });
 
-  debug('controllers/inbox.js: calling fetchThings');
+  debug('controllers/things.js: calling fetchThings');
   fetchThings()
     .then(function() {
       $scope.$on('thingChange', function() {
@@ -369,6 +369,6 @@ angular.module('mushin').controller(
       });
 
   });
-  debug('controllers/inbox.js: called fetchThings');
+  debug('controllers/things.js: called fetchThings');
 
 });

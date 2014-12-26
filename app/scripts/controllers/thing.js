@@ -18,6 +18,7 @@ angular.module('mushin').controller(
     debug('new thing controller');
 
     $scope.thing = {};
+    $scope.stateName = null;
 
     $scope.contexts = $rootScope.contexts;
     $scope.projects = $rootScope.projects;
@@ -80,6 +81,7 @@ angular.module('mushin').controller(
       goToCorrectType(data);
       $scope.thing = data;
       $scope.unit = data.state === Thing.MIT ? Thing.ONE_DAY : Thing.ONE_WEEK;
+      $scope.stateName = Thing.types[data.state];
       lastType = $scope.thing.state;
       $scope[Thing.types[lastType]] = true;
 

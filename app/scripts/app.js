@@ -85,15 +85,15 @@ angular.module(
           // up: 'things',
         }
       })
-/*
-      .state('mitThing', {
-        url: '/mit/:id',
+      .state('archiveThing', {
+        url: '/archive/:id',
         templateUrl: 'views/thing.html',
         controller: 'ThingController',
         data: {
           state: 2
         }
       })
+/*
       .state('brThing', {
         url: '/br/:id',
         templateUrl: 'views/thing.html',

@@ -138,16 +138,21 @@ angular.module('mushin').factory('things', function ($rootScope, hoodie, $q, Thi
         }
       })
 
-      var conversions = ['inbox', 'mit', 'br']
+      /* generate all conversion functions, named convertTo... */
+      /* this should match the Thing types in services/thing.js */
+      var conversions = ['active', 'archive'];
 
       angular.forEach(conversions, function(conversion) {
-        var method = 'convertTo' + conversion[0].toUpperCase() + conversion.substring(1)
-        var state = Thing[conversion.toUpperCase()]
-        scope[method] = function(data) {
-          var thing = new Thing(data)
-          return thing.convertTo(state)
-        }
-      })
+        var methodName = 'convertTo' + conversion[0].toUpperCase() + conversion.substring(1);
+        var state = Thing[conversion.toUpperCase()];
+
+        scope[methodName] = function(data) {
+          debug(methodName + '(): ' + JSON.stringify(data));
+          var thing = new Thing(data);
+          return thing.convertTo(state);
+        };
+
+      });
     }
   }
 })

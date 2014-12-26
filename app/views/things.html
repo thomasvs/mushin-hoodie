@@ -90,7 +90,7 @@
     thing-cell
     class="thing-cell-animation"
     ng-repeat="thing in thingsFound = (things | filter:notRecentlyCompleted | filter:filterByTag | filter:filterByNumber | filter:{title: searchString} | filter:filterByDueSelector | orderBy:predicate | limitTo: 50) track by thing.id"
-    swipe-right="convertToBr(thing)"
+    swipe-right="convertToArchive(thing)"
     swipe-left="convertToMit(thing)"
     swipe-long-right="setDeleted(thing)"
     swipe-long-left="setDone(thing)">

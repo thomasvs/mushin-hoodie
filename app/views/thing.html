@@ -1,19 +1,13 @@
 <bp-navbar-config ng-class="{lists: lists, br: br}">
   <bp-action
-    ng-class="{active: lists}"
-    ng-click="handle(convertToMit(thing))"
+    ng-class="{active: archive}"
+    ng-click="handle(convertToArchive(thing))"
     class="bp-icon lists fa-list-ol">
-    Convert to most important things
-  </bp-action>
-  <bp-action
-    ng-class="{active: br}"
-    ng-click="handle(convertToBr(thing))"
-    class="bp-icon br fa-calendar">
-    Convert to big rock
+    Archive
   </bp-action>
   <bp-action
     ng-class="{active: things}"
-    ng-click="handle(convertToInbox(thing))"
+    ng-click="handle(convertToActive(thing))"
     class="bp-icon things fa-inbox">
     Inbox
   </bp-action>
@@ -71,6 +65,7 @@
           'other': '– due in {} weeks'
         }">
       </span>
+
       <div class="dropdown" ng-class="{open: open}">
         <a class="dropdown-toggle btn btn-danger" ng-click="open = !open; update();">
           Due date: {{ due | date }}
@@ -81,7 +76,9 @@
         </div>
       </div>
 
+      <span>in {{ stateName }} </span>
     </bp-table-header>
+
     <bp-cell>
       <input
         type="text"

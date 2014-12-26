@@ -40,7 +40,8 @@ angular.module('mushin').factory('Thing', function ($q, $filter, hoodie) {
   Thing.ONE_DAY = ONE_DAY
   Thing.ONE_WEEK = ONE_WEEK
   // FIXME: rename things to active or open here, but mind goToCorrectType
-  Thing.types = [,'things','mit','br','archive']
+  // should match the types enum above
+  Thing.types = [,'things','archive']
 
   Thing.isType = function(type) {
     return type === ACTIVE || type === ARCHIVE
@@ -112,6 +113,7 @@ angular.module('mushin').factory('Thing', function ($q, $filter, hoodie) {
   }
 
   Thing.prototype.convertTo = function(type) {
+    debug('convertTo(): type ' + type);
     if (type !== this.data.state && Thing.isType(type)) {
       var changes = {state: type}
       /*

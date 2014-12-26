@@ -27,8 +27,19 @@ angular.module(
 
     $urlRouterProvider.otherwise('/things');
 
+    /* specified things and thingsquery separately so thingsThing can
+     * find its parent automatically
+     */
     $stateProvider
       .state('things', {
+        url: '/things',
+        templateUrl: 'views/things.html',
+        controller: 'ThingsController',
+        data: {
+          title: 'Things'
+        }
+      })
+      .state('thingsquery', {
         url: '/things?query',
         templateUrl: 'views/things.html',
         controller: 'ThingsController',
@@ -67,6 +78,11 @@ angular.module(
         controller: 'ThingController',
         data: {
           title: 'Edit Thing',
+          // have to specify manually because adding ?query higher up
+          // makes autodetection of things as a parent break
+          // but then it turns out that it complains about not passing
+          // query as a parameter, so we now specify things twice higher up
+          // up: 'things',
         }
       })
 /*

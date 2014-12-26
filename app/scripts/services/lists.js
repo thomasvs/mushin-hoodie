@@ -6,6 +6,7 @@ angular.module('mushin').factory('lists',
   var lists = {};
 
   hoodie.store.on('change:list', function(name, list) {
+    debug('change:list changed, broadcasting');
     $rootScope.$broadcast('listChange', {
       type: name,
       list: list
@@ -21,6 +22,7 @@ angular.module('mushin').factory('lists',
         lists = listsData;
         deferred.resolve(listsData);
       });
+      debug('getAll returns promise');
       return deferred.promise;
   };
 

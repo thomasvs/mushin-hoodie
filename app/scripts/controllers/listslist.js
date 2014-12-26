@@ -9,8 +9,11 @@ angular.module('mushin').controller('ListsListCtrl', function ($state, $scope, l
   //lists.extend($scope)
 
   function fetchLists() {
+    debug('fetchLists started');
     lists.getAll()
       .then(function(all) {
+        debug('getAll: result has ' + all.length + ' items');
+        // this splice empties the list
         $scope.lists.splice(0, Number.MAX_VALUE);
         angular.forEach(all, function(item) {
             $scope.lists.push(item);

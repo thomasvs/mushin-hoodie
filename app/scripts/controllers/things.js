@@ -1,5 +1,5 @@
 angular.module('mushin').controller(
-  'InboxController',
+  'ThingsController',
   function($scope, $rootScope, $filter, $location, $q, things, Thing, lists) {
 
     /* lists is app/scripts/services/lists.js */
@@ -253,7 +253,7 @@ angular.module('mushin').controller(
         // at this time, the rootScope contexts/projects are set and thus
         // available through $scope too
 
-        $scope.inbox = $filter('filter')(things, function(thing) {
+        $scope.things = $filter('filter')(things, function(thing) {
           // FIXME: I'm filtering on complete/end in a filter func
           if (!thing.done && !thing.deleted) return true;
         });
@@ -262,7 +262,7 @@ angular.module('mushin').controller(
         if (search.query) {
           var parser = new window.Parser();
           var parsed = parser.parse(search.query);
-          debug('controllers/inbox: parsed query ' + JSON.stringify(parsed));
+          debug('controllers/things.js: parsed query ' + JSON.stringify(parsed));
 
 
           /* FIXME: reset old filter state; roll into helper */
@@ -332,7 +332,7 @@ angular.module('mushin').controller(
 
   /* module code */
 
-  var debug = new window.$debug('mushin:InboxController');
+  var debug = new window.$debug('mushin:ThingsController');
   var search = $location.search();
 
   // order of the things listed

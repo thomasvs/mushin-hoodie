@@ -24,7 +24,7 @@ angular.module('mushin').controller(
        * @name     mushin.controller:ProgressController#sawInstructions
        * @methodOf mushin.controller:ProgressController
        * @param    {string} state the name of the section instructions have been
-       *                          seen for (inbox, lists, ...)
+       *                          seen for (things, lists, ...)
        *
        * @description
        *

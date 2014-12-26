@@ -65,31 +65,31 @@
 </div>
 
 <bp-table
-  class="inbox"
+  class="things"
   bp-scroll
-  ng-if="!inbox.length"
+  ng-if="!things.length"
   ng-controller="ProgressController"
-  src="'views/inbox.zero.html'"
+  src="'views/things.zero.html'"
   ng-include>
 </bp-table>
 
 <bp-table
-  ng-if="inbox.length"
+  ng-if="things.length"
   bp-scroll
   bp-scroll-sticky
-  class="inbox">
+  class="things">
 
   <!-- bp-table-header is part of the table and scrolls away
-       but inboxFound's scope is limited -->
+       but thingsFound's scope is limited -->
   <bp-table-header>
-    showing {{ inboxFound.length }} of {{ inbox.length }} things
+    showing {{ thingsFound.length }} of {{ things.length }} things
   </bp-table-header>
 
 
   <bp-cell
     thing-cell
     class="thing-cell-animation"
-    ng-repeat="thing in inboxFound = (inbox | filter:notRecentlyCompleted | filter:filterByTag | filter:filterByNumber | filter:{title: searchString} | filter:filterByDueSelector | orderBy:predicate | limitTo: 50) track by thing.id"
+    ng-repeat="thing in thingsFound = (things | filter:notRecentlyCompleted | filter:filterByTag | filter:filterByNumber | filter:{title: searchString} | filter:filterByDueSelector | orderBy:predicate | limitTo: 50) track by thing.id"
     swipe-right="convertToBr(thing)"
     swipe-left="convertToMit(thing)"
     swipe-long-right="setDeleted(thing)"
@@ -150,5 +150,5 @@
   <button type="button" ng-click="sortActive = !sortActive" class="glyphicon glyphicon-sort btn-lg">  </button>
 </div>
 
-<bp-tabbar tab-bar class="inbox">
+<bp-tabbar tab-bar class="things">
 </bp-tabbar>

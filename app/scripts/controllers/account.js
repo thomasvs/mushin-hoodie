@@ -33,7 +33,7 @@ angular.module('mushin').controller('AccountController', function ($q, $window, 
 
       hoodieAccount.signUp(data.email, data.password)
         .then(function() {
-          $state.go('inbox')
+          $state.go('things')
         },
         function(error) {
           down.resolve(error)
@@ -43,7 +43,7 @@ angular.module('mushin').controller('AccountController', function ($q, $window, 
     }
     hoodieAccount.signIn(data.email, data.password)
       .then(function() {
-        $state.go('inbox')
+        $state.go('things')
       },function(error) {
         down.resolve(error)
         $scope.allowSignUp = true

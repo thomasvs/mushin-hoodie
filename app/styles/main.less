@@ -38,21 +38,21 @@
 
 @mit-color: #E7A048;
 @br-color: #347093;
-@inbox-color: #8e00ab;
+@things-color: #8e00ab;
 @do-color: #33A269;
 @delete-color: #E76E48;
 
 // User Styles
 @android: false;
 // @ios-dynamic-type: false;
-@android-highlight-color: @inbox-color;
-@ios-highlight-color: @inbox-color;
+@android-highlight-color: @things-color;
+@ios-highlight-color: @things-color;
 @android-navbar-app-icon: url(../favicon.ico);
 
 @import "animations/thingcell";
 @import "directives/thingcell";
 @import "views/account";
-@import "views/inbox";
+@import "views/things";
 
 body {
   font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -91,7 +91,7 @@ bp-cell.multiline {
   }
 }
 
-.inboxzero {
+.thingszero {
   .bp-flexbox(vertical, center, center);
   position: absolute;
   height: 100%;
@@ -117,7 +117,7 @@ bp-toolbar bp-action.bp-icon {
     &.br {
       color: #347093 !important;
     }
-    &.inbox {
+    &.things {
       color: #8e00ab !important;
     }
     &.do {

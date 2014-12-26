@@ -31,7 +31,7 @@ angular.module(
       .state('things', {
         url: '/things?query',
         templateUrl: 'views/things.html',
-        controller: 'InboxController',
+        controller: 'ThingsController',
         data: {
           title: 'Things'
         }

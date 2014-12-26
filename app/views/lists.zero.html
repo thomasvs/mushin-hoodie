@@ -13,14 +13,14 @@
     <br><br>
     Here is an example of a shopping list, which contains all things
     in the 'shop' context
-    <bp-action class="bp-button lists" ui-sref="inbox({query: '@shop'})">shopping list</bp-action>
+    <bp-action class="bp-button lists" ui-sref="things({query: '@shop'})">shopping list</bp-action>
   </span>
 </bp-cell>
 
 <div
-  class="inboxzero"
+  class="thingszero"
   ng-if="!instructions">
   <div>
-    <bp-action class="bp-button lists" ui-sref="inbox({query: '@shop'})">shopping list</bp-action>
+    <bp-action class="bp-button lists" ui-sref="things({query: '@shop'})">shopping list</bp-action>
    </div>
 </div>

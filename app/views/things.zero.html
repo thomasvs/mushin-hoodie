@@ -1,7 +1,7 @@
 <bp-cell
   class="multiline"
   ng-if="instructions"
-  ng-init="sawInstructions('inbox')">
+  ng-init="sawInstructions('things')">
   <span>
     This is your list of <strong>Things</strong> to get done.
     <br><br>
@@ -9,7 +9,7 @@
 </bp-cell>
 
 <div
-  class="inboxzero"
+  class="thingszero"
   ng-if="!instructions">
   <div>
     <bp-action class="bp-icon fa-inbox"></bp-action>

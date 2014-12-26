@@ -42,7 +42,7 @@ angular.module('mushin').factory('lists',
               query: query
           };
 
-          if (existing) {
+          if (existing.length > 0) {
             var list = existing[0];
 
             /* make sure we only keep one with this title */

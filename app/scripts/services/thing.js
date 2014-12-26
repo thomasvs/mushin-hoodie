@@ -39,7 +39,8 @@ angular.module('mushin').factory('Thing', function ($q, $filter, hoodie) {
   Thing.ARCHIVE = ARCHIVE
   Thing.ONE_DAY = ONE_DAY
   Thing.ONE_WEEK = ONE_WEEK
-  Thing.types = [,'inbox','mit','br','archive']
+  // FIXME: rename things to active or open here, but mind goToCorrectType
+  Thing.types = [,'things','mit','br','archive']
 
   Thing.isType = function(type) {
     return type === ACTIVE || type === ARCHIVE

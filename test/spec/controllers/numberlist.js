@@ -1,6 +1,6 @@
 // vi:si:et:sw=2:sts=2:ts=2
 describe(
-  'Controller: NumberListCtrl', function () {
+  'Controller: NumberListController', function () {
    beforeEach(module('mushin'));
 
     beforeEach(
@@ -23,7 +23,7 @@ describe(
         'multiple': true,
       };
 
-      var $nlc = controller('NumberListCtrl', {
+      var $nlc = controller('NumberListController', {
         $scope: scope,
         $attrs: attrs,
       });

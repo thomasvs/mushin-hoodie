@@ -1,3 +1,9 @@
+Setting up for development
+--------------------------
+
+npm install
+bower install
+
 Running in dev mode
 -------------------
 

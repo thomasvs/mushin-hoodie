@@ -238,6 +238,10 @@ angular.module('mushin').controller(
       }
     };
 
+    $scope.selectAll = function() {
+      debug('selectAll: ');
+    };
+
   /* private functions */
   function fetchThings() {
 

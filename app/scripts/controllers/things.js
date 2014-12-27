@@ -1,6 +1,7 @@
 angular.module('mushin').controller(
   'ThingsController',
-  function($scope, $rootScope, $filter, $location, $q, things, Thing, lists) {
+  function($scope, $rootScope, $filter, $location, $q, things, Thing,
+    lists) {
 
     /* lists is app/scripts/services/lists.js */
 
@@ -242,137 +243,138 @@ angular.module('mushin').controller(
       debug('selectAll: ');
     };
 
-  /* private functions */
-  function fetchThings() {
+    /* private functions */
+    function fetchThings() {
 
-    var start = new Date();
-    var deferred = $q.defer();
+      var start = new Date();
+      var deferred = $q.defer();
 
-    debug('fetchThings: calling getAll');
-    things.getAll(Thing.ACTIVE)
-      .then(function(things) {
-        debug('fetchThings: called getAll in ' +
-            (new Date().getTime() - start.getTime()) +
-            ' ms');
-        // at this time, the rootScope contexts/projects are set and thus
-        // available through $scope too
+      debug('fetchThings: calling getAll');
+      things.getAll(Thing.ACTIVE)
+        .then(function(things) {
+          debug('fetchThings: called getAll in ' +
+              (new Date().getTime() - start.getTime()) +
+              ' ms');
+          // at this time, the rootScope contexts/projects are set and thus
+          // available through $scope too
 
-        $scope.things = $filter('filter')(things, function(thing) {
-          // FIXME: I'm filtering on complete/end in a filter func
-          if (!thing.done && !thing.deleted) return true;
+          $scope.things = $filter('filter')(things, function(thing) {
+            // FIXME: I'm filtering on complete/end in a filter func
+            if (!thing.done && !thing.deleted) return true;
+          });
+
+          // parse query params from search entry now
+          if (search.query) {
+            var parser = new window.Parser();
+            var parsed = parser.parse(search.query);
+            debug('controllers/things.js: parsed query ' + JSON.stringify(parsed));
+
+
+            /* FIXME: reset old filter state; roll into helper */
+            angular.forEach($scope.contexts, function(value, key) {
+              $scope.contexts[key].active = false;
+            });
+            angular.forEach($scope.projects, function(value, key) {
+              $scope.projects[key].active = false;
+            });
+            angular.forEach($scope.importance, function(value, key) {
+              $scope.importance[key].active = false;
+            });
+            angular.forEach($scope.urgency, function(value, key) {
+              $scope.urgency[key].active = false;
+            });
+
+            /* now set state based on query */
+            angular.forEach(parsed.contexts, function (context) {
+              // it's possible we're asking for a non-existing context
+              // FIXME: maybe extract to a contexts initter ?
+              if ($scope.contexts[context] === undefined ) {
+                $scope.contexts[context] = {
+                  'name': context,
+                  'things': [],
+                };
+              }
+              $scope.contexts[context].active = true;
+            });
+
+            angular.forEach(parsed.projects, function (project) {
+              if ($scope.projects[project] === undefined ) {
+                $scope.projects[project] = {
+                  'name': project,
+                  'things': [],
+                };
+              }
+              $scope.projects[project].active = true;
+            });
+
+              var i;
+
+            if (parsed.importance) {
+              /* it was parsed as an int, convert to str */
+              var importance = '' + parsed.importance;
+              for (i = 0; i < importance.length; ++i) {
+                debug('filtering for importance ' + importance.charAt(i));
+                $scope.importance[importance.charAt(i)].active = true;
+              }
+            }
+
+            if (parsed.urgency) {
+              /* it was parsed as an int, convert to str */
+              var urgency = '' + parsed.urgency;
+              for (i = 0; i < urgency.length; ++i) {
+                debug('filtering for urgency ' + urgency.charAt(i));
+                $scope.urgency[urgency.charAt(i)].active = true;
+              }
+            }
+          }
+
+          debug('fetchThings: finished');
+          deferred.resolve(undefined);
+        });
+      debug('fetchThings: returning');
+      return deferred.promise;
+    }
+
+    /* module code */
+
+    var debug = new window.$debug('mushin:ThingsController');
+    var search = $location.search();
+
+    // order of the things listed
+    $scope.predicate = 'title';
+
+    // state of the by due date filter
+    $scope.dueSelect = 'all';
+
+
+    debug('controllers/things.js: search params ' + JSON.stringify(search));
+
+    $scope.saveListActive = false;
+
+
+    $scope.inbox = [];
+
+    /* this adds proxy functions to Thing class functions */
+    things.extend($scope);
+
+    // http://cubiq.org/add-to-home-screen
+    addToHomescreen({
+      maxDisplayCount: 3
+    });
+
+    debug('controllers/things.js: calling fetchThings');
+    fetchThings()
+      .then(function() {
+        $scope.$on('thingChange', function() {
+          debug('thingChange, calling fetchThings');
+          // FIXME: this is too expensive to redo every time;
+          // figure out which thing chnaged instead
+          fetchThings();
+          debug('thingChange, called fetchThings');
         });
 
-        // parse query params from search entry now
-        if (search.query) {
-          var parser = new window.Parser();
-          var parsed = parser.parse(search.query);
-          debug('controllers/things.js: parsed query ' + JSON.stringify(parsed));
+    });
+    debug('controllers/things.js: called fetchThings');
 
-
-          /* FIXME: reset old filter state; roll into helper */
-          angular.forEach($scope.contexts, function(value, key) {
-            $scope.contexts[key].active = false;
-          });
-          angular.forEach($scope.projects, function(value, key) {
-            $scope.projects[key].active = false;
-          });
-          angular.forEach($scope.importance, function(value, key) {
-            $scope.importance[key].active = false;
-          });
-          angular.forEach($scope.urgency, function(value, key) {
-            $scope.urgency[key].active = false;
-          });
-
-          /* now set state based on query */
-          angular.forEach(parsed.contexts, function (context) {
-            // it's possible we're asking for a non-existing context
-            // FIXME: maybe extract to a contexts initter ?
-            if ($scope.contexts[context] === undefined ) {
-              $scope.contexts[context] = {
-                'name': context,
-                'things': [],
-              };
-            }
-            $scope.contexts[context].active = true;
-          });
-
-          angular.forEach(parsed.projects, function (project) {
-            if ($scope.projects[project] === undefined ) {
-              $scope.projects[project] = {
-                'name': project,
-                'things': [],
-              };
-            }
-            $scope.projects[project].active = true;
-          });
-
-            var i;
-
-          if (parsed.importance) {
-            /* it was parsed as an int, convert to str */
-            var importance = '' + parsed.importance;
-            for (i = 0; i < importance.length; ++i) {
-              debug('filtering for importance ' + importance.charAt(i));
-              $scope.importance[importance.charAt(i)].active = true;
-            }
-          }
-
-          if (parsed.urgency) {
-            /* it was parsed as an int, convert to str */
-            var urgency = '' + parsed.urgency;
-            for (i = 0; i < urgency.length; ++i) {
-              debug('filtering for urgency ' + urgency.charAt(i));
-              $scope.urgency[urgency.charAt(i)].active = true;
-            }
-          }
-        }
-
-        debug('fetchThings: finished');
-        deferred.resolve(undefined);
-      });
-    debug('fetchThings: returning');
-    return deferred.promise;
   }
-
-  /* module code */
-
-  var debug = new window.$debug('mushin:ThingsController');
-  var search = $location.search();
-
-  // order of the things listed
-  $scope.predicate = 'title';
-
-  // state of the by due date filter
-  $scope.dueSelect = 'all';
-
-
-  debug('controllers/things.js: search params ' + JSON.stringify(search));
-
-  $scope.saveListActive = false;
-
-
-  $scope.inbox = [];
-
-  /* this adds proxy functions to Thing class functions */
-  things.extend($scope);
-
-  // http://cubiq.org/add-to-home-screen
-  addToHomescreen({
-    maxDisplayCount: 3
-  });
-
-  debug('controllers/things.js: calling fetchThings');
-  fetchThings()
-    .then(function() {
-      $scope.$on('thingChange', function() {
-        debug('thingChange, calling fetchThings');
-        // FIXME: this is too expensive to redo every time;
-        // figure out which thing chnaged instead
-        fetchThings();
-        debug('thingChange, called fetchThings');
-      });
-
-  });
-  debug('controllers/things.js: called fetchThings');
-
-});
+);

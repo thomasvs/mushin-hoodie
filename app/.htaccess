@@ -1,0 +1,4 @@
+<Files *.appcache>
+    ExpiresActive On
+    ExpiresDefault "access"
+</Files>

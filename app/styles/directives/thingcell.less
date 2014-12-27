@@ -71,14 +71,19 @@
     opacity: 0.5;
   }
 
-  /* first line: complete, title, recurrence/time */
-  .complete {
+  /* first line: select, complete, title, recurrence/time */
+  .select, .complete {
     float: left;
-    width: 10%;
+    width: 5%;
     height: 29px;
     line-height: 29px;
     font-weight: bold;
     &:extend(.ellipsis);
+  }
+
+
+  .select .unchecked {
+    opacity: 0.5;
   }
 
   .complete .unchecked {

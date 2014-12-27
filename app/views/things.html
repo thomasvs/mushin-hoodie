@@ -95,12 +95,17 @@
     swipe-long-right="setDeleted(thing)"
     swipe-long-left="setDone(thing)">
     <div class="content">
+      <div class="select">
+        <i class="glyphicon" ng-class="{ 'glyphicon-unchecked': !selected, 'glyphicon-check': selected, 'unchecked': !selected }" ng-click="select(thing); selected = !selected;"></i>
+      </div>
+      <!-- show a complete action; recurring for recurrence things,
+           pencil to complete normal things -->
       <div class="complete">
         <span ng-if="thing.recurrence" ng-class="{ 'repeat-fade': completed }" class="repeat">
           <i class="glyphicon glyphicon-repeat" ng-click="setComplete(thing); completed = !completed;"></i>
         </span>
         <span ng-if="!thing.recurrence">
-          <i class="glyphicon glyphicon-check" ng-class="{ true: 'unchecked' }[thing.complete != 100]" ng-click="setComplete(thing)"></i>
+          <i class="glyphicon glyphicon-pencil" ng-class="{ true: 'unchecked' }[thing.complete != 100]" ng-click="setComplete(thing)"></i>
         </span>
       </div>
       <div class="title" ui-sref="thingsThing({id:thing.id})">

@@ -128,6 +128,7 @@ module.exports = (grunt) ->
           cache: ['/_api/_files/hoodie.js']
         src: [
           'package.json'
+          'version.json'
           'scripts/*.js'
           'styles/*.css'
           'fonts/*'
@@ -235,6 +236,32 @@ module.exports = (grunt) ->
 #        browsers: [ 'Chrome', 'Firefox' ]
         singleRun: false
 
+    # see http://stackoverflow.com/questions/13130710/can-you-record-the-git-revision-with-gruntjs
+    # to add a revision tag
+    pkg: grunt.file.readJSON 'package.json'
+
+    "git-describe":
+      options: {}
+      me: {}
+
+  grunt.registerTask 'save-revision', ->
+    grunt.event.once 'git-describe', (rev) ->
+      grunt.log.writeln "Git Revision: " + rev[0]
+      grunt.option "git-revision", rev[0]
+
+    grunt.task.run "git-describe"
+
+  grunt.registerTask 'tag-revision', 'Tag the current build revision', ->
+    grunt.task.requires 'git-describe'
+
+    grunt.file.write 'www/version.json', JSON.stringify
+      version: grunt.config('pkg.version'),
+      revision: grunt.option 'git-revision'
+      date: grunt.template.today()
+
+  grunt.registerTask 'version', [
+    'save-revision',
+    'tag-revision']
 
   grunt.registerTask 'release', ->
     @args.unshift 'bump-only'
@@ -266,6 +293,7 @@ module.exports = (grunt) ->
     'cssmin'
     'rev'
     'usemin'
+    'version'
     'manifest'
     'ngdocs'
   ]

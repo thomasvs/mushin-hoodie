@@ -45,6 +45,22 @@
     </bp-cell>
     <bp-cell class="bp-cell-value2" ng-click>
       <span class="label">
+        Revision
+      </span>
+      <a target="_blank" ng-href="https://github.com/thomasvs/mushin-hoodie/releases/tag/v{{ package.version }}" class="value">
+        {{ version.revision }}
+      </a>
+    </bp-cell>
+    <bp-cell class="bp-cell-value2" ng-click>
+      <span class="label">
+        Date
+      </span>
+      <a target="_blank" ng-href="https://github.com/thomasvs/mushin-hoodie/releases/tag/v{{ package.version }}" class="value">
+        {{ version.date }}
+      </a>
+    </bp-cell>
+    <bp-cell class="bp-cell-value2" ng-click>
+      <span class="label">
         License
       </span>
       <a target="_blank" href="https://github.com/boennemann/zentodone/blob/master/LICENSE" class="value">

@@ -81,4 +81,8 @@ angular.module('mushin').controller('AccountController', function ($q, $window, 
     .then(function(res) {
       $scope.package = res.data
     })
+  $http.get('version.json')
+    .then(function(res) {
+      $scope.version = res.data
+    })
 })

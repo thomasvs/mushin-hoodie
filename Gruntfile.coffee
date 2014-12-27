@@ -192,6 +192,7 @@ module.exports = (grunt) ->
             '../package.json'
             '*.{png,ico,xml}'
             'index.html'
+            '.htaccess'
           ]
         ,
           '<%= app.dist %>/package.json': 'package.json'

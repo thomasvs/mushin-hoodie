@@ -73,6 +73,16 @@
   ng-include>
 </bp-table>
 
+<!-- FIXME: this table's ng-repeat is in our controller's scope; the one
+            inside bp-table below isn't, so that thingsFound is not
+            available in ThingsController -->
+<table>
+<tr
+    ng-repeat="thing in (thingsFound = (things | filter:notRecentlyCompleted | filter:filterByTag | filter:filterByNumber | filter:{title: searchString} | filter:filterByDueSelector | orderBy:predicate | limitTo: 50)) track by thing.id"
+</tr>
+</table>
+
+
 <bp-table
   ng-if="things.length"
   bp-scroll
@@ -89,14 +99,14 @@
   <bp-cell
     thing-cell
     class="thing-cell-animation"
-    ng-repeat="thing in thingsFound = (things | filter:notRecentlyCompleted | filter:filterByTag | filter:filterByNumber | filter:{title: searchString} | filter:filterByDueSelector | orderBy:predicate | limitTo: 50) track by thing.id"
+    ng-repeat="thing in (thingsFound = (things | filter:notRecentlyCompleted | filter:filterByTag | filter:filterByNumber | filter:{title: searchString} | filter:filterByDueSelector | orderBy:predicate | limitTo: 50)) track by thing.id"
     swipe-right="convertToArchive(thing)"
     swipe-left="convertToMit(thing)"
     swipe-long-right="setDeleted(thing)"
     swipe-long-left="setDone(thing)">
     <div class="content">
       <div class="select">
-        <i class="glyphicon" ng-class="{ 'glyphicon-unchecked': !selected, 'glyphicon-check': selected, 'unchecked': !selected }" ng-click="select(thing); selected = !selected;"></i>
+        <i class="glyphicon" ng-class="{ 'glyphicon-unchecked': !isSelected(thing), 'glyphicon-check': isSelected(thing), 'unchecked': !isSelected(thing) }" ng-click="toggleSelected(thing);"> </i>
       </div>
       <!-- show a complete action; recurring for recurrence things,
            pencil to complete normal things -->
@@ -150,9 +160,10 @@
 -->
 
 <div class="btn-group btn-group-toolbar btn-group-lg">
-  <button type="button" ng-click="saveListActive = !saveListActive" class="glyphicon glyphicon-list btn-lg">  </button>
-  <button type="button" ng-click="filterActive = !filterActive" class="glyphicon glyphicon-filter btn-lg">  </button>
-  <button type="button" ng-click="sortActive = !sortActive" class="glyphicon glyphicon-sort btn-lg">  </button>
+  <button type="button" ng-click="saveListActive = !saveListActive" class="glyphicon glyphicon-list btn-lg"> save</button>
+  <button type="button" ng-click="filterActive = !filterActive" class="glyphicon glyphicon-filter btn-lg"> filter</button>
+  <button type="button" ng-click="sortActive = !sortActive" class="glyphicon glyphicon-sort btn-lg"> order</button>
+  <button type="button" ng-click="selectAll()" class="glyphicon glyphicon-font btn-lg"> <span ng-if="selectedAll">un</span>select all</button>
 </div>
 
 <bp-tabbar tab-bar class="things">

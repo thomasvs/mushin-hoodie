@@ -239,8 +239,35 @@ angular.module('mushin').controller(
       }
     };
 
+    $scope.isSelected = function(thing) {
+      //debug('isSelected: ' + thing.id + ' ' + $scope.selected[thing]);
+      return $scope.selected[thing.id] !== undefined;
+    };
+
+
+    $scope.toggleSelected = function(thing) {
+      debug('toggleSelected: ' + thing.id + ' ' + $scope.selected[thing.id]);
+      if ($scope.isSelected(thing)) {
+        delete $scope.selected[thing.id];
+      } else {
+        $scope.selected[thing.id] = thing;
+      }
+    };
+
     $scope.selectAll = function() {
-      debug('selectAll: ');
+      $scope.selectedAll = !$scope.selectedAll;
+      debug('selectAll: now ' + $scope.selectedAll);
+      debug('selectAll: looping over ' + $scope.thingsFound.length + ' things');
+
+      angular.forEach($scope.thingsFound, function (thing) {
+        if ($scope.selectedAll) {
+          $scope.selected[thing.id] = thing;
+        } else {
+          if ($scope.isSelected(thing)) {
+            delete $scope.selected[thing.id];
+          }
+        }
+      });
     };
 
     /* private functions */
@@ -339,6 +366,15 @@ angular.module('mushin').controller(
 
     var debug = new window.$debug('mushin:ThingsController');
     var search = $location.search();
+
+    // declare it here so that ng-repeat of thing in thingsFound exposes
+    // this to controller
+//    $scope.thingsFound = [];
+
+    // whether a thing is selected in the things view
+    // mapping of thing.id -> thing
+    $scope.selected = {};
+    $scope.selectedAll = false;
 
     // order of the things listed
     $scope.predicate = 'title';

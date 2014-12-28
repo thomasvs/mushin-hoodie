@@ -335,6 +335,12 @@ angular.module('mushin').controller(
   var debug = new window.$debug('mushin:ThingsController');
   var search = $location.search();
 
+  $scope.title = "Things"; /* set from search query */
+  if (search.title) {
+    $scope.title = "Things: " + search.title;
+    debug('controllers/things.js: parsed title ' + search.title);
+  }
+
   // order of the things listed
   $scope.predicate = 'title';
 

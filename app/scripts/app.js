@@ -40,7 +40,7 @@ angular.module(
         }
       })
       .state('thingsquery', {
-        url: '/things?query',
+        url: '/things?query&title',
         templateUrl: 'views/things.html',
         controller: 'ThingsController',
         data: {

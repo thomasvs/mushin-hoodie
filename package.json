@@ -19,6 +19,7 @@
     "hoodie-server": "^1.1.1"
   },
   "devDependencies": {
+    "bower": "^1.3.12",
     "grunt": "^0.4.4",
     "grunt-angular-templates": "^0.5.4",
     "grunt-bump": "0.0.14",

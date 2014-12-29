@@ -10,7 +10,9 @@ angular.module('mushin').controller('MultiEditInstanceController',
 
   $scope.archive = function () {
     console.log('archiving ' + JSON.stringify($scope.selected) + ' things');
-    $rootScope.$broadcast("multiEditAction", [ 'one', 'two' ]);
+    $rootScope.$broadcast("multiEditAction", {
+      action: 'archive',
+    });
   };
 
   $scope.cancel = function () {

@@ -406,7 +406,7 @@ angular.module('mushin').controller(
 
     /* listen for events from multi edit dialog */
     $scope.$on("multiEditAction", function(event, args) {
-      debug('archive ' + Object.keys($scope.selected).length + ' things');
+      debug('action: ' + args.action + ' ' + Object.keys($scope.selected).length + ' things');
     });
 
     debug('controllers/things.js: calling fetchThings');

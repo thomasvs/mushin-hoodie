@@ -404,6 +404,11 @@ angular.module('mushin').controller(
       maxDisplayCount: 3
     });
 
+    /* listen for events from multi edit dialog */
+    $scope.$on("multiEditAction", function(event, args) {
+      debug('archive ' + Object.keys($scope.selected).length + ' things');
+    });
+
     debug('controllers/things.js: calling fetchThings');
     fetchThings()
       .then(function() {

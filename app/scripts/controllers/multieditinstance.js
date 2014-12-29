@@ -1,7 +1,8 @@
 // Please note that $modalInstance represents a modal window (instance) dependency.
 // It is not the same as the $modal service used above.
 
-angular.module('mushin').controller('MultiEditInstanceController', function ($scope, $modalInstance, items) {
+angular.module('mushin').controller('MultiEditInstanceController',
+  function ($scope, $rootScope, $modalInstance, items) {
 
   $scope.ok = function () {
     $modalInstance.close($scope.selected.item);
@@ -9,6 +10,7 @@ angular.module('mushin').controller('MultiEditInstanceController', function ($sc
 
   $scope.archive = function () {
     console.log('archiving ' + JSON.stringify($scope.selected) + ' things');
+    $rootScope.$broadcast("multiEditAction", [ 'one', 'two' ]);
   };
 
   $scope.cancel = function () {

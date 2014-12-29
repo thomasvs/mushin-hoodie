@@ -4,6 +4,11 @@
 angular.module('mushin').controller('MultiEditInstanceController',
   function ($scope, $rootScope, $modalInstance, items) {
 
+  var debug = new window.$debug('mushin:controllers/MultiEditInstance');
+
+  $scope.importanceEdit = {};
+  $scope.urgencyEdit = {};
+
   $scope.ok = function () {
     $modalInstance.close($scope.selected.item);
   };
@@ -18,4 +23,14 @@ angular.module('mushin').controller('MultiEditInstanceController',
   $scope.cancel = function () {
     $modalInstance.dismiss('cancel');
   };
+
+  /* listen to numberlist changes */
+  $scope.$on('NUMBER_TOGGLED', function(event, type, name) {
+    debug('NUMBER_TOGGLED for type ' + type + ' to ' + name);
+    $rootScope.$broadcast("multiEditAction", {
+      action: type,
+      number: name,
+    });
+  });
+
 });

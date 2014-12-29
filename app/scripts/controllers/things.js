@@ -1,7 +1,7 @@
 angular.module('mushin').controller(
   'ThingsController',
   function($scope, $rootScope, $filter, $location, $q, things, Thing,
-    lists) {
+    lists, hoodie) {
 
     /* lists is app/scripts/services/lists.js */
 
@@ -406,7 +406,25 @@ angular.module('mushin').controller(
 
     /* listen for events from multi edit dialog */
     $scope.$on("multiEditAction", function(event, args) {
-      debug('action: ' + args.action + ' ' + Object.keys($scope.selected).length + ' things');
+      debug('action: ' + args.action + ' '
+        + Object.keys($scope.selected).length + ' things');
+
+      if (args.action == 'importance' || args.action == 'urgency') {
+        var number = args.number;
+        var promises = [];
+
+        angular.forEach($scope.selected, function (value, key) {
+          value[args.action] = number;
+
+          var res = hoodie.store.update('thing', value.id, value);
+
+          promises.push(res);
+
+          debug('update: ' + JSON.stringify(res));
+        });
+
+        return $q.all(promises);
+      }
     });
 
     debug('controllers/things.js: calling fetchThings');

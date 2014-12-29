@@ -406,14 +406,14 @@ angular.module('mushin').controller(
 
     /* listen for events from multi edit dialog */
     $scope.$on("multiEditAction", function(event, args) {
-      debug('action: ' + args.action + ' '
-        + Object.keys($scope.selected).length + ' things');
+      debug('action: ' + args.action + ' ' +
+        Object.keys($scope.selected).length + ' things');
 
       if (args.action == 'importance' || args.action == 'urgency') {
         var number = args.number;
         var promises = [];
 
-        angular.forEach($scope.selected, function (value, key) {
+        angular.forEach($scope.selected, function (value) {
           value[args.action] = number;
 
           var res = hoodie.store.update('thing', value.id, value);

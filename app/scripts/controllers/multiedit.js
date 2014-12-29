@@ -13,7 +13,7 @@ angular.module('mushin').controller('MultiEditController', function ($scope, $mo
       }
     });
 
-    modalInstance.result.then(function (selectedItem) {
+    modalInstance.result.then(function (/* selectedItem */) {
     }, function () {
       $log.info('Modal dismissed at: ' + new Date());
     });

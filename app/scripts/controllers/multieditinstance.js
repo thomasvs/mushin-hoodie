@@ -2,7 +2,7 @@
 // It is not the same as the $modal service used above.
 
 angular.module('mushin').controller('MultiEditInstanceController',
-  function ($scope, $rootScope, $modalInstance, items) {
+  function ($scope, $rootScope, $modalInstance) {
 
   var debug = new window.$debug('mushin:controllers/MultiEditInstance');
 
@@ -14,7 +14,7 @@ angular.module('mushin').controller('MultiEditInstanceController',
   };
 
   $scope.archive = function () {
-    console.log('archiving ' + JSON.stringify($scope.selected) + ' things');
+    debug('archiving ' + JSON.stringify($scope.selected) + ' things');
     $rootScope.$broadcast("multiEditAction", {
       action: 'archive',
     });

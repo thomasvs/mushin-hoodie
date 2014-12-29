@@ -1,8 +1,8 @@
-angular.module('mushin').controller('ListController', function ($state, $scope, things, Thing, sortThings) {
+angular.module('mushin').controller('ListController', function ($state, $scope, things /* , Thing , sortThings */) {
   var state = $state.current;
   var name = state.name;
-  var type = state.data.state;
-  var unit = type === Thing.MIT ? Thing.ONE_DAY : Thing.ONE_WEEK;
+  // var type = state.data.state;
+  // var unit = type === Thing.MIT ? Thing.ONE_DAY : Thing.ONE_WEEK;
 
   $scope[name] = [];
   things.extend($scope);

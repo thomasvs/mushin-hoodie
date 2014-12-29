@@ -165,7 +165,12 @@
   <button type="button" ng-click="filterActive = !filterActive" class="glyphicon glyphicon-filter btn-lg"> filter</button>
   <button type="button" ng-click="sortActive = !sortActive" class="glyphicon glyphicon-sort btn-lg"> order</button>
   <button type="button" ng-click="selectAll()" class="glyphicon glyphicon-font btn-lg"> <span ng-if="selectedAll">un</span>select all</button>
+  <button type="button" ng-controller="MultiEditController" ng-click="open()" class="glyphicon glyphicon-font btn-lg">edit selected</button>
 </div>
+
+
+
+
 
 <bp-tabbar tab-bar class="things">
 </bp-tabbar>

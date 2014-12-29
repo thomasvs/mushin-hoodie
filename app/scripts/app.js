@@ -12,7 +12,8 @@ angular.module(
     'hoodie',
     'monospaced.elastic',
     'datePicker',
-    'filter.duration'
+    'filter.duration',
+    'ui.bootstrap',
   ]
 )
   .config(function(

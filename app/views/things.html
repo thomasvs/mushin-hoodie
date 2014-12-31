@@ -110,13 +110,13 @@
         <i class="glyphicon" ng-class="{ 'glyphicon-unchecked': !isSelected(thing), 'glyphicon-check': isSelected(thing), 'unchecked': !isSelected(thing) }" ng-click="toggleSelected(thing);"> </i>
       </div>
       <!-- show a complete action; recurring for recurrence things,
-           pencil to complete normal things -->
+           ok-circle to complete normal things -->
       <div class="complete">
         <span ng-if="thing.recurrence" ng-class="{ 'repeat-fade': completed }" class="repeat">
           <i class="glyphicon glyphicon-repeat" ng-click="setComplete(thing); completed = !completed;"></i>
         </span>
         <span ng-if="!thing.recurrence">
-          <i class="glyphicon glyphicon-pencil" ng-class="{ true: 'unchecked' }[thing.complete != 100]" ng-click="setComplete(thing)"></i>
+          <i class="glyphicon glyphicon-ok-circle" ng-class="{ true: 'unchecked' }[thing.complete != 100]" ng-click="setComplete(thing)"></i>
         </span>
       </div>
       <div class="title" ui-sref="thingsThing({id:thing.id})">
@@ -165,7 +165,7 @@
   <button type="button" ng-click="filterActive = !filterActive" class="glyphicon glyphicon-filter btn-lg"> filter</button>
   <button type="button" ng-click="sortActive = !sortActive" class="glyphicon glyphicon-sort btn-lg"> order</button>
   <button type="button" ng-click="selectAll()" class="glyphicon glyphicon-font btn-lg"> <span ng-if="selectedAll">un</span>select all</button>
-  <button type="button" ng-controller="MultiEditController" ng-click="open()" class="glyphicon glyphicon-font btn-lg">edit selected</button>
+  <button type="button" ng-controller="MultiEditController" ng-click="open()" class="glyphicon glyphicon-pencil btn-lg"> edit selected</button>
 </div>
 
 

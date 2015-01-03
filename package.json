@@ -12,7 +12,7 @@
   },
   "type": "app",
   "dependencies": {
-    "hoodie-plugin-angularjs": "^0.0.17",
+    "hoodie-plugin-angularjs": "http://github.com/thomasvs/hoodie-plugin-angularjs/tarball/bc3033741098c5f66036f9b99a51c3f08e3e231a",
     "hoodie-plugin-appconfig": "^1.0.0",
     "hoodie-plugin-email": "^1.0.0",
     "hoodie-plugin-users": "^1.0.0",

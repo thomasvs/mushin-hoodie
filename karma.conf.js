@@ -11,10 +11,12 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      'app/bower_components/jquery/dist/jquery.js',
+      'node_modules/hoodie-server/node_modules/hoodie/dist/hoodie.js',
       'app/bower_components/angular/angular.js',
+      'app/bower_components/angular-mocks/angular-mocks.js',
       'node_modules/hoodie-plugin-angularjs/hoodie.angularjs.js',
       'app/bower_components/debug-browser/debug.js',
-      'app/bower_components/angular-mocks/angular-mocks.js',
 //      'app/bower_components/angular-route/angular-route.js',
       'app/bower_components/angular-animate/angular-animate.js',
       'app/bower_components/angular-datepicker/app/scripts/datePicker.js',

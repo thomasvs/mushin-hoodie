@@ -2,7 +2,7 @@
 // http://karma-runner.github.io/0.10/config/configuration-file.html
 
 module.exports = function(config) {
-  config.set({
+  var configuration = {
     // base path, that will be used to resolve files and exclude
     basePath: '',
 
@@ -61,9 +61,20 @@ module.exports = function(config) {
     // - IE (only Windows)
     browsers: ['Chrome'],
 
-
+    // See http://stackoverflow.com/questions/19255976/how-to-make-travis-execute-angular-tests-on-chrome-please-set-env-variable-chr
+    customLaunchers: {
+      Chrome_travis_ci: {
+        base: 'Chrome',
+        flags: ['--no-sandbox']
+      }
+    },
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit
     singleRun: false
-  });
+  };
+
+  if(process.env.TRAVIS){
+    configuration.browsers = ['Chrome_travis_ci'];
+  }
+  config.set(configuration);
 };

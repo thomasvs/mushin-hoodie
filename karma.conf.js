@@ -12,7 +12,10 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'app/bower_components/jquery/dist/jquery.js',
-      'node_modules/hoodie-server/node_modules/hoodie/dist/hoodie.js',
+//    This one fails with an undefined reference to Hoodie
+//      'node_modules/hoodie-server/node_modules/hoodie/dist/hoodie.js',
+//    This one works, but I had to bower install hoodie
+      'app/bower_components/hoodie/dist/hoodie.js',
       'app/bower_components/angular/angular.js',
       'app/bower_components/angular-mocks/angular-mocks.js',
       'node_modules/hoodie-plugin-angularjs/hoodie.angularjs.js',

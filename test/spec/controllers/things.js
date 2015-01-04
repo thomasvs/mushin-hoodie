@@ -1,6 +1,16 @@
 // vi:si:et:sw=2:sts=2:ts=2
 describe(
   'Controller: ThingsController', function () {
+    var hoodie;
+    var hoodieStore;
+    var $rootScope;
+    var $q;
+
+    var hoodieApi = (new Hoodie());
+    var api = hoodieApi.store;
+
+    var controller;
+
     beforeEach(module('mushin'));
     beforeEach(module('hoodie', function ($provide) {
       $provide.value('hoodie', hoodieApi);
@@ -12,16 +22,6 @@ describe(
       ]);
     }));
 
-
-    var hoodie;
-    var hoodieStore;
-    var $rootScope;
-    var $q;
-
-    var $hoodieApi = (new Hoodie());
-    var api = hoodieApi.store;
-
-    var controller;
 
 
     beforeEach(inject(function ($controller, _$rootScope_, _hoodieStore_, _hoodie_, _$q_) {
@@ -43,4 +43,3 @@ describe(
     });
   }
 );
-*/

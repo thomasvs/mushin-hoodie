@@ -234,7 +234,13 @@ module.exports = (grunt) ->
         configFile: 'karma.conf.js'
 #        background: false
 #        browsers: [ 'Chrome', 'Firefox' ]
+        # FIXME: changing this to true works
         singleRun: false
+
+      once:
+        configFile: 'karma.conf.js'
+        singleRun: true
+
 
     # see http://stackoverflow.com/questions/13130710/can-you-record-the-git-revision-with-gruntjs
     # to add a revision tag
@@ -298,7 +304,7 @@ module.exports = (grunt) ->
     'ngdocs'
   ]
 
-  grunt.registerTask 'test', ['connect:test', 'karma']
+  grunt.registerTask 'test', ['connect:test', 'karma:once']
   grunt.registerTask 'default', ['build']
   grunt.loadNpmTasks 'grunt-jsdoc'
   grunt.loadNpmTasks 'grunt-ngdocs'

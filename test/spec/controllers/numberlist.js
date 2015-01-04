@@ -1,7 +1,7 @@
 // vi:si:et:sw=2:sts=2:ts=2
 describe(
   'Controller: NumberListController', function () {
-   beforeEach(module('mushin'));
+    beforeEach(module('mushin'));
 
     beforeEach(
       inject(
@@ -12,7 +12,6 @@ describe(
         }
       )
     );
-
 
     it('should initialize even with boolean properties', function () {
       attrs = {

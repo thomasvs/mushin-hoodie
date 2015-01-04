@@ -23,6 +23,7 @@ module.exports = function(config) {
       'app/bower_components/angular-loading-bar/src/loading-bar.js',
       'app/bower_components/angular-touch/angular-touch.js',
       'app/bower_components/angular-ui-router/release/angular-ui-router.js',
+      'app/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'app/bower_components/bradypodion/dist/bradypodion.js',
       'app/scripts/*.js',
       'app/scripts/**/*.js',

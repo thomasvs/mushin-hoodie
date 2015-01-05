@@ -4,6 +4,7 @@ describe(
     var hoodie;
     var hoodieStore;
     var $rootScope;
+    var scope;
     var $q;
 
     var hoodieApi = (new Hoodie());
@@ -31,15 +32,19 @@ describe(
       $q = _$q_;
 
       scope = $rootScope.$new();
-      controller = $controller;
+      controller = $controller('ThingsController', {
+        '$scope': scope,
+      });
     }));
-
-    it('should have hoodieStore', function () {
-      expect(hoodieStore).toBeDefined();
-    });
 
     it('should have controller', function () {
       expect(controller).toBeDefined();
+    });
+    it('should have things', function () {
+      expect(scope).toBeDefined();
+      expect(scope.saveListActive).toBe(false);
+      console.debug(scope.things);
+      console.debug(scope.inbox);
     });
   }
 );

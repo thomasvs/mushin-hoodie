@@ -9,6 +9,14 @@ module.exports = function(config) {
     // testing framework to use (jasmine/mocha/qunit/...)
     frameworks: ['jasmine'],
 
+    preprocessors: {
+      'app/views/*.html': 'html2js'
+    },
+    ngHtml2JsPreprocessor: {
+      stripPrefix: "app/",
+      moduleName: "template-module"
+    },
+
     // list of files / patterns to load in the browser
     files: [
       'app/bower_components/jquery/dist/jquery.js',
@@ -29,11 +37,13 @@ module.exports = function(config) {
       'app/bower_components/angular-touch/angular-touch.js',
       'app/bower_components/angular-ui-router/release/angular-ui-router.js',
       'app/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+      'app/bower_components/add-to-homescreen/src/addtohomescreen.js',
       'app/bower_components/bradypodion/dist/bradypodion.js',
       'app/scripts/*.js',
       'app/scripts/**/*.js',
 //      'test/mock/**/*.js',
-      'test/spec/**/*.js'
+      'test/spec/**/*.js',
+      'app/views/*.html',
     ],
 
     // list of files / patterns to exclude
@@ -61,6 +71,11 @@ module.exports = function(config) {
     // - IE (only Windows)
     browsers: ['Chrome'],
 
+    plugins: [
+      'karma-jasmine',
+      'karma-chrome-launcher',
+      'karma-ng-html2js-preprocessor',
+    ],
     // See http://stackoverflow.com/questions/19255976/how-to-make-travis-execute-angular-tests-on-chrome-please-set-env-variable-chr
     customLaunchers: {
       Chrome_travis_ci: {

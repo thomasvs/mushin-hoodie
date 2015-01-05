@@ -434,7 +434,7 @@ angular.module('mushin').controller(
           debug('thingChange, calling fetchThings');
           // FIXME: this is too expensive to redo every time;
           // figure out which thing chnaged instead
-          fetchThings();
+          //fetchThings();
           debug('thingChange, called fetchThings');
         });
 

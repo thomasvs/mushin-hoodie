@@ -41,14 +41,20 @@ describe(
     }));
 
     it('should have a getAll function', function () {
-      expect(angular.isFunction(things.getAll)).toBe(true);
+        expect(angular.isFunction(things.getAll)).toBe(true);
     });
-    it('getAll should work', function () {
-      things.getAll(Thing.ACTIVE)
-        .then(function(things) {
-          console.log('test: things' + things);
-          expect(angular.isFunction(things.getAll)).toBe(false);
-        });
+    it('should load projects, contexts, importance and urgency right',
+      function () {
+        things.loadedThingsData(Thing.active, [
+          {
+            urgency: 5,
+            projects: [ 'mushin', ]
+          },
+        ]);
+
+        expect(Object.keys($rootScope.projects)).toEqual(['mushin']);
+        expect(Object.keys($rootScope.urgency)).toEqual(['5']);
+
       }
     );
   }

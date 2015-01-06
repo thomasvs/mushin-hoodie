@@ -7,6 +7,118 @@ angular.module('mushin').factory('things', function ($rootScope, hoodie, $q, Thi
   $rootScope.importance = {}; // importance level -> obj with things, active, ...
   $rootScope.urgency = {};
 
+  var service = {};
+
+  /* public API */
+
+  service.loadedThingsData = function(type, thingsData) {
+
+    var thingsDataOfType = [];
+
+    // reset when we recount
+    resetHash($rootScope.projects);
+    resetHash($rootScope.contexts);
+    resetHash($rootScope.importance);
+    resetHash($rootScope.urgency);
+
+    for (var i = 0; i < thingsData.length; i++) {
+      // FIXME: not sure if it's better to deal with thingData here or
+      //        full thing objects
+      var thing = thingsData[i];
+      if ((thing.state === type) ||
+          (type == Thing.ACTIVE && !thing.state)) {
+        thingsDataOfType.push(thing);
+        trackHash($rootScope.projects, 'project', thing);
+        trackHash($rootScope.contexts, 'context', thing);
+        trackNumberHash($rootScope.importance, 'importance', thing);
+        trackNumberHash($rootScope.urgency, 'urgency', thing);
+      }
+    }
+    debug('loaded ' + Object.keys($rootScope.projects).length +
+        ' projects');
+    debug('loaded ' + Object.keys($rootScope.contexts).length +
+        ' contexts');
+    debug('loaded ' + Object.keys($rootScope.importance).length +
+        ' importance levels');
+    debug('loaded ' + Object.keys($rootScope.urgency).length +
+        ' urgency levels');
+    return thingsDataOfType;
+  };
+
+  service.get = function(id) {
+    return $q.when(hoodie.store.find('thing', id));
+  };
+
+  /* called by ThingsController to load all things */
+  service.getAll = function(type) {
+    var start = new Date();
+
+    var promise = $q.when(hoodie.store.findAll('thing'));
+    if (!Thing.isType(type)) {
+      return promise;
+    }
+
+    var deferred = $q.defer();
+
+    promise.then(function(thingsData) {
+      debug('loaded ' + thingsData.length + ' hoodie things in ' +
+          (new Date().getTime() - start.getTime()) + ' ms');
+
+      thingsDataOfType = service.loadedThingsData(type, thingsData);
+
+      // now that we've loaded, make sure we start broadcasting
+      // changes
+      hoodie.store.on('change:thing', function(name, thing) {
+        debug('change:thing handler, name ' + name + ', thing ' + thing);
+        $rootScope.$broadcast('thingChange', {
+          type: name,
+          thing: thing
+        })
+      });
+      debug('loaded ' + thingsDataOfType.length +
+          ' hoodie things of type ' + type + ' in ' +
+          (new Date().getTime() - start.getTime()) + ' ms');
+
+      deferred.resolve(thingsDataOfType);
+    });
+    return deferred.promise;
+  };
+
+  service.add = function(title, description, data) {
+    var newThing = new Thing(title, description, data)
+    return $q.when(hoodie.store.add('thing', newThing.data))
+  };
+
+  service.extend = function(scope) {
+    /* service adds proxies for some functions on the Thing class,
+     * instantiating them on the fly so they can be changed.
+     */
+    var methods = ['setDone', 'setDeleted', 'setComplete']
+
+    angular.forEach(methods, function(method) {
+      scope[method] = function(data) {
+        var thing = new Thing(data)
+        return thing[method]()
+      }
+    });
+
+    /* generate all conversion functions, named convertTo... */
+    /* service should match the Thing types in services/thing.js */
+    var conversions = ['active', 'archive'];
+
+    angular.forEach(conversions, function(conversion) {
+      var methodName = 'convertTo' + conversion[0].toUpperCase() + conversion.substring(1);
+      var state = Thing[conversion.toUpperCase()];
+
+      scope[methodName] = function(data) {
+        debug(methodName + '(): ' + JSON.stringify(data));
+        var thing = new Thing(data);
+        return thing.convertTo(state);
+      };
+
+    });
+  };
+
   /* private API */
 
   // update the contexts/projects hash based on the thing
@@ -56,103 +168,6 @@ angular.module('mushin').factory('things', function ($rootScope, hoodie, $q, Thi
     }
   }
 
-  /* public API */
-  return {
-    get: function(id) {
-      return $q.when(hoodie.store.find('thing', id));
-    },
-    getAll: function(type) {
-      var start = new Date();
+  return service;
 
-      var promise = $q.when(hoodie.store.findAll('thing'));
-      if (!Thing.isType(type)) {
-        return promise;
-      }
-
-      var deferred = $q.defer();
-
-      promise.then(function(thingsData) {
-        var thingsDataOfType = [];
-
-        debug('loaded ' + thingsData.length + ' hoodie things in ' +
-            (new Date().getTime() - start.getTime()) + ' ms');
-
-        // reset when we recount
-        resetHash($rootScope.projects);
-        resetHash($rootScope.contexts);
-        resetHash($rootScope.importance);
-        resetHash($rootScope.urgency);
-
-        for (var i = 0; i < thingsData.length; i++) {
-          // FIXME: not sure if it's better to deal with thingData here or
-          //        full thing objects
-          var thing = thingsData[i];
-          if ((thing.state === type) ||
-              (type == Thing.ACTIVE && !thing.state)) {
-            thingsDataOfType.push(thing);
-            trackHash($rootScope.projects, 'project', thing);
-            trackHash($rootScope.contexts, 'context', thing);
-            trackNumberHash($rootScope.importance, 'importance', thing);
-            trackNumberHash($rootScope.urgency, 'urgency', thing);
-          }
-        }
-        debug('loaded ' + thingsDataOfType.length +
-            ' hoodie things of type ' + type + ' in ' +
-            (new Date().getTime() - start.getTime()) + ' ms');
-        debug('loaded ' + Object.keys($rootScope.projects).length +
-            ' projects');
-        debug('loaded ' + Object.keys($rootScope.contexts).length +
-            ' contexts');
-        debug('loaded ' + Object.keys($rootScope.importance).length +
-            ' importance levels');
-        debug('loaded ' + Object.keys($rootScope.urgency).length +
-            ' urgency levels');
-
-        // now that we've loaded, make sure we start broadcasting
-        // changes
-        hoodie.store.on('change:thing', function(name, thing) {
-          $rootScope.$broadcast('thingChange', {
-            type: name,
-            thing: thing
-          })
-        });
-
-        deferred.resolve(thingsDataOfType);
-      });
-      return deferred.promise;
-    },
-    add: function(title, description, data) {
-      var newThing = new Thing(title, description, data)
-      return $q.when(hoodie.store.add('thing', newThing.data))
-    },
-    extend: function(scope) {
-      /* this adds proxies for some functions on the Thing class,
-       * instantiating them on the fly so they can be changed.
-       */
-      var methods = ['setDone', 'setDeleted', 'setComplete']
-
-      angular.forEach(methods, function(method) {
-        scope[method] = function(data) {
-          var thing = new Thing(data)
-          return thing[method]()
-        }
-      })
-
-      /* generate all conversion functions, named convertTo... */
-      /* this should match the Thing types in services/thing.js */
-      var conversions = ['active', 'archive'];
-
-      angular.forEach(conversions, function(conversion) {
-        var methodName = 'convertTo' + conversion[0].toUpperCase() + conversion.substring(1);
-        var state = Thing[conversion.toUpperCase()];
-
-        scope[methodName] = function(data) {
-          debug(methodName + '(): ' + JSON.stringify(data));
-          var thing = new Thing(data);
-          return thing.convertTo(state);
-        };
-
-      });
-    }
-  }
-})
+});

@@ -56,12 +56,13 @@ angular.module('mushin').controller(
     $scope.$on('NUMBER_TOGGLED', function(event, type, name) {
       var number = $scope.thing[type];
       debug('NUMBER TOGGLED for ' + name + ' when I have ' + number);
-      if (number == name) {
+      /* name comes in as a string */
+      if (number == parseInt(name)) {
         // remove
         $scope.thing[type] = undefined;
       } else {
         // set
-        $scope.thing[type] = name;
+        $scope.thing[type] = parseInt(name);
       }
       debug('running $scope.update for NUMBER_TOGGLED');
       $scope.update();

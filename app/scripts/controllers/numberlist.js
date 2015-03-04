@@ -82,11 +82,14 @@ angular.module('mushin').controller(
      * @ngdoc    method
      * @name     mushin.controller:NumberListController#toggle
      * @methodOf mushin.controller:NumberListController
-     * @param    {string} name the name of the tag to toggle.
+     * @param    {string} name the one-character 'name' of the
+     *                         number to toggle.
      *
      * @description
      *
-     * Toggle the selection state of a tag.
+     * Toggle the selection state of the number.
+     * Will emit NUMBER_TOGGLED with urgency/importance and a string
+     * representation of the number toggled.
      */
     $scope.toggle = function(name) {
       var all = true;
@@ -119,7 +122,7 @@ angular.module('mushin').controller(
      *
      * @description
      *
-     * Clear the selection state of all tags, and set selectedAll.
+     * Clear the selection state of all numbers, and set selectedAll.
      */
     $scope.clear = function() {
       for (var key in $scope.active) {
@@ -128,6 +131,7 @@ angular.module('mushin').controller(
       $scope.selectedAll = true;
     }
 
+    /* FIXME: this looks unused anywhere; remove? */
     /**
      * @ngdoc    method
      * @name     mushin.controller:NumberListController#filterByTag

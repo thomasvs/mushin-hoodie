@@ -130,26 +130,6 @@ angular.module('mushin').controller(
 
     /**
      * @ngdoc    method
-     * @name     mushin.controller:NumberListController#getCount
-     * @methodOf mushin.controller:NumberListController
-     *
-     * @description
-     *
-     * Get the number of things for the given tag.
-     *
-     * @param    {string} tag the name of the tag to get a count for;
-     *                        leave undefined to get the total count of tags
-     */
-    $scope.getCount = function(tag) {
-      if (tag) {
-        return $scope.tags[tag].things.length;
-      } else {
-        return Object.keys($scope.tags).length;
-      }
-    }
-
-    /**
-     * @ngdoc    method
      * @name     mushin.controller:NumberListController#filterByTag
      * @methodOf mushin.controller:NumberListController
      *

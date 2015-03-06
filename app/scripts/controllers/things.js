@@ -430,8 +430,10 @@ angular.module('mushin').controller(
     debug('controllers/things.js: calling fetchThings');
     fetchThings()
       .then(function() {
-        $scope.$on('thingChange', function() {
-          debug('thingChange, calling fetchThings');
+        $scope.$on('thingChange', function(event, change) {
+          debug('thingChange: type ' + change.type);
+          debug('thingChange: thing ' + change.thing);
+          debug('thingChange: thing ' + JSON.stringify(change.thing));
           // FIXME: this is too expensive to redo every time;
           // figure out which thing chnaged instead
           //fetchThings();

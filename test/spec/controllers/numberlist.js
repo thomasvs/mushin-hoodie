@@ -37,22 +37,23 @@ describe(
       )
     );
 
-    it('should initialize even with boolean properties', function () {
-      var $nlc = createController(false, 'unknown-type', 'haha', true,
-        true);
+    it('should initialize even with (wrong) boolean properties',
+      function () {
+        var $nlc = createController(false, 'unknown-type', 'haha', true,
+          true);
     });
 
     it('should emit NUMBER_TOGGLED with type and name', function () {
-      scope.active = {};
-      var $nlc = createController();
+        scope.active = {};
+        var $nlc = createController();
 
-      spyOn(scope, "$emit");
+        spyOn(scope, "$emit");
 
-      scope.toggle('1');
+        scope.toggle('1');
 
-      expect(scope.$emit).toHaveBeenCalledWith(
-        "NUMBER_TOGGLED", "unknown-type", "1");
-      expect(scope.active["1"]).toEqual({ "active": true });
+        expect(scope.$emit).toHaveBeenCalledWith(
+          "NUMBER_TOGGLED", "unknown-type", "1");
+        expect(scope.active["1"]).toEqual({ "active": true });
     });
   }
 );

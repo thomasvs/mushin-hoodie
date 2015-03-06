@@ -4,12 +4,14 @@ angular.module('mushin').controller(
     things, Thing,
     lists, hoodie) {
 
+    var debug = new window.$debug('mushin:controllers/things');
+
     /* lists is app/scripts/services/lists.js */
 
     $scope.sortActive = $cookieStore.get('sortActive') || false;
-    console.log('loaded sortActive cookie as ' + $scope.sortActive);
+    debug('loaded sortActive cookie as ' + $scope.sortActive);
     $scope.filterActive = $cookieStore.get('filterActive') || false;
-    console.log('loaded filterActive cookie as ' + $scope.filterActive);
+    debug('loaded filterActive cookie as ' + $scope.filterActive);
 
 
     /* module functions */
@@ -21,7 +23,6 @@ angular.module('mushin').controller(
       $scope.filterActive = !$scope.filterActive;
       $cookieStore.put('filterActive', $scope.filterActive);
     }
-
 
     $scope.newThing = function() {
 

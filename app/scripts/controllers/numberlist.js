@@ -70,7 +70,8 @@ angular.module('mushin').controller(
 
     $scope.open = false;
 
-    debug('new NumberListController of type ' + $scope.type);
+    debug('new NumberListController of type ' + $scope.type +
+      ' with attrs ' + JSON.stringify($attrs));
 
     $scope.selectedAll = true;
 

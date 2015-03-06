@@ -140,6 +140,10 @@ angular.module('mushin').controller(
 
       var now = new Date();
       var due = new Date(thing.due);
+      // undefined is fine, anything else is a parsing error
+      if (thing.due && isNaN(due.getTime()))
+          debug('warning: id ' + thing.id +
+            ': could not parse date ' + thing.due);
 
       var dayStart = new Date(now.valueOf());
       dayStart.setHours(0);

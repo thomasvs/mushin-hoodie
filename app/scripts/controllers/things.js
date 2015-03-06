@@ -167,15 +167,15 @@ angular.module('mushin').controller(
         case 'today':
           if (dayStart <= due && due < dayEnd)
             ret = true;
-            break;
+          break;
         case 'due':
           if (now < due)
             ret = true;
-            break;
+          break;
         case 'no':
           if (!thing.due)
             ret = true;
-            break;
+          break;
       }
 
       return ret;

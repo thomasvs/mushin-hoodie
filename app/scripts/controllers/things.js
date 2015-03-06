@@ -8,6 +8,8 @@ angular.module('mushin').controller(
 
     $scope.sortActive = $cookieStore.get('sortActive') || false;
     console.log('loaded sortActive cookie as ' + $scope.sortActive);
+    $scope.filterActive = $cookieStore.get('filterActive') || false;
+    console.log('loaded filterActive cookie as ' + $scope.filterActive);
 
 
     /* module functions */
@@ -15,6 +17,11 @@ angular.module('mushin').controller(
       $scope.sortActive = !$scope.sortActive;
       $cookieStore.put('sortActive', $scope.sortActive);
     }
+    $scope.toggleFilterActive = function() {
+      $scope.filterActive = !$scope.filterActive;
+      $cookieStore.put('filterActive', $scope.filterActive);
+    }
+
 
     $scope.newThing = function() {
 

@@ -1,11 +1,21 @@
 angular.module('mushin').controller(
   'ThingsController',
-  function($scope, $rootScope, $filter, $location, $q, things, Thing,
+  function($scope, $rootScope, $filter, $location, $q, $cookieStore,
+    things, Thing,
     lists, hoodie) {
 
     /* lists is app/scripts/services/lists.js */
 
+    $scope.sortActive = $cookieStore.get('sortActive') || false;
+    console.log('loaded sortActive cookie as ' + $scope.sortActive);
+
+
     /* module functions */
+    $scope.toggleSortActive = function() {
+      $scope.sortActive = !$scope.sortActive;
+      $cookieStore.put('sortActive', $scope.sortActive);
+    }
+
     $scope.newThing = function() {
 
       var title = ($scope.thingTitle || '').trim()

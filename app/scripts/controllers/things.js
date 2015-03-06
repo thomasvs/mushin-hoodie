@@ -176,6 +176,9 @@ angular.module('mushin').controller(
           if (!thing.due)
             ret = true;
           break;
+        default:
+          throw new Error("Unknown value for dueSelect: " +
+            $scope.dueSelect);
       }
 
       return ret;

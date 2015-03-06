@@ -1,6 +1,12 @@
 FEATURES
 --------
 
+- when a thing gets added/changes/... add it to the tasks, instead of
+  (currently disabled) reloading of everything
+
+- remember state of filter and order buttons
+- fix search and filterByDueDate
+
 - when typing in a new thing, when you hit @ or p: or any other special thing,
   auto-suggest as you type
 

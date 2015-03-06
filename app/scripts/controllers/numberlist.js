@@ -70,8 +70,9 @@ angular.module('mushin').controller(
 
     $scope.open = false;
 
-    debug('new NumberListController of type ' + $scope.type +
-      ' with attrs ' + JSON.stringify($attrs));
+    debug('new NumberListController of type ' + $scope.type);
+    // FIXME: can't do this; circular attrs
+    // ' with attrs ' + JSON.stringify($attrs));
 
     $scope.selectedAll = true;
 

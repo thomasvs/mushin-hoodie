@@ -4,7 +4,7 @@
 module.exports = function(config) {
   var configuration = {
     // base path, that will be used to resolve files and exclude
-    basePath: '',
+    basePath: '.',
 
     // testing framework to use (jasmine/mocha/qunit/...)
     frameworks: ['jasmine'],
@@ -19,6 +19,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      'test/debug.js',
       'app/bower_components/jquery/dist/jquery.js',
 //    This one fails with an undefined reference to Hoodie
 //      'node_modules/hoodie-server/node_modules/hoodie/dist/hoodie.js',
@@ -39,6 +40,7 @@ module.exports = function(config) {
       'app/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'app/bower_components/add-to-homescreen/src/addtohomescreen.js',
       'app/bower_components/bradypodion/dist/bradypodion.js',
+
       'app/scripts/*.js',
       'app/scripts/**/*.js',
 //      'test/mock/**/*.js',
@@ -54,7 +56,7 @@ module.exports = function(config) {
 
     // level of logging
     // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
-    logLevel: config.LOG_INFO,
+    logLevel: config.LOG_DEBUG,
 
 
     // enable / disable watching file and executing tests whenever any file changes

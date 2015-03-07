@@ -36,7 +36,7 @@
   </span>
 
   <!-- div for by due date filter -->
-  <div class="btn-group due-dropdown" ng-if="sortActive" dropdown ng-class="{open: dueOpen}">
+  <div class="btn-group due-dropdown" ng-if="filterActive" dropdown ng-class="{open: dueOpen}">
 
     <button type="button" class="btn btn-primary dropdown-toggle btn-sm" ng-click="dueOpen=!dueOpen">
       By Due date: {{ dueSelect }}

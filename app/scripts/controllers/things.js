@@ -264,6 +264,10 @@ angular.module('mushin').controller(
       return ret;
     };
 
+    $scope.setDueSelect = function(value) {
+      $scope.dueSelect = value;
+    };
+
     $scope.notRecentlyCompleted = function(thing) {
       if (thing.complete != 100) {
 //        debug(thing.title + ' not complete, keeping');

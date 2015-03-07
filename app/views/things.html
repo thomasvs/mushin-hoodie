@@ -43,15 +43,15 @@
     </button>
     <ul class="dropdown-menu" role="menu">
       <li ng-class="{ active: dueSelect == 'all' }">
-        <a href="" ng-click="dueSelect = 'all'">All</a></li>
+        <a href="" ng-click="setDueSelect('all')">All</a></li>
       <li ng-class="{ active: dueSelect == 'overdue' }">
-        <a href="" ng-click="dueSelect = 'overdue'">Overdue</a></li>
+        <a href="" ng-click="setDueSelect('overdue')">Overdue</a></li>
       <li ng-class="{ active: dueSelect == 'today' }">
-        <a href="" ng-click="dueSelect = 'today'">Due Today</a></li>
+        <a href="" ng-click="setDueSelect('today')">Due Today</a></li>
       <li ng-class="{ active: dueSelect == 'due' }">
-        <a href="" ng-click="dueSelect = 'due'">Due</a></li>
+        <a href="" ng-click="setDueSelect('due')">Due</a></li>
       <li ng-class="{ active: dueSelect == 'no' }">
-        <a href="" ng-click="dueSelect = 'no'">No Due Date</a></li>
+        <a href="" ng-click="setDueSelect('no')">No Due Date</a></li>
     </ul>
 
   </div>

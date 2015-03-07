@@ -4,9 +4,89 @@ angular.module('mushin').controller(
     things, Thing,
     lists, hoodie) {
 
-    var debug = new window.$debug('mushin:controllers/things');
-
     /* lists is app/scripts/services/lists.js */
+
+    /* module code */
+
+    var debug = new window.$debug('mushin:ThingsController');
+    var search = $location.search();
+
+    // declare it here so that ng-repeat of thing in thingsFound exposes
+    // this to controller
+//    $scope.thingsFound = [];
+
+    // whether a thing is selected in the things view
+    // mapping of thing.id -> thing
+    $scope.selected = {};
+    $scope.selectedAll = false;
+
+    $scope.title = "Things"; /* set from search query */
+    if (search.title) {
+      $scope.title = "Things: " + search.title;
+      debug('controllers/things.js: parsed title ' + search.title);
+    }
+
+    // order of the things listed
+    $scope.predicate = 'title';
+
+    // state of the by due date filter
+    $scope.dueSelect = 'all';
+
+
+    debug('controllers/things.js: search params ' + JSON.stringify(search));
+
+    $scope.saveListActive = false;
+
+
+    $scope.inbox = [];
+
+    /* this adds proxy functions to Thing class functions */
+    things.extend($scope);
+
+    // http://cubiq.org/add-to-home-screen
+    addToHomescreen({
+      maxDisplayCount: 3
+    });
+
+    /* listen for events from multi edit dialog */
+    $scope.$on("multiEditAction", function(event, args) {
+      debug('action: ' + args.action + ' ' +
+        Object.keys($scope.selected).length + ' things');
+
+      if (args.action == 'importance' || args.action == 'urgency') {
+        var number = args.number;
+        var promises = [];
+
+        angular.forEach($scope.selected, function (value) {
+          value[args.action] = number;
+
+          var res = hoodie.store.update('thing', value.id, value);
+
+          promises.push(res);
+
+          debug('update: ' + JSON.stringify(res));
+        });
+
+        return $q.all(promises);
+      }
+    });
+
+    debug('controllers/things.js: calling fetchThings');
+    fetchThings()
+      .then(function() {
+        $scope.$on('thingChange', function(event, change) {
+          debug('thingChange: type ' + change.type);
+          debug('thingChange: thing ' + change.thing);
+          debug('thingChange: thing ' + JSON.stringify(change.thing));
+          // FIXME: this is too expensive to redo every time;
+          // figure out which thing chnaged instead
+          //fetchThings();
+          debug('thingChange, called fetchThings');
+        });
+
+    });
+    debug('controllers/things.js: called fetchThings');
+
 
     $scope.sortActive = $cookieStore.get('sortActive') || false;
     debug('loaded sortActive cookie as ' + $scope.sortActive);
@@ -386,87 +466,6 @@ angular.module('mushin').controller(
       debug('fetchThings: returning');
       return deferred.promise;
     }
-
-    /* module code */
-
-    var debug = new window.$debug('mushin:ThingsController');
-    var search = $location.search();
-
-    // declare it here so that ng-repeat of thing in thingsFound exposes
-    // this to controller
-//    $scope.thingsFound = [];
-
-    // whether a thing is selected in the things view
-    // mapping of thing.id -> thing
-    $scope.selected = {};
-    $scope.selectedAll = false;
-
-    $scope.title = "Things"; /* set from search query */
-    if (search.title) {
-      $scope.title = "Things: " + search.title;
-      debug('controllers/things.js: parsed title ' + search.title);
-    }
-
-    // order of the things listed
-    $scope.predicate = 'title';
-
-    // state of the by due date filter
-    $scope.dueSelect = 'all';
-
-
-    debug('controllers/things.js: search params ' + JSON.stringify(search));
-
-    $scope.saveListActive = false;
-
-
-    $scope.inbox = [];
-
-    /* this adds proxy functions to Thing class functions */
-    things.extend($scope);
-
-    // http://cubiq.org/add-to-home-screen
-    addToHomescreen({
-      maxDisplayCount: 3
-    });
-
-    /* listen for events from multi edit dialog */
-    $scope.$on("multiEditAction", function(event, args) {
-      debug('action: ' + args.action + ' ' +
-        Object.keys($scope.selected).length + ' things');
-
-      if (args.action == 'importance' || args.action == 'urgency') {
-        var number = args.number;
-        var promises = [];
-
-        angular.forEach($scope.selected, function (value) {
-          value[args.action] = number;
-
-          var res = hoodie.store.update('thing', value.id, value);
-
-          promises.push(res);
-
-          debug('update: ' + JSON.stringify(res));
-        });
-
-        return $q.all(promises);
-      }
-    });
-
-    debug('controllers/things.js: calling fetchThings');
-    fetchThings()
-      .then(function() {
-        $scope.$on('thingChange', function(event, change) {
-          debug('thingChange: type ' + change.type);
-          debug('thingChange: thing ' + change.thing);
-          debug('thingChange: thing ' + JSON.stringify(change.thing));
-          // FIXME: this is too expensive to redo every time;
-          // figure out which thing chnaged instead
-          //fetchThings();
-          debug('thingChange, called fetchThings');
-        });
-
-    });
-    debug('controllers/things.js: called fetchThings');
 
   }
 );

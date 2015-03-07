@@ -30,7 +30,8 @@
 <div>
   <span>
     <div class="search" ng-if="filterActive">
-      <input type="text" class="form-control" placeholder="Search" ng-model="searchString">
+      <input type="text" class="form-control" placeholder="Search"
+             ng-model="search.title">
     </div>
   </span>
 
@@ -78,8 +79,8 @@
             inside bp-table below isn't, so that thingsFound is not
             available in ThingsController -->
 <table>
-<tr ng-repeat="thing in thingsFiltered = (things | filter:notRecentlyCompleted | filter:filterByTag | filter:filterByNumber | filter:{title: searchString} | filter:filterByDueSelector | orderBy:predicate) track by thing.id">
-<tr ng-repeat="thing in thingsFound = (things | filter:notRecentlyCompleted | filter:filterByTag | filter:filterByNumber | filter:{title: searchString} | filter:filterByDueSelector | orderBy:predicate | limitTo: 50) track by thing.id">
+<tr ng-repeat="thing in thingsFiltered = (things | filter:notRecentlyCompleted | filter:filterByTag | filter:filterByNumber | filter:search | filter:filterByDueSelector | orderBy:predicate) track by thing.id">
+<tr ng-repeat="thing in thingsFound = (things | filter:notRecentlyCompleted | filter:filterByTag | filter:filterByNumber | filter:search | filter:filterByDueSelector | orderBy:predicate | limitTo: 50) track by thing.id">
 <td> </td>
 </tr>
 </table>
@@ -101,7 +102,7 @@
   <bp-cell
     thing-cell
     class="thing-cell-animation"
-    ng-repeat="thing in thingsFound = (things | filter:notRecentlyCompleted | filter:filterByTag | filter:filterByNumber | filter:{title: searchString} | filter:filterByDueSelector | orderBy:predicate | limitTo: 50) track by thing.id"
+    ng-repeat="thing in thingsFound = (things | filter:notRecentlyCompleted | filter:filterByTag | filter:filterByNumber | filter:search | filter:filterByDueSelector | orderBy:predicate | limitTo: 50) track by thing.id"
     swipe-right="convertToArchive(thing)"
     swipe-left="convertToMit(thing)"
     swipe-long-right="setDeleted(thing)"

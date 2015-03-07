@@ -11,6 +11,10 @@ angular.module('mushin').controller(
     var debug = new window.$debug('mushin:ThingsController');
     var search = $location.search();
 
+    // done as an object to avoid scoping issues
+    // see http://jonathancreamer.com/working-with-all-the-different-kinds-of-scopes-in-angular/
+    $scope.search = {};
+
     // declare it here so that ng-repeat of thing in thingsFound exposes
     // this to controller
 //    $scope.thingsFound = [];

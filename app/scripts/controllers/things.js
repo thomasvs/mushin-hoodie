@@ -245,15 +245,15 @@ angular.module('mushin').controller(
           ret = true;
           break;
         case 'overdue':
-          if (now > due)
+          if (thing.due && now > due)
             ret = true;
           break;
         case 'today':
-          if (dayStart <= due && due < dayEnd)
+          if (thing.due && dayStart <= due && due < dayEnd)
             ret = true;
           break;
         case 'due':
-          if (now < due)
+          if (thing.due && now < due)
             ret = true;
           break;
         case 'no':

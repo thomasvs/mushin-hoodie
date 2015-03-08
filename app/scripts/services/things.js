@@ -66,7 +66,7 @@ angular.module('mushin').factory('things',
         debug('loaded ' + thingsData.length + ' hoodie things in ' +
             (new Date().getTime() - start.getTime()) + ' ms');
 
-        thingsDataOfType = service.loadedThingsData(type, thingsData);
+        var thingsDataOfType = service.loadedThingsData(type, thingsData);
 
         // now that we've loaded, make sure we start broadcasting
         // changes

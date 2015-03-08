@@ -26,6 +26,7 @@ module.exports = function(config) {
 //    This one works, but I had to bower install hoodie
       'app/bower_components/hoodie/dist/hoodie.js',
       'app/bower_components/angular/angular.js',
+      'app/bower_components/angular-cookies/angular-cookies.js',
       'app/bower_components/angular-mocks/angular-mocks.js',
       'node_modules/hoodie-plugin-angularjs/hoodie.angularjs.js',
       'app/bower_components/debug-browser/debug.js',

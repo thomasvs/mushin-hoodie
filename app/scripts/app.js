@@ -9,7 +9,7 @@ angular.module(
   'mushin', [
     'bp',
     'angular-loading-bar',
-     'ngCookies',
+    'ngCookies',
     'hoodie',
     'monospaced.elastic',
     'datePicker',

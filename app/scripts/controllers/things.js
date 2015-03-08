@@ -1,6 +1,6 @@
 angular.module('mushin').controller(
   'ThingsController',
-  function($scope, $rootScope, $filter, $location, $q, $cookieStore,
+  function($scope, $rootScope, $location, $q, $cookieStore,
     things, Thing,
     lists, hoodie) {
 
@@ -85,7 +85,7 @@ angular.module('mushin').controller(
           // FIXME: this is too expensive to redo every time;
           // figure out which thing chnaged instead
           //fetchThings();
-          debug('thingChange, called fetchThings');
+          //debug('thingChange, called fetchThings');
         });
 
     });
@@ -397,11 +397,6 @@ angular.module('mushin').controller(
               ' ms');
           // at this time, the rootScope contexts/projects are set and thus
           // available through $scope too
-
-          $scope.things = $filter('filter')(things, function(thing) {
-            // FIXME: I'm filtering on complete/end in a filter func
-            if (!thing.done && !thing.deleted) return true;
-          });
 
           // parse query params from search entry now
           if (search.query) {

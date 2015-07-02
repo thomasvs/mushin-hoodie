@@ -124,9 +124,22 @@ angular.module('mushin').factory('things',
       return deferred.promise;
     };
 
+    /**
+     * @ngdoc method
+     * @methodOf mushin.service:things
+     * @name  mushin.service:things#add
+     * @param {string} title       title
+     * @param {string} description a longer description
+     * @param {Object} data        parsed thing data
+     *
+     * @description
+     *
+     * Create a new thing with the given title, description, and thing data,
+     * and store it in the data store.
+     */
     service.add = function(title, description, data) {
-      var newThing = new Thing(title, description, data)
-      return $q.when(hoodie.store.add('thing', newThing.data))
+      var newThing = new Thing(title, description, data);
+      return $q.when(hoodie.store.add('thing', newThing.data));
     };
 
     service.extend = function(scope) {

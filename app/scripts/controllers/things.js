@@ -214,6 +214,17 @@ angular.module('mushin').controller(
 
 
     /* module functions */
+
+    /**
+     * @ngdoc    method
+     * @name     mushin.controller:ThingsController#toggleSortActive
+     * @methodOf mushin.controller:ThingsController
+     *
+     * @description
+     *
+     * Toggle the sort order.
+     * Stores the sort order in a cookie.
+     */
     $scope.toggleSortActive = function() {
       $scope.sortActive = !$scope.sortActive;
       $cookieStore.put('sortActive', $scope.sortActive);
@@ -223,9 +234,21 @@ angular.module('mushin').controller(
       $cookieStore.put('filterActive', $scope.filterActive);
     }
 
+    /**
+     * @ngdoc    method
+     * @name     mushin.controller:ThingsController#newThing
+     * @methodOf mushin.controller:ThingsController
+     *
+     * @description
+     *
+     * Creates a new thing from the view's thing entry text.
+     * Adds it to the things service.
+     * Resets the thing entry.
+     */
+
     $scope.newThing = function() {
 
-      var title = ($scope.thingTitle || '').trim()
+      var title = ($scope.thingTitle || '').trim();
       var parser = new window.Parser();
       var parsed = parser.parse(title);
 

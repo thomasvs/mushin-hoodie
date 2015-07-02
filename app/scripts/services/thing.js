@@ -30,7 +30,14 @@ angular.module('mushin').factory('Thing',
      *
      * @description
      *
-     * Create a new Thing from either title, or a data Object.
+     * Create a new Thing from the given arguments.
+     *
+     * If the first argument is a data Object, recreate the thing from
+     * that data object without any additional processing.
+     *
+     * Otherwise, set title, description, and the additional data given,
+     * then set/override some default values on specific attributes.
+     * This mode is used for parsing new thing entries.
      */
     function Thing(titleOrData, description, data) {
       debug('new Thing object with title/data ' + JSON.stringify(titleOrData) +

@@ -40,7 +40,9 @@ Currently using ng-docs.
 
 grunt ngdocs
 
-- go to http://localhost:8999/docs/api
+- read them:
+  grunt serve
+  browse to http://localhost:8999/docs/
 
 Reset database from backup
 --------------------------

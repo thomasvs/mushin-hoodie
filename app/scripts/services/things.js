@@ -2,21 +2,46 @@
 //
 // tested in test/spec/services/things.js
 //
+
+/**
+ * @ngdoc     service
+ * @name      mushin.service:things
+ *
+ * @description <p>The things service tracks all things, and loads them from
+ *                 the data store.</p>
+ */
 angular.module('mushin').factory('things',
   function($rootScope, $filter, hoodie, $q, Thing) {
 
     var debug = new window.$debug('mushin:services/thing');
 
+    /* inject tracking variables in the root scope */
     $rootScope.contexts = {}; // context name -> obj with things, active, ...
     $rootScope.projects = {};
     $rootScope.importance = {}; // importance level -> obj with things, active, ...
     $rootScope.urgency = {};
     $rootScope.things = [];
 
-    var service = {};
+    var service = {}; // the service object to which we will attach functions and
+                      // return
 
     /* public API */
 
+
+    /**
+     * @ngdoc method
+     * @methodOf mushin.service:things
+     * @name  mushin.service:things#loadedThingsData
+     * @param {enum}           type       accepted type of things to be loaded;
+     *                                    e.g. Thing.ACTIVE
+     * @param {list of Object} thingsData list of data objects for things
+     *
+     * @description
+     *
+     * Reset our tracking state with the given loaded things.
+     * Only loads things of the specified type.
+     * Called after getting all data objects from the data store.
+     */
     service.loadedThingsData = function(type, thingsData) {
 
       var thingsDataOfType = [];

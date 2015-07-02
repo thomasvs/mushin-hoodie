@@ -1,9 +1,12 @@
 Setting up for development
 --------------------------
 
-npm install --dev
+npm install
 export PATH=`pwd`/node_modules/.bin:$PATH
 bower install
+
+Rerun these after updating your checkout to make sure dependencies are kept
+up-to-date.
 
 Running in dev mode
 -------------------
@@ -18,12 +21,15 @@ export PATH=`pwd`/node_modules/.bin:$PATH
 
 once:
 
-grunt test
+  grunt test
 
 continous:
 
-grunt karma
+  grunt karma
 
+If you want debug logging on the console, create test/debug.js with:
+
+echo "window.DEBUG = 'mushin:*'" > test/debug.js
 
 Documentation
 -------------

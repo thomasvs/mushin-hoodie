@@ -13,7 +13,7 @@ describe(
     var api = hoodieApi.store;
 
     var debug = new window.$debug('mushin:services/thing');
-    debug('Service: things debug');
+    debug('TEST: Service: things debug');
 
     beforeEach(module('mushin'));
 

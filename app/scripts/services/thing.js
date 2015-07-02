@@ -4,7 +4,8 @@
  * @ngdoc     service
  * @name      mushin.service:Thing
  *
- * @description <p>The Thing class encapsulates a Thing.</p>
+ * @description <p>The Thing service creates objects that persist
+ *                 changes to hoodie.</p>
  */
 angular.module('mushin').factory('Thing',
   function($q, $filter, hoodie) {
@@ -71,6 +72,15 @@ angular.module('mushin').factory('Thing',
       return type === ACTIVE || type === ARCHIVE;
     };
 
+    /**
+     * @ngdoc method
+     * @methodOf mushin.service:Thing
+     * @name  mushin.service:Thing#setDone
+     *
+     * @description
+     *
+     * Marks a thing as done in the data store.
+     */
     Thing.prototype.setDone = function() {
       var data = this.data;
       var state = data.state;

@@ -10,8 +10,13 @@ module.exports = function(config) {
     frameworks: ['jasmine'],
 
     preprocessors: {
-      'app/views/*.html': 'html2js'
+      'app/views/*.html': 'html2js',
+      // source files, that you wanna generate coverage for
+      // do not include tests or libraries
+      // (these files will be instrumented by Istanbul)
+      'app/scripts/**/*.js': ['coverage'],
     },
+
     ngHtml2JsPreprocessor: {
       stripPrefix: "app/",
       moduleName: "template-module"
@@ -50,6 +55,22 @@ module.exports = function(config) {
       'app/views/*.html',
     ],
 
+    // See https://github.com/karma-runner/karma-coverage
+    reporters: ['progress', 'coverage'],
+
+    // optionally, configure the reporter
+    coverageReporter: {
+      reporters: [
+        {
+          type : 'html',
+          dir : 'coverage/'
+        },
+        {
+          type : 'text-summary'
+        },
+      ],
+    },
+
     // list of files / patterns to exclude
     exclude: [],
 
@@ -78,6 +99,7 @@ module.exports = function(config) {
     plugins: [
       'karma-jasmine',
       'karma-chrome-launcher',
+      'karma-coverage',
       'karma-ng-html2js-preprocessor',
     ],
     // See http://stackoverflow.com/questions/19255976/how-to-make-travis-execute-angular-tests-on-chrome-please-set-env-variable-chr

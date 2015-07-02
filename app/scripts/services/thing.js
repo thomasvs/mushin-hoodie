@@ -44,7 +44,7 @@ angular.module('mushin').factory('Thing',
     Thing.ONE_WEEK = ONE_WEEK
     // FIXME: rename things to active or open here, but mind goToCorrectType
     // should match the types enum above
-    Thing.types = [ , 'things', 'archive']
+    Thing.types = [, 'things', 'archive']
 
     Thing.isType = function(type) {
       return type === ACTIVE || type === ARCHIVE

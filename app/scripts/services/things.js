@@ -34,7 +34,13 @@ angular.module('mushin').factory('things',
               {
                 title: 'my title',
                 type: Thing.ACTIVE,
-              }
+                id: 'a1',
+              },
+              {
+                title: 'my second thing',
+                type: Thing.ACTIVE,
+                id: 'a2',
+              },
             ]);
           },
           on: function(evt, func) {

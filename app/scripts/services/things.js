@@ -9,8 +9,9 @@
  * @requires  hoodie
  * @requires  mushin.service:Thing
  *
- * @description <p>The things service tracks all things, and loads them from
- *                 the data store.</p>
+ * @description <p>The things service tracks all things, loads them from
+ *                 the data store, and updates the rootScope tracking
+ *                 variables.</p>
  */
 angular.module('mushin').factory('things',
   function($rootScope, $filter, hoodie, $q, Thing) {

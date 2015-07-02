@@ -35,16 +35,6 @@ angular.module('mushin').controller(
 
     var debug = new window.$debug('mushin:ThingsController');
 
-    /* FIXME: can be used somewhere else to mock out hoodie
-    if ($state.current.data.mock.indexOf("hoodie") > -1) {
-      hoodie = {
-        store: {
-          findAll: function() { return Promise.resolve([{}, {}]) }
-        }
-      };
-    }
-    */
-
     /* private functions */
     function fetchThings() {
 

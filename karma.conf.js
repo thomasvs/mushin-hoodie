@@ -19,6 +19,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      // optional file that can be used to initialize debug logging
       'test/debug.js',
       'app/bower_components/jquery/dist/jquery.js',
 //    This one fails grunt test with an undefined reference to Hoodie

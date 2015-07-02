@@ -14,9 +14,41 @@
  *                 variables.</p>
  */
 angular.module('mushin').factory('things',
-  function($rootScope, $filter, hoodie, $q, Thing) {
+  function($rootScope, $filter, hoodie, $q, Thing, $state) {
 
     var debug = new window.$debug('mushin:services/thing');
+
+    /* hoodie is hoodie's hoodie.js, not the angularized version
+     * FIXME: not sure how angular finds this at all */
+    /* mock out hoodie using data on the state in stateProvider */
+    if ($state.current.data && $state.current.data.mock &&
+        $state.current.data.mock.indexOf("hoodie") > -1) {
+      debug('mocking out hoodie');
+      hoodie = {
+        /* FIXME: load mocked data from serialized file served over http? */
+        /* FIXME: create a mocked hoodie class in a separate js file and
+         *        load it ? */
+        store: {
+          findAll: function() {
+            return Promise.resolve([
+              {
+                title: 'my title',
+                type: Thing.ACTIVE,
+              }
+            ]);
+          },
+          on: function(evt, func) {
+            debug('hoodie.store.on: ' + evt + func);
+          },
+          add: function(type, data) {
+            debug('hoodie.store.add: ' + type + data);
+            /* FIXME: don't use alert, since this is a mock service
+             * should be changed to an event bubbling up that can be caught */
+            debug('Faked adding thing with title ' + data.title);
+          }
+        }
+      };
+    }
 
     /* inject tracking variables in the root scope */
     $rootScope.contexts = {}; // context name -> obj with things, active, ...

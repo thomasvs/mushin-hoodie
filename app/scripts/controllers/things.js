@@ -27,11 +27,23 @@
  */
 angular.module('mushin').controller(
   'ThingsController',
-  function($scope, $rootScope, $location, $q, $cookieStore,
+  function($scope, $rootScope, $state, $location, $q, $cookieStore,
     things, Thing,
     lists, hoodie) {
 
     /* lists is app/scripts/services/lists.js */
+
+    var debug = new window.$debug('mushin:ThingsController');
+
+    /* FIXME: can be used somewhere else to mock out hoodie
+    if ($state.current.data.mock.indexOf("hoodie") > -1) {
+      hoodie = {
+        store: {
+          findAll: function() { return Promise.resolve([{}, {}]) }
+        }
+      };
+    }
+    */
 
     /* private functions */
     function fetchThings() {
@@ -123,7 +135,6 @@ angular.module('mushin').controller(
 
     /* module code */
 
-    var debug = new window.$debug('mushin:ThingsController');
     var search = $location.search();
 
     // done as an object to avoid scoping issues

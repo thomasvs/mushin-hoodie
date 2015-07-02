@@ -105,6 +105,16 @@ angular.module(
         }
       })
 */
+      /* test views */
+      .state('test-things', {
+        url: '/test/things',
+        templateUrl: 'views/things.html',
+        controller: 'ThingsController',
+        data: {
+          title: 'Test Things',
+          mock: [ 'hoodie', 'things'],
+        }
+      })
   })
   .run(function($rootScope, $state, $q, $window) {
     var defer = $q.defer()

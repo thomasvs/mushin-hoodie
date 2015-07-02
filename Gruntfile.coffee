@@ -84,6 +84,11 @@ module.exports = (grunt) ->
         jshintrc: '.jshintrc'
       watch: [ '<%= app.app %>/scripts/**/*.js' ]
 
+    jscs:
+      main: [ '<%= app.app %>/scripts/**/*.js' ]
+      options:
+        config: ".jscsrc"
+
     uglify: options:
      preserveComments: 'some'
 
@@ -305,8 +310,10 @@ module.exports = (grunt) ->
   ]
 
   grunt.registerTask 'test', ['connect:test', 'karma:once']
+  grunt.registerTask 'lint', ['jshint', 'jscs']
   grunt.registerTask 'default', ['build']
   grunt.loadNpmTasks 'grunt-jsdoc'
   grunt.loadNpmTasks 'grunt-ngdocs'
   grunt.loadNpmTasks 'grunt-karma'
+  grunt.loadNpmTasks 'grunt-jscs'
 

@@ -2,11 +2,11 @@ angular.module('mushin').factory('Thing',
   function($q, $filter, hoodie) {
 
     // Thing types
-    var ACTIVE = 1
-    var ARCHIVE = 2
+    var ACTIVE = 1;
+    var ARCHIVE = 2;
 
-    var ONE_DAY = 24 * 60 * 60 * 1000
-    var ONE_WEEK = 7 * 24 * 60 * 60 * 1000
+    var ONE_DAY = 24 * 60 * 60 * 1000;
+    var ONE_WEEK = 7 * 24 * 60 * 60 * 1000;
 
     var debug = new window.$debug('mushin:Thing');
 
@@ -14,8 +14,8 @@ angular.module('mushin').factory('Thing',
       debug('new Thing object with title/data ' + JSON.stringify(title) +
           ' and desc ' + description)
       if (angular.isObject(title)) {
-        this.data = title
-        return
+        this.data = title;
+        return;
       }
 
       // defaults
@@ -38,21 +38,21 @@ angular.module('mushin').factory('Thing',
       debug('created new thing ' + JSON.stringify(this.data, null, 4));
     }
 
-    Thing.ACTIVE = ACTIVE
-    Thing.ARCHIVE = ARCHIVE
-    Thing.ONE_DAY = ONE_DAY
-    Thing.ONE_WEEK = ONE_WEEK
+    Thing.ACTIVE = ACTIVE;
+    Thing.ARCHIVE = ARCHIVE;
+    Thing.ONE_DAY = ONE_DAY;
+    Thing.ONE_WEEK = ONE_WEEK;
     // FIXME: rename things to active or open here, but mind goToCorrectType
     // should match the types enum above
     Thing.types = [, 'things', 'archive']
 
     Thing.isType = function(type) {
-      return type === ACTIVE || type === ARCHIVE
-    }
+      return type === ACTIVE || type === ARCHIVE;
+    };
 
     Thing.prototype.setDone = function() {
-      var data = this.data
-      var state = data.state
+      var data = this.data;
+      var state = data.state;
 
       // FIXME: this code was used to auto-archive things after some time */
       /*
@@ -74,7 +74,7 @@ angular.module('mushin').factory('Thing',
         done: true,
         state: state
       }))
-    }
+    };
 
     Thing.prototype.setComplete = function() {
       debug('complete thing with title ' + this.data.title);
@@ -108,32 +108,32 @@ angular.module('mushin').factory('Thing',
         due: due.toISOString(),
         end: end && end.toISOString() || '',
       }))
-    }
+    };
 
     Thing.prototype.setDeleted = function() {
       return $q.when(hoodie.store.update('thing', this.data.id, {
         deleted: true,
         state: ARCHIVE
       }))
-    }
+    };
 
     Thing.prototype.convertTo = function(type) {
       debug('convertTo(): type ' + type);
       if (type !== this.data.state && Thing.isType(type)) {
-        var changes = {state: type}
+        var changes = {state: type};
         /*
         if (type === MIT || type === BR) {
           changes.dueDate = Date.now()
         }
         */
-        return $q.when(hoodie.store.update('thing', this.data.id, changes))
+        return $q.when(hoodie.store.update('thing', this.data.id, changes));
       }
 
-      var deferred = $q.defer()
-      deferred.reject(false)
-      return deferred.promise
-    }
+      var deferred = $q.defer();
+      deferred.reject(false);
+      return deferred.promise;
+    };
 
-    return Thing
+    return Thing;
   }
 );

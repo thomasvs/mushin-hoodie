@@ -1,4 +1,7 @@
 // vi:si:et:sw=2:sts=2:ts=2
+//
+// tests for scripts/services/things.js
+//
 describe(
   'Service: things', function () {
     var things;

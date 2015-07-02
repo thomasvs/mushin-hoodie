@@ -1,3 +1,7 @@
+// vi:si:et:sw=2:sts=2:ts=2
+//
+// tested in test/spec/services/things.js
+//
 angular.module('mushin').factory('things',
   function ($rootScope, $filter, hoodie, $q, Thing) {
 

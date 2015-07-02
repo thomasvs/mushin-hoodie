@@ -1,15 +1,18 @@
-angular.module('mushin').factory('Thing', function ($q, $filter, hoodie) {
+angular.module('mushin').factory('Thing',
+  function($q, $filter, hoodie) {
+
   // Thing types
   var ACTIVE = 1
   var ARCHIVE = 2
 
-  var ONE_DAY = 24*60*60*1000
-  var ONE_WEEK = 7*24*60*60*1000
+  var ONE_DAY = 24 * 60 * 60 * 1000
+  var ONE_WEEK = 7 * 24 * 60 * 60 * 1000
 
   var debug = new window.$debug('mushin:Thing');
 
   function Thing(title, description, data) {
-    debug('new Thing object with title/data ' + JSON.stringify(title) + ' and desc ' + description)
+    debug('new Thing object with title/data ' + JSON.stringify(title) +
+        ' and desc ' + description)
     if (angular.isObject(title)) {
       this.data = title
       return
@@ -41,7 +44,7 @@ angular.module('mushin').factory('Thing', function ($q, $filter, hoodie) {
   Thing.ONE_WEEK = ONE_WEEK
   // FIXME: rename things to active or open here, but mind goToCorrectType
   // should match the types enum above
-  Thing.types = [,'things','archive']
+  Thing.types = [ , 'things', 'archive']
 
   Thing.isType = function(type) {
     return type === ACTIVE || type === ARCHIVE
@@ -76,7 +79,8 @@ angular.module('mushin').factory('Thing', function ($q, $filter, hoodie) {
   Thing.prototype.setComplete = function() {
     debug('complete thing with title ' + this.data.title);
 
-    var complete, end;
+    var complete;
+    var end;
     var start = this.data.start && new Date(this.data.start) || new Date();
     var due = this.data.due && new Date(this.data.due) || new Date();
 
@@ -84,7 +88,8 @@ angular.module('mushin').factory('Thing', function ($q, $filter, hoodie) {
       start = due;
       // interestingly, setSeconds handles wrapping
       due.setSeconds(due.getSeconds() + this.data.recurrence);
-      debug('handle recurrence ' + this.data.recurrence + ', start ' + start + ' due ' + due);
+      debug('handle recurrence ' + this.data.recurrence + ', start ' + start +
+          ' due ' + due);
     } else {
       if (this.data.complete == 100) {
         complete = 0;
@@ -130,4 +135,5 @@ angular.module('mushin').factory('Thing', function ($q, $filter, hoodie) {
   }
 
   return Thing
-});
+  }
+);

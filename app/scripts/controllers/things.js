@@ -1,3 +1,30 @@
+// vi:si:et:sw=2:sts=2:ts=2
+
+// FIXME: remove use of hoodie here; this should be data-store-agnostic
+
+/**
+ * @ngdoc     controller
+ * @name      mushin.controller:ThingsController
+ * @requires  $scope
+ *
+ * @description <p>The things controller controls the view of
+ *              things.</p>
+ *
+ *              <p>A parent scope should provide the following members:
+ *                 <dl>
+ *                   <dt>projects</dt>
+ *                   <dd>dict of projects</dd>
+ *                   <dt>contexts</dt>
+ *                   <dd>dict of contexts</dd>
+ *                   <dt>importance</dt>
+ *                   <dd>dict of importance</dd>
+ *                   <dt>urgency</dt>
+ *                   <dd>dict of urgency</dd>
+ *                 </dl>
+ *              </p>
+ *
+ * @author    Thomas Vander Stichele <thomas (at) apestaart (dot) org>
+ */
 angular.module('mushin').controller(
   'ThingsController',
   function($scope, $rootScope, $location, $q, $cookieStore,

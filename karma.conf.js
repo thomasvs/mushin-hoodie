@@ -21,9 +21,9 @@ module.exports = function(config) {
     files: [
       'test/debug.js',
       'app/bower_components/jquery/dist/jquery.js',
-//    This one fails with an undefined reference to Hoodie
+//    This one fails grunt test with an undefined reference to Hoodie
 //      'node_modules/hoodie-server/node_modules/hoodie/dist/hoodie.js',
-//    This one works, but I had to bower install hoodie
+//    This one works, but I had to bower install hoodie 1.0.3
       'app/bower_components/hoodie/dist/hoodie.js',
       'app/bower_components/angular/angular.js',
       'app/bower_components/angular-cookies/angular-cookies.js',

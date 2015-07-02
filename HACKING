@@ -87,3 +87,8 @@ Known Issues
   rm -rf node_modules/grunt-connect-proxy
   npm install eventemitter3@0.1.6
   npm install grunt-connect-proxy
+
+- grunt test fails with undefined reference to Hoodie
+  most likely hoodie.js does not exist; see karma.conf.js to see how it is
+  loaded, and make sure the file that is referenced there exists.
+  For example, bower hoodie 1.0.4 changed from dist/ to src/ which broke this.

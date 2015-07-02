@@ -21,7 +21,7 @@ describe(
 
     // tests
 
-    it('should instantiate new things',
+    it('should instantiate a new thing from title and description',
       function () {
         thing = new Thing('my thing', 'is good', {
         });
@@ -31,6 +31,21 @@ describe(
         expect(thing.data.state).toEqual(Thing.ACTIVE);
         expect(thing.data.deleted).toEqual(false);
         expect(thing.data.id).not.toBeUndefined();
+      }
+    );
+
+    it('should instantiate a new thing from data',
+      function () {
+        thing = new Thing({
+          title: 'my thing',
+          description: 'is good'
+        });
+
+        expect(thing.data.title).toEqual('my thing');
+        expect(thing.data.description).toEqual('is good');
+        expect(thing.data.state).toBeUndefined();
+        expect(thing.data.deleted).toBeUndefined();
+        expect(thing.data.id).toBeUndefined();
       }
     );
   }

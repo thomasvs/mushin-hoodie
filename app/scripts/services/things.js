@@ -3,7 +3,7 @@
 // tested in test/spec/services/things.js
 //
 angular.module('mushin').factory('things',
-  function ($rootScope, $filter, hoodie, $q, Thing) {
+  function($rootScope, $filter, hoodie, $q, Thing) {
 
     var debug = new window.$debug('mushin:services/thing');
 
@@ -88,8 +88,9 @@ angular.module('mushin').factory('things',
         $rootScope.things = $filter('filter')(thingsDataOfType,
           function(thing) {
             // FIXME: I'm filtering on complete/end in a filter func
-            if (!thing.done && !thing.deleted) return true;
-        });
+            if (!thing.done && !thing.deleted) { return true; }
+          }
+        );
 
         deferred.resolve(thingsDataOfType);
       });
@@ -119,7 +120,8 @@ angular.module('mushin').factory('things',
       var conversions = ['active', 'archive'];
 
       angular.forEach(conversions, function(conversion) {
-        var methodName = 'convertTo' + conversion[0].toUpperCase() + conversion.substring(1);
+        var methodName = 'convertTo' + conversion[0].toUpperCase() +
+            conversion.substring(1);
         var state = Thing[conversion.toUpperCase()];
 
         scope[methodName] = function(data) {
@@ -181,5 +183,5 @@ angular.module('mushin').factory('things',
     }
 
     return service;
-
-});
+  }
+);

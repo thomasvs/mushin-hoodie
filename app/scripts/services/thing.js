@@ -1,3 +1,11 @@
+// vi:si:et:sw=2:sts=2:ts=2
+// FIXME: still not sure whether service + method is the way to doc this
+/**
+ * @ngdoc     service
+ * @name      mushin.service:Thing
+ *
+ * @description <p>The Thing class encapsulates a Thing.</p>
+ */
 angular.module('mushin').factory('Thing',
   function($q, $filter, hoodie) {
 
@@ -10,11 +18,24 @@ angular.module('mushin').factory('Thing',
 
     var debug = new window.$debug('mushin:Thing');
 
-    function Thing(title, description, data) {
-      debug('new Thing object with title/data ' + JSON.stringify(title) +
+    /**
+     * @ngdoc method
+     * @methodOf mushin.service:Thing
+     * @name  mushin.service:Thing#Thing
+     * @param {string or Object} titleOrData title, or full data for object
+     * @param {string}           description a longer description
+     * @param {Object}           data        data, in case the first one was
+     *                                       title
+     *
+     * @description
+     *
+     * Create a new Thing from either title, or a data Object.
+     */
+    function Thing(titleOrData, description, data) {
+      debug('new Thing object with title/data ' + JSON.stringify(titleOrData) +
           ' and desc ' + description)
-      if (angular.isObject(title)) {
-        this.data = title;
+      if (angular.isObject(titleOrData)) {
+        this.data = titleOrData;
         return;
       }
 
@@ -32,7 +53,7 @@ angular.module('mushin').factory('Thing',
         date: Date.now(),
         state: ACTIVE,
         deleted: false,
-        title: title,
+        title: titleOrData,
         description: description
       });
       debug('created new thing ' + JSON.stringify(this.data, null, 4));

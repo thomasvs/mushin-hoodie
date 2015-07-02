@@ -82,6 +82,17 @@ replicate
   couchdb-dump http://localhost:5984/mushin-hoodie > mushin-hoodie.dump
   couchdb-load -u admin -p $HOODIE_PASSWORD http://localhost:6006/$HOODIE_DB_QUOTE < mushin-hoodie.dump
 
+Adding dependencies
+-------------------
+
+Example:
+  npm install karma karma-coverage --save-dev
+Tests
+-----
+
+Tests are under test/spec/
+
+
 Known Issues
 ------------
 

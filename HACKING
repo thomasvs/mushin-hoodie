@@ -10,6 +10,19 @@ Running in dev mode
 export PATH=`pwd`/node_modules/.bin:$PATH
 grunt serve
 
+Running tests
+-------------
+
+export PATH=`pwd`/node_modules/.bin:$PATH
+
+once:
+
+grunt test
+
+continous:
+
+grunt karma
+
 
 Documentation
 -------------

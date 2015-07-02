@@ -229,7 +229,7 @@ module.exports = (grunt) ->
                 destination: 'doc'
 
     ngdocs:
-        all: ['<%= app.app %>/scripts/**/*.js', 'app/scripts/controllers/taglist.js']
+        all: ['<%= app.app %>/scripts/**/*.js']
         options:
             dest: 'app/docs'
 

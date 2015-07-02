@@ -26,7 +26,11 @@ describe(
         thing = new Thing('my thing', 'is good', {
         });
 
+        expect(thing.data.title).toEqual('my thing');
+        expect(thing.data.description).toEqual('is good');
         expect(thing.data.state).toEqual(Thing.ACTIVE);
+        expect(thing.data.deleted).toEqual(false);
+        expect(thing.data.id).not.toBeUndefined();
       }
     );
   }

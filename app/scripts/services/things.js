@@ -6,6 +6,8 @@
 /**
  * @ngdoc     service
  * @name      mushin.service:things
+ * @requires  hoodie
+ * @requires  mushin.service:Thing
  *
  * @description <p>The things service tracks all things, and loads them from
  *                 the data store.</p>
@@ -27,7 +29,7 @@ angular.module('mushin').factory('things',
 
     /* public API */
 
-
+    // FIXME: this method is only used in this file?
     /**
      * @ngdoc method
      * @methodOf mushin.service:things

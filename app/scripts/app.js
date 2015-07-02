@@ -106,6 +106,13 @@ angular.module(
       })
 */
       /* test views */
+      .state('test', {
+        url: '/test',
+        templateUrl: 'views/test.html',
+        data: {
+          title: 'Tests',
+        }
+      })
       .state('test-things', {
         url: '/test/things',
         templateUrl: 'views/things.html',

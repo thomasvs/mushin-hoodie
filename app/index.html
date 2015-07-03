@@ -35,12 +35,45 @@
     <!-- endbuild -->
     <!-- end added for mushin -->
     <link rel="stylesheet" href="/bower_components/angular-material/angular-material.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
   </head>
-  <body ng-app="mushin">
 
-    <ui-view-wrapper>
-      <ui-view></ui-view>
-    </ui-view-wrapper>
+  <body ng-app="mushin" layout="column" class="ng-scope">
+
+    <md-toolbar layout="row" class="md-default-theme">
+      <!-- the div keeps icons y-centered with the text -->
+      <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" aria-label="Settings">
+          <md-icon><i class="material-icons">menu</i></md-icon>
+        </md-button>
+
+        <!-- FIXME: this center doesn't center the title -->
+        <h1 layout-align-gt-sm="center">Things</h1>
+
+        <span flex=""></span>
+
+        <!-- right hand side extra buttons -->
+        <md-button class="md-icon-button" aria-label="Search">
+          <md-icon><i class="material-icons">search</i></md-icon>
+        </md-button>
+        <md-button class="md-icon-button" aria-label="More">
+          <md-icon><i class="material-icons">more_vert</i></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+
+    <div layout="row" flex="" class="content-wrapper">
+      <div layout="column" flex="" class="content-wrapper" id="primary-col">
+        <md-content layout="column" flex="" class="md-default-theme">
+          <!-- ui.router stateProvider replaces ui-view with the proper view -->
+          <ui-view>
+          </ui-view>
+        </md-content>
+      </div>
+    </div>
+
 
     <!-- build:js scripts/vendor.js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>

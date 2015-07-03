@@ -48,7 +48,7 @@ module.exports = function(config) {
       'app/bower_components/angular-ui-router/release/angular-ui-router.js',
       'app/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'app/bower_components/add-to-homescreen/src/addtohomescreen.js',
-      'app/bower_components/bradypodion/dist/bradypodion.js',
+//      'app/bower_components/bradypodion/dist/bradypodion.js',
 
       'app/scripts/*.js',
       'app/scripts/**/*.js',

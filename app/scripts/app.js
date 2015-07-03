@@ -7,8 +7,8 @@
 
 angular.module(
   'mushin', [
-    'bp',
     'angular-loading-bar',
+    'ui.router',
     'ngCookies',
     'ngMaterial',
     'hoodie',
@@ -19,12 +19,8 @@ angular.module(
   ]
 )
   .config(function(
-    $urlRouterProvider, $stateProvider, bpAppProvider,
+    $urlRouterProvider, $stateProvider,
     cfpLoadingBarProvider) {
-
-    bpAppProvider.setConfig({
-      platform: 'ios'
-    });
 
     cfpLoadingBarProvider.includeSpinner = false;
 

@@ -38,6 +38,8 @@ module.exports = function(config) {
       'app/bower_components/debug-browser/debug.js',
 //      'app/bower_components/angular-route/angular-route.js',
       'app/bower_components/angular-animate/angular-animate.js',
+      'app/bower_components/angular-aria/angular-aria.js',
+      'app/bower_components/angular-material/angular-material.js',
       'app/bower_components/angular-datepicker/app/scripts/datePicker.js',
       'app/bower_components/angular-duration-filter/src/duration.js',
       'app/bower_components/angular-elastic/elastic.js',

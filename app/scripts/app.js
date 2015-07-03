@@ -10,6 +10,7 @@ angular.module(
     'bp',
     'angular-loading-bar',
     'ngCookies',
+    'ngMaterial',
     'hoodie',
     'monospaced.elastic',
     'datePicker',

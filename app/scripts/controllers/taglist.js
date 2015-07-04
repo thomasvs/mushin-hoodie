@@ -92,6 +92,9 @@ angular.module('mushin').controller(
           };
       }
       $scope.active[name].active = !$scope.active[name].active;
+      debug('toggled ' + $scope.type + ' ' + name + ' to ' +
+        $scope.active[name].active);
+      // FIXME: also say what it toggled to?
       $scope.$emit('TAG_TOGGLED', $scope.type, name);
 
       for (var key in $scope.active) {

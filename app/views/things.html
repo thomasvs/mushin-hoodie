@@ -7,16 +7,13 @@
 </form>
 
 <!-- div for tags/number lists -->
-<div ng-if="filterActive">
-  <span>
-    <span tag-list ng-controller="TagListController as cl" type="context" all="true" data="contexts" active="contexts"></span>
-    <span tag-list ng-controller="TagListController as pl" type="project" all="true" data="projects" active="projects"></span>
-  </span>
+<div ng-if="filterActive" layout="row">
+<!-- FIXME: right-align projects, center I/U -->
+    <div flex="25" tag-list ng-controller="TagListController as cl" type="context" all="true" data="contexts" active="contexts"></div>
+    <div flex="25" id="importance-list" number-list ng-controller="NumberListController as il" type="importance" all="true" data="importance" active="importance" multiple="true"></div>
+    <div flex="25" id="urgency-list" number-list ng-controller="NumberListController as ul" type="urgency" all="true" data="urgency" active="urgency" multiple="true"></div>
+    <div flex="25" tag-list ng-controller="TagListController as pl" type="project" all="true" data="projects" active="projects"></div>
 
-  <span>
-    <span id="importance-list" number-list ng-controller="NumberListController as il" type="importance" all="true" data="importance" active="importance" multiple="true"></span>
-    <span id="urgency-list" number-list ng-controller="NumberListController as ul" type="urgency" all="true" data="urgency" active="urgency" multiple="true"></span>
-  </span>
 </div>
 
 <div>

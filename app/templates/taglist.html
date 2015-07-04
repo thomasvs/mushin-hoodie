@@ -1,7 +1,11 @@
-<div class="btn-group {{type}}s-dropdown" dropdown ng-class="{open: open}">
-  <button type="button" class="btn btn-primary dropdown-toggle" ng-disabled="disabled" ng-click="open=!open">
-    <span class="badge">{{ getActiveCount() }}</span>
-    of {{ getTotalCount() }}
+<!-- app/templates/taglist.html start -->
+<md-menu ng-attr-md-position-mode="{{
+           type == 'context' ? undef : 'target-right target' }}">
+
+  <md-button class="md-raised" aria-label="Open {{type}}"
+             ng-click="$mdOpenMenu($event)">
+
+    <span class="badge">{{ getActiveCount() }}</span> of {{ getTotalCount() }}
     <ng-pluralize count="getTotalCount()"
                   when="{
                     '0': '{{ type }}s',
@@ -9,14 +13,22 @@
                     'other': '{{ type}}s'
                   }">
     </ng-pluralize>
-    <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu scrollable-menu" ng-class="{ true: 'dropdown-menu-right' }[type == 'project']" role="menu">
-    <li ng-show="showAll" ng-class="{ 'active': selectedAll }"><a href="" ng-click="clear();">All {{ type }}s</a></li>
-    <li ng-show="showAll" class="divider"></li>
-    <li ng-repeat="tag in tags|orderBy:name" ng-class="{ 'active': active[tag.name].active}">
-      <a href="" ng-click="toggle(tag.name);">{{ tag.name }}
-      <span class="badge pull-right">{{ getTotalCount(tag.name) }}</span></a>
-    </li>
-  </ul>
-</div>
+  </md-button>
+  <md-menu-content width="4">
+    <!-- show 'all ...' and a divider if asked to -->
+    <md-menu-item ng-show="showAll">
+      <md-button ng-class="{ 'md-raised md-primary': selectedAll }"
+                 ng-click="clear();">All {{ type }}s</md-button>
+    </md-menu-item>
+    <md-menu-divider ng-show="showAll"></md-menu-divider>
+    <!-- show each of the tags, and a count of things -->
+    <md-menu-item ng-repeat="tag in tags|orderBy:name">
+      <md-button ng-class="{ 'md-raised md-primary': active[tag.name].active}"
+                ng-click="toggle(tag.name);">{{ tag.name }}
+        <span flex=""></span><!-- makes the number to the right of menu -->
+        <span>{{ getTotalCount(tag.name) }}</span>
+      </md-button>
+    </md-menu-item>
+  </md-menu-content>
+</md-menu>
+<!-- app/templates/taglist.html end -->

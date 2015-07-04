@@ -111,3 +111,9 @@ ISSUES
 - should be possible to show query for a list
 - formalize enums using https://stijndewitt.wordpress.com/2014/01/26/enums-in-javascript/
   - scripts/services/thing.js Thing types
+
+MATERIAL HACKING
+----------------
+ - bug when clicking on the taglist selector's divider
+   - internals get a document and not something you can call hasAttribute on
+ - no way to leave the menu open while selecting items in it for taglist selecter?

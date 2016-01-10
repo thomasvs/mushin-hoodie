@@ -61,7 +61,7 @@ COSMETICS
 DEVELOPMENT
 -----------
 
-- add list of tests on /tests
+- add list of tests on /test (test.html is missing; check otto)
 
 VERSIONS
 --------
@@ -100,6 +100,8 @@ SPEED
 ISSUES
 ------
 
+- in material /test/things, clicking save triggers javascript cssclass
+  jslite error; see if updating angular from 1.3.0 to newer helps
 - why do a lot of things have a due date in 2015? see movies
 - why is their space eaten above and below the list?
 - get thing count outside of the scrolling list

@@ -14,9 +14,9 @@
  *                 variables.</p>
  */
 angular.module('mushin').factory('things',
-  function($rootScope, $filter, hoodie, $q, Thing, $state) {
+  function($rootScope, $filter, hoodie, $q, Thing, $state, $http) {
 
-    var debug = new window.$debug('mushin:services/thing');
+    var debug = new window.$debug('mushin:services/things');
 
     /* hoodie is hoodie's hoodie.js, not the angularized version
      * FIXME: not sure how angular finds this at all */
@@ -25,31 +25,16 @@ angular.module('mushin').factory('things',
         $state.current.data.mock.indexOf("hoodie") > -1) {
       debug('mocking out hoodie');
       hoodie = {
-        /* FIXME: load mocked data from serialized file served over http? */
         /* FIXME: create a mocked hoodie class in a separate js file and
          *        load it ? */
         store: {
           findAll: function() {
-            return Promise.resolve([
-              {
-                title: 'my title',
-                type: Thing.ACTIVE,
-                id: 'a1',
-                contexts: [ 'computer', ],
-                projects: [ 'mushin', ],
-                importance: 3,
-                urgency: 5,
-              },
-              {
-                title: 'my second thing',
-                type: Thing.ACTIVE,
-                id: 'a2',
-                contexts: [ 'computer', ],
-                projects: [ 'personal', ],
-                importance: 3,
-                urgency: 5,
-              },
-            ]);
+            debug('findAll');
+            return $http.get('/data/test.json').then(
+              function successCallback(response) {
+                return response.data;
+              }
+            );
           },
           on: function(evt, func) {
             debug('hoodie.store.on: ' + evt + func);

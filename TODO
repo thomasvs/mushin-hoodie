@@ -111,6 +111,7 @@ ISSUES
 - should be possible to show query for a list
 - formalize enums using https://stijndewitt.wordpress.com/2014/01/26/enums-in-javascript/
   - scripts/services/thing.js Thing types
+-make fonts offline
 
 MATERIAL HACKING
 ----------------

@@ -31,6 +31,11 @@ If you want debug logging on the console, create test/debug.js with:
 
 echo "window.DEBUG = 'mushin:*'" > test/debug.js
 
+Seeing interactive tests
+------------------------
+
+Go to http://localhost:8999/#/test
+
 Documentation
 -------------
 

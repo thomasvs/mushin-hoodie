@@ -118,7 +118,7 @@ Known Issues
 
 Test views
 ----------
-/test/things
+/test/things; e.g. http://0.0.0.0:8999/#/test/things
 
 material icons
 --------------

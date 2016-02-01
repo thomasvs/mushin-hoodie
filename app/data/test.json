@@ -12,7 +12,7 @@
     "id": "b2",
     "projects": ["mushin"],
     "contexts": ["laptop"],
-    "recurrence": "8W",
+    "recurrence": 4838400,
     "importance": 4,
     "urgency": 2
   },
@@ -23,6 +23,7 @@
     "projects": ["personal"],
     "contexts": ["metro"],
     "recurrence": "4W",
+    "recurrence": 2419200,
     "importance": 4,
     "urgency": 2
   },

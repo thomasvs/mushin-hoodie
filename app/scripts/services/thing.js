@@ -4,7 +4,7 @@
  * @ngdoc     service
  * @name      mushin.service:Thing
  *
- * @description <p>The Thing service creates objects that persist
+ * @description <p>The Thing service creates parsed objects that persist
  *                 changes to hoodie.</p>
  */
 angular.module('mushin').factory('Thing',

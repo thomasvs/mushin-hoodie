@@ -6,8 +6,9 @@ node_modules/
 dist/
 .tmp/
 build/
-^data/
+/data/
 www/
+coverage/
 
 # logs
 *.log

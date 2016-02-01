@@ -119,3 +119,12 @@ Known Issues
 Test views
 ----------
 /test/things
+
+material icons
+--------------
+ * See http://google.github.io/material-design-icons/; method 2
+   bower insstall material-design-icons
+   create app/styles/material-design-icons, replacing online url with
+   /bower_components/material-design-icons/iconfont/
+   refresh; seems to work
+
